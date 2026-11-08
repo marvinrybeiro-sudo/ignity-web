@@ -1,0 +1,26 @@
+{
+  "name": "ignity-web",
+  "version": "2.0.0-alpha.0",
+  "description": "Framework agêntico para criar sites WordPress + Elementor com Claude Code e Codex.",
+  "license": "MIT",
+  "author": "Marvin Ribeiro",
+  "bin": {
+    "ignity": "bin/ignity.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "content/",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\"",
+    "build": "node scripts/build-dist.js",
+    "snapshot:v1": "node scripts/snapshot-v1.js"
+  }
+}

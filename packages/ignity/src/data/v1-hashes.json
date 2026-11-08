@@ -1,0 +1,44 @@
+{
+  "description": "Hashes SHA-256 dos 29 arquivos instalados pelo instalar.py v1 (modo both) e texto original dos adapters v1. Copiado de test/fixtures/v1-manifest.json (Story 1.2).",
+  "files": {
+    ".agents/skills/elementor/SKILL.md": "d02ff39a656da6298d1070c7f5ea116e5d9ccaadf17a54417137f60021997786",
+    ".agents/skills/elementor/references/operacao.md": "4eb60cd80b4a65282b377449867a5fd168f7e198d173aa6f88f2c2285e98a6b7",
+    ".agents/skills/web-assets/SKILL.md": "322744840caf94539c3b5a1080753255037bbacb46b1fff91e6b249254e53049",
+    ".agents/skills/web-figma-spec/SKILL.md": "5a0029f9d66c922cd52df61f3a33779549289aa0aa37c489fc59b608feb94564",
+    ".agents/skills/web-motion/SKILL.md": "9ed2022909b01806b43a9c41eddec88193f09fbc0c1ce5945fefe4d8794fa9f1",
+    ".agents/skills/web-orchestrator/SKILL.md": "057fd27edc2726b418995ad519459700a6e9265d36955522fadceb0a519b8e56",
+    ".agents/skills/web-qa/SKILL.md": "6a6b5f30c45645490a33c6c257b572c1bef54ec2ac37f4e42986a06584f0e931",
+    ".agents/skills/web-release/SKILL.md": "e72e8dbbb793cb450f4e79800c855966f914fa520da6fb981621509c7660f315",
+    ".agents/skills/web-seo/SKILL.md": "b9906bcba3064de7d8b87749e9305b3bdbd092b2d9dc5c4e92f182bc9bc5eb34",
+    ".claude/skills/elementor/SKILL.md": "d02ff39a656da6298d1070c7f5ea116e5d9ccaadf17a54417137f60021997786",
+    ".claude/skills/elementor/references/operacao.md": "4eb60cd80b4a65282b377449867a5fd168f7e198d173aa6f88f2c2285e98a6b7",
+    ".claude/skills/web-assets/SKILL.md": "322744840caf94539c3b5a1080753255037bbacb46b1fff91e6b249254e53049",
+    ".claude/skills/web-figma-spec/SKILL.md": "5a0029f9d66c922cd52df61f3a33779549289aa0aa37c489fc59b608feb94564",
+    ".claude/skills/web-motion/SKILL.md": "9ed2022909b01806b43a9c41eddec88193f09fbc0c1ce5945fefe4d8794fa9f1",
+    ".claude/skills/web-orchestrator/SKILL.md": "057fd27edc2726b418995ad519459700a6e9265d36955522fadceb0a519b8e56",
+    ".claude/skills/web-qa/SKILL.md": "6a6b5f30c45645490a33c6c257b572c1bef54ec2ac37f4e42986a06584f0e931",
+    ".claude/skills/web-release/SKILL.md": "e72e8dbbb793cb450f4e79800c855966f914fa520da6fb981621509c7660f315",
+    ".claude/skills/web-seo/SKILL.md": "b9906bcba3064de7d8b87749e9305b3bdbd092b2d9dc5c4e92f182bc9bc5eb34",
+    "AGENTS.md": "431cecd1ef9f68c2d0ffa39c0ddbac6f71bbe9635a75d92951041dd0c0676072",
+    "CLAUDE.md": "1456b0bc41cc0bf8baf9cf38c18c170e999316e2a8d222c48886b5ca0049eee6",
+    "project/ASSETS.csv": "e832759924d6c484237f411754cad43f2c413b0b0f794850f9c80a7db8ae0429",
+    "project/BRIEF.md": "7d4a165dc55875cb3c1c8b5ab0cc3d7973b6e9191db0cb8c0d1230af3339c62b",
+    "project/DECISIONS.md": "e63a4eb92651c3a0c319fca0d7e2f14bbd8d5db48cdb074f8b7ba1d7ffd00a19",
+    "project/INICIAR.md": "892f5911925982a052348763dd1b4dd79f981e6f2234d3ba994734fb9c6424a0",
+    "project/QA.md": "a392fd4087c2f774fe20e157c327a3b969f1e9928efc3086a92f1026dc073513",
+    "project/RETOMAR.md": "3d39da759ab4124c462acbdbef7f5deaa7d5229636f072dce7683b3a14137dce",
+    "project/SECTIONS.md": "99f8e4d905b464139bb3e5b3ae54306d1b5381a6b6744c5a6e6383c0471aa88f",
+    "project/STATE.md": "d8a1001afd77551745720733788d6cee9c38a5e0ea471f3710dca571786237d5",
+    "project/framework/FRAMEWORK.md": "e7db2f4e18069b96b42178e4dc008792cdae564e0ddb5dd1666f84d5a43a99fa"
+  },
+  "adapters": {
+    "CLAUDE.md": {
+      "sha256": "1456b0bc41cc0bf8baf9cf38c18c170e999316e2a8d222c48886b5ca0049eee6",
+      "text": "# Orientações do projeto web\n\nEste projeto usa o Framework Agêntico Web. Para iniciar ou retomar o fluxo completo, carregar `web-orchestrator` em `.claude/skills/web-orchestrator/SKILL.md`, disponível também como `/web-orchestrator` no Claude Code. Para uma alteração pontual, ler o estado e carregar apenas os módulos pertinentes.\n\nContexto: `project/BRIEF.md`. Continuidade: `project/STATE.md`. Decisões: `project/DECISIONS.md`. Referências e QA: demais arquivos em `project/`. Guia: `project/framework/FRAMEWORK.md`.\n\nPreservar conteúdo nativo e editável no Elementor, reutilizar componentes e conferir desktop/mobile. Descobrir o MCP e o schema reais, ler a revisão atual antes de editar e verificar persistência. Não transportar IDs, acessos ou decisões de outra marca. Priorizar o pedido atual e as autorizações existentes; o framework não concede permissões adicionais.\n\nNão abrir agentes paralelos automaticamente. Registrar evidência e próximo passo ao encerrar. Não salvar segredos ou URLs assinadas nos registros. Se estas orientações forem adicionadas a um projeto existente, mesclar com suas instruções sem apagar regras anteriores.\n"
+    },
+    "AGENTS.md": {
+      "sha256": "431cecd1ef9f68c2d0ffa39c0ddbac6f71bbe9635a75d92951041dd0c0676072",
+      "text": "# Orientações do projeto web\n\nEste projeto usa o Framework Agêntico Web. Para iniciar ou retomar o fluxo completo, carregar `web-orchestrator` em `.agents/skills/web-orchestrator/SKILL.md`. Para uma alteração pontual, ler o estado e carregar apenas os módulos pertinentes.\n\nContexto: `project/BRIEF.md`. Continuidade: `project/STATE.md`. Decisões: `project/DECISIONS.md`. Referências e QA: demais arquivos em `project/`. Guia: `project/framework/FRAMEWORK.md`.\n\nPreservar conteúdo nativo e editável no Elementor, reutilizar componentes e conferir desktop/mobile. Descobrir o MCP e o schema reais, ler a revisão atual antes de editar e verificar persistência. Não transportar IDs, acessos ou decisões de outra marca. Priorizar o pedido atual e as autorizações existentes; o framework não concede permissões adicionais.\n\nNão abrir agentes paralelos automaticamente. Registrar evidência e próximo passo ao encerrar. Não salvar segredos ou URLs assinadas nos registros. Se estas orientações forem adicionadas a um projeto existente, mesclar com suas instruções sem apagar regras anteriores.\n"
+    }
+  }
+}
