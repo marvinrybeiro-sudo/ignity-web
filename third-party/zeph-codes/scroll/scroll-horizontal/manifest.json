@@ -1,0 +1,41 @@
+{
+  "id": "scroll-horizontal-1791435130878-1791435131427",
+  "titulo": "Scroll horizontal",
+  "modulo": "Módulo: Scroll",
+  "categoria": "scroll",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2026-10-08T04:52:11.000Z",
+  "atualizado": "2026-10-08T05:56:39.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/d9001721-244e-4a16-bfef-6bc00e0597d7.gif",
+  "video": null,
+  "arquivos": [
+    "html"
+  ],
+  "peso": {
+    "bytes": 10257,
+    "gzip": 3644
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": true,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": true
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

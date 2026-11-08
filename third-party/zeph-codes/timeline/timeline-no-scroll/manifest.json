@@ -1,0 +1,41 @@
+{
+  "id": "timeline-no-scroll-1791439277819-1791439278215",
+  "titulo": "Timeline no scroll",
+  "modulo": "Módulo: Timeline",
+  "categoria": "timeline",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2026-10-08T06:01:18.000Z",
+  "atualizado": "2026-10-08T06:10:11.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/2cececda-7648-4777-8bf2-418d926ad8f7.gif",
+  "video": null,
+  "arquivos": [
+    "html"
+  ],
+  "peso": {
+    "bytes": 14726,
+    "gzip": 5498
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": true,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": true
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

@@ -1,0 +1,301 @@
+<div class="btn-wrapper-wp">
+    <button class="btn-ink" id="inkButton">
+        <span class="btn-text">CRIAR DO ZERO</span>
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M21.53 7.15a1 1 0 0 0-1 0L17 10.25V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4.25l3.53 3.1a1 1 0 0 0 1.53-.85v-8a1 1 0 0 0-.53-.85z"/>
+        </svg>
+        <div class="ink-splash"></div>
+    </button>
+    
+    <div class="particle-container" id="particleContainer"></div>
+</div>
+
+<svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
+  <defs>
+    <filter id="ink-filter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="25" />
+    </filter>
+  </defs>
+</svg>
+
+
+<style>
+    /* Reset local para evitar conflito com temas WP */
+    .btn-wrapper-wp *, .btn-wrapper-wp *::before, .btn-wrapper-wp *::after {
+        box-sizing: border-box;
+    }
+
+    /* --- CONFIGURAÇÃO DO WRAPPER --- */
+    .btn-wrapper-wp {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        max-width: 380px;
+        height: 64px;
+        overflow: visible !important; /* Força visibilidade fora da caixa */
+        margin: 20px 0; /* Espaçamento padrão no post */
+    }
+
+    /* --- BOTÃO PRINCIPAL --- */
+    .btn-ink {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        
+        /* Cores e Texto */
+        background-color: #F8A83C; 
+        color: #000 !important; /* Força preto sobrepondo o tema */
+        
+        border: none !important;
+        outline: none !important;
+        border-radius: 12px;
+        
+        /* Tipografia */
+        font-family: 'Inter', sans-serif; /* Certifique-se que o WP tem essa fonte, senão herda do tema */
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 1;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-decoration: none !important;
+        
+        cursor: pointer;
+        overflow: hidden; 
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+        
+        /* Glow inicial */
+        box-shadow: 0 0 15px rgba(248, 168, 60, 0.3);
+        z-index: 2;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* --- TINTA INTERNA (Preta no Hover) --- */
+    .ink-splash {
+        position: absolute;
+        top: var(--y, 50%);
+        left: var(--x, 50%);
+        width: 0;
+        height: 0;
+        background: #000;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1; 
+        filter: url(#ink-filter); 
+        transition: width 0.5s ease, height 0.5s ease;
+        pointer-events: none;
+    }
+
+    /* --- ÍCONE E TEXTO --- */
+    .btn-text, .btn-icon {
+        position: relative;
+        z-index: 5;
+        pointer-events: none;
+        transition: all 0.4s ease;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+        fill: currentColor; /* Garante que o SVG pegue a cor do texto */
+    }
+
+    .btn-icon {
+        height: 20px;
+        width: 20px;
+        min-width: 20px;
+        opacity: 0;
+        max-width: 0;
+        transform: translateX(20px) rotate(30deg);
+        display: block; /* Evita comportamento estranho de SVG inline no WP */
+    }
+
+    /* --- ESTADOS DE HOVER --- */
+    .btn-wrapper-wp:hover .btn-ink {
+        transform: scale(1.02);
+        box-shadow: 0 10px 40px rgba(248, 168, 60, 0.6);
+    }
+
+    .btn-wrapper-wp:hover .ink-splash {
+        width: 450%;
+        height: 450%;
+    }
+
+    .btn-wrapper-wp:hover .btn-text {
+        color: #fff; /* Texto fica branco quando o fundo preto (tinta) entra */
+    }
+    
+    .btn-wrapper-wp:hover .btn-icon {
+        color: #fff;
+        opacity: 1;
+        max-width: 20px;
+        margin-left: 12px;
+        transform: translateX(0) rotate(0deg);
+    }
+
+    .btn-ink:active {
+        transform: scale(0.95);
+    }
+
+    /* =========================================
+       PARTÍCULAS
+    ========================================= */
+    .particle-container {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 10; 
+    }
+
+    .particle {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        display: block;
+    }
+
+    /* Laranjas (Entrando) */
+    .p-orange {
+        background: #F8A83C;
+        box-shadow: 0 0 10px #F8A83C, 0 0 20px rgba(248, 168, 60, 0.8); 
+        animation: implodeAnim var(--life, 0.6s) ease-in forwards;
+    }
+
+    @keyframes implodeAnim {
+        0% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+        10% { opacity: 1; }
+        100% { transform: translate(calc(-50% - var(--startX)), calc(-50% - var(--startY))) scale(0.2); opacity: 0; }
+    }
+
+    /* Brancas (Saindo) */
+    .p-white {
+        background: #fff;
+        opacity: 0.9;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        animation: floatOutAnim var(--life, 1.5s) ease-out forwards;
+    }
+
+    @keyframes floatOutAnim {
+        0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+        20% { opacity: 0.8; }
+        100% { transform: translate(calc(-50% + var(--moveX)), calc(-50% + var(--moveY))) scale(0); opacity: 0; }
+    }
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Seletores (Usando classes específicas para evitar conflito)
+    const btn = document.getElementById('inkButton');
+    const btnWrapper = document.querySelector('.btn-wrapper-wp');
+    const particleContainer = document.getElementById('particleContainer');
+
+    // Se o botão não for encontrado (ex: erro de carregamento), para o script
+    if (!btn || !btnWrapper) return;
+
+    let isHovering = false;
+    let particleInterval;
+
+    const random = (min, max) => Math.random() * (max - min) + min;
+
+    // Rastreamento do Mouse
+    btnWrapper.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        btn.style.setProperty('--x', x + 'px');
+        btn.style.setProperty('--y', y + 'px');
+    });
+
+    // Hover IN
+    btnWrapper.addEventListener('mouseenter', () => {
+        isHovering = true;
+        particleInterval = setInterval(spawnParticles, 25);
+    });
+
+    // Hover OUT
+    btnWrapper.addEventListener('mouseleave', () => {
+        isHovering = false;
+        clearInterval(particleInterval);
+    });
+
+    function spawnParticles() {
+        if (!isHovering) return;
+        
+        // Quantidade de partículas
+        createOrangeParticle();
+        createOrangeParticle();
+
+        if(Math.random() > 0.6) {
+            createWhiteParticle();
+        }
+    }
+
+    function createOrangeParticle() {
+        const p = document.createElement('div');
+        p.classList.add('particle', 'p-orange');
+        
+        const size = random(2, 5); 
+        p.style.width = `${size}px`;
+        p.style.height = `${size}px`;
+
+        const btnRect = btn.getBoundingClientRect();
+        const btnCenterX = btnRect.width / 2;
+        const btnCenterY = btnRect.height / 2;
+        
+        const offset = 50; 
+        let startX, startY;
+        const side = Math.floor(random(0, 4)); 
+        
+        // Garante que nasce FORA do botão
+        switch(side) {
+            case 0: startX = random(-offset, btnRect.width + offset); startY = random(-offset, -10); break; 
+            case 1: startX = random(btnRect.width + 10, btnRect.width + offset); startY = random(-offset, btnRect.height + offset); break; 
+            case 2: startX = random(-offset, btnRect.width + offset); startY = random(btnRect.height + 10, btnRect.height + offset); break; 
+            case 3: startX = random(-offset, -10); startY = random(-offset, btnRect.height + offset); break; 
+        }
+        
+        p.style.left = `${startX}px`;
+        p.style.top = `${startY}px`;
+        
+        p.style.setProperty('--startX', `${startX - btnCenterX}px`);
+        p.style.setProperty('--startY', `${startY - btnCenterY}px`);
+        p.style.setProperty('--life', `${random(0.5, 0.8)}s`);
+
+        particleContainer.appendChild(p);
+        setTimeout(() => p.remove(), 800);
+    }
+
+    function createWhiteParticle() {
+        const p = document.createElement('div');
+        p.classList.add('particle', 'p-white');
+        
+        const size = random(1, 4); 
+        p.style.width = `${size}px`;
+        p.style.height = `${size}px`;
+
+        const btnRect = btn.getBoundingClientRect();
+        
+        // Nasce DENTRO do botão
+        const startX = random(10, btnRect.width - 10);
+        const startY = random(10, btnRect.height - 10);
+        
+        p.style.left = `${startX}px`;
+        p.style.top = `${startY}px`;
+
+        const angle = random(0, Math.PI * 2);
+        const distance = random(30, 60);
+        const moveX = Math.cos(angle) * distance;
+        const moveY = Math.sin(angle) * distance - 20;
+
+        p.style.setProperty('--moveX', `${moveX}px`);
+        p.style.setProperty('--moveY', `${moveY}px`);
+        p.style.setProperty('--life', `${random(1.2, 2.0)}s`);
+
+        particleContainer.appendChild(p);
+        setTimeout(() => p.remove(), 2000);
+    }
+});
+</script>

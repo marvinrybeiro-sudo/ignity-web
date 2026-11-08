@@ -1,0 +1,10 @@
+selector{
+    background: #3a0da5; /*mude a cor do BG*/
+    padding: 24px; /*padding*/
+    border-radius: 12px; /*arredondamento*/
+    transition: 0.5s all
+}
+
+selector:hover{
+    background: #210471 !important; /*BG no hover*/
+}

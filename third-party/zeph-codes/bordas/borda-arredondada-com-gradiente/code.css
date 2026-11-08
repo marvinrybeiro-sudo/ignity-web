@@ -1,0 +1,31 @@
+selector{
+    border-radius: 20px; /* Arredondamento do card */
+    position: relative;
+    z-index: 5; 
+}
+
+selector::before{
+    content: "";
+    background: linear-gradient(to right, #6121ff, #4c0de2); /* Gradiente para borda externa */
+    position: absolute;
+    border-radius: inherit;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%,-50%);
+    z-index: -3; 
+    width: calc(100% + 4px); /* Largura total do card mais a largura da borda */
+    height: calc(100% + 4px); /* Altura total do card mais a largura da borda */
+}
+
+selector::after{
+    content: "";
+    background: #1a1a1a; /* Cor de fundo do card */
+    border-radius: inherit;
+    z-index: -2;
+    width: 100%; 
+    height: 100%;
+    position: absolute; 
+    transform: translate(-50%,-50%);
+    top: 50%; 
+    left: 50%; 
+}

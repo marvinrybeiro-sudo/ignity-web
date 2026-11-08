@@ -1,0 +1,25 @@
+selector .elementor-heading-title{
+    
+    /* Transições para o plano de fundo e outras propriedades */
+    transition: background 2s ease 0s;
+    transition: all 1s; /* Transição suave para todas as propriedades */
+    
+    -webkit-background-clip: text; /* Limita o plano de fundo ao texto */
+    -webkit-text-fill-color: transparent; /* Torna o texto transparente */
+
+    /* Animação do texto */
+    animation: move 3s ease 1s infinite alternate;
+
+    /* Gradiente de fundo aplicado ao texto */
+    background-image: linear-gradient(45deg, #d5d1ff, #937cff, #7247ff, #6121ff);
+    background-size: 500% 200%; /* Tamanho do plano de fundo */
+}
+
+@keyframes move{
+    0%{
+        background-position: 0.0; 
+    }
+    100%{
+        background-position: 100% 0; 
+    }
+}

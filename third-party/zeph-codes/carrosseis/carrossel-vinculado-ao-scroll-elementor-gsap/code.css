@@ -1,0 +1,25 @@
+html, body{
+    width: 100%;
+    overflow-x: clip;
+}
+
+.container-cards{
+    transition: none !important;
+    height: 100vh;
+}
+
+.cards{
+    min-width: 1920px;
+    will-change: transform;
+    transition: none !important;
+}
+
+.cards .card{
+    min-width: 400px !important; /*ajuste a largura do slide no desktop aqui*/
+}
+
+@media (max-width: 767px) {
+	.cards .card{
+	    min-width: 75vw !important; /*ajuste a largura do slide no mobile aqui*/
+	}
+}

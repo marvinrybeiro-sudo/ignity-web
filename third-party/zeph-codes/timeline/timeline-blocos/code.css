@@ -1,0 +1,7 @@
+.linee::before{
+    content: "";
+    background: #585858;
+    width: 1px;
+    height: 100%;
+    left: -20px;
+}

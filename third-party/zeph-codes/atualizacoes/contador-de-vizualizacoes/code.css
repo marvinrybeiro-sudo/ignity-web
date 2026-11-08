@@ -1,0 +1,29 @@
+.pcl-viewers {
+  display: flex;
+  color: #ffffff; /*mude a cor do número aqui*/
+  font-size: 1.5em;
+  justify-content: center;
+  align-items: center
+}
+
+.olho{
+    stroke: #ffffff80; /*mude a cor do ícone de olho aqui*/
+}
+
+.pupila{
+    stroke: white; /*mude a cor do ícone de olho aqui*/
+}
+
+.texto {
+    color: #ffffff90; /*mude a cor do texto aqui*/
+    margin-left: 5px;
+}
+
+.usuarios {
+    padding-right: 10px;
+    margin-left: 10px;
+}
+
+selector svg{
+    height: unset;
+}

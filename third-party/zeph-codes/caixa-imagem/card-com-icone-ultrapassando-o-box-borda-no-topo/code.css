@@ -1,0 +1,14 @@
+selector{
+    background-color: #EBE6DC; /* Cor de fundo */
+    width: 500px  !important; /* Largura fixa */
+    height: 270px !important; /* Altura fixa */
+    padding-left: 50px; /* Espaçamento interno à esquerda */
+    padding-right: 50px; /* Espaçamento interno à direita */
+    border-radius: 10px; /* Arredondamento das bordas */
+    border-top: 2px solid #BD9F69; /* Borda superior com cor personalizada */
+    margin-bottom: 70px !important; /* Margem inferior */
+}
+
+selector .elementor-image-box-img{
+    margin-top: -60px !important; /* Margem superior negativa para sobreposição */
+}

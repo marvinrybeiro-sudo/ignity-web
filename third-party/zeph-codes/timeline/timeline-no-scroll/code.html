@@ -1,0 +1,215 @@
+<!--
+TIMELINE NO SCROLL
+1. Cole este código inteiro em um bloco/widget HTML. CSS e JS já estão incluídos.
+2. Troque os textos da coluna esquerda e dos <li class="cu-tl-etapa">.
+   Duplique/remova um <li> para adicionar/remover uma etapa; a numeração é automática.
+3. Personalize as cores, o espaçamento e --topo no CSS abaixo.
+   Se houver cabeçalho fixo de 80px, use --topo:80px.
+4. No JS, DISTANCIA controla quanto scroll a sequência consome (2.2 = 2,2 telas).
+   SUAVIDADE controla o atraso suave de acompanhamento (em segundos).
+5. Use em um contêiner de largura total. Se algum bloco acima tiver overflow:hidden
+   (comum em temas e construtores), o script corrige sozinho; se ainda assim o sticky
+   falhar, ele passa a fixar a seção via JavaScript.
+No desktop: a seção fica presa, os cards aparecem e a linha cresce com o scroll.
+O número ativo acende; as etapas concluídas permanecem visíveis. Subir reverte tudo.
+Em telas menores, a sequência acompanha o scroll sem fixação quando couber.
+Se o conteúdo não couber na altura útil, todas as etapas ficam legíveis, sem fixação.
+Com movimento reduzido, todas as etapas ficam legíveis e a fixação é desativada.
+Não usa bibliotecas, imagens nem fontes externas. Pode repetir o bloco na página.
+-->
+<section class="cu-tl" aria-label="Etapas do processo">
+  <div class="cu-tl-fixo">
+    <div class="cu-tl-grade">
+      <div class="cu-tl-intro">
+        <span class="cu-tl-tag">PASSO A PASSO</span>
+        <h2>Uma jornada com<br><em>começo, meio e fim.</em></h2>
+        <p>Apresente seu método em etapas. Role a página para acompanhar cada passo do processo.</p>
+        <!-- Substitua este bloco por uma imagem ou outro conteúdo, se quiser. -->
+        <div class="cu-tl-resumo"><span>DO INÍCIO AO RESULTADO</span><strong>Uma etapa de cada vez.</strong><i aria-hidden="true">↓</i></div>
+      </div>
+      <div class="cu-tl-coluna">
+        <h3>O caminho até o resultado</h3>
+        <ol class="cu-tl-lista">
+          <li class="cu-tl-etapa">
+            <span class="cu-tl-numero" aria-hidden="true"><b>01</b></span>
+            <svg class="cu-tl-icone" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7.5"/><path d="m16 16 5 5"/></svg>
+            <div class="cu-tl-card"><h4>Entender o cenário.</h4><p>Conheça o ponto de partida e identifique o que precisa mudar.</p></div>
+          </li>
+          <li class="cu-tl-etapa">
+            <span class="cu-tl-numero" aria-hidden="true"><b>02</b></span>
+            <svg class="cu-tl-icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V3m0 1c5-4 10 4 16 0v11c-6 4-11-4-16 0"/></svg>
+            <div class="cu-tl-card"><h4>Definir a direção.</h4><p>Transforme seus objetivos em um plano claro e possível.</p></div>
+          </li>
+          <li class="cu-tl-etapa">
+            <span class="cu-tl-numero" aria-hidden="true"><b>03</b></span>
+            <svg class="cu-tl-icone" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/><circle cx="12" cy="12" r="10"/></svg>
+            <div class="cu-tl-card"><h4>Colocar em prática.</h4><p>Execute cada ação com foco, consistência e acompanhamento.</p></div>
+          </li>
+          <li class="cu-tl-etapa">
+            <span class="cu-tl-numero" aria-hidden="true"><b>04</b></span>
+            <svg class="cu-tl-icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V11m8 9V4m8 16v-6M2 22h20"/></svg>
+            <div class="cu-tl-card"><h4>Acompanhar os resultados.</h4><p>Observe a evolução e ajuste o caminho quando necessário.</p></div>
+          </li>
+          <li class="cu-tl-etapa">
+            <span class="cu-tl-numero" aria-hidden="true"><b>05</b></span>
+            <svg class="cu-tl-icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 3 6v6c0 5 9 10 9 10s9-5 9-10V6z"/><path d="m8 12 3 3 5-6"/></svg>
+            <div class="cu-tl-card"><h4>Consolidar a mudança.</h4><p>Mantenha o que funciona e prepare o próximo passo.</p></div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+.cu-tl{--topo:0px;display:block;flex:0 0 auto;margin:0;padding:0;border:0;max-width:none;overflow:visible!important;--fundo:#081b13;--cor:#d0b77c;--cor-clara:#f3dfab;--texto:#f5f6f0;--muted:#b5c5bb;--espaco:30px;--numero:44px;width:100%;position:relative;background:var(--fundo);color:var(--texto);font:400 17px/1.65 Arial,sans-serif}
+.cu-tl,.cu-tl *{box-sizing:border-box}
+.cu-tl-fixo{width:100%;padding:64px 32px;background:radial-gradient(ellipse at 10% 10%,#183c2966,transparent 65%),var(--fundo)}
+.cu-tl-fixada .cu-tl-fixo{position:-webkit-sticky;position:sticky;top:var(--topo);height:var(--altura);display:grid;align-items:center;z-index:1}
+/* Plano B: quando o sticky não funciona no site, o JS move o bloco junto com o scroll */
+.cu-tl-fixada.cu-tl-modo-js .cu-tl-fixo{position:relative;top:0;will-change:transform}
+.cu-tl-grade{display:grid;grid-template-columns:1fr 1.16fr;gap:clamp(40px,6vw,100px);width:min(100%,1180px);margin:auto;align-items:start}
+.cu-tl-tag{display:inline-block;border:1px solid #ffffff25;border-radius:3px;padding:8px 14px;font-size:11px;font-weight:600;letter-spacing:.16em;color:var(--muted)}
+.cu-tl h2{font:400 clamp(34px,3.8vw,56px)/1.1 Georgia,serif;letter-spacing:-.035em;color:var(--texto);margin:24px 0}
+.cu-tl h2 em{font-style:normal;color:var(--cor)}
+.cu-tl-intro>p{margin:0;max-width:460px;color:var(--muted)}
+.cu-tl-resumo{margin-top:36px;border:1px solid #d0b77c30;border-radius:18px;padding:24px;background:#ffffff03;display:grid;gap:8px}
+.cu-tl-resumo span{font-size:10px;letter-spacing:.14em;color:var(--cor)}
+.cu-tl-resumo strong{font-size:20px;font-weight:400}.cu-tl-resumo i{font-size:28px;font-style:normal;color:var(--cor)}
+.cu-tl h3{font:400 clamp(25px,2.5vw,34px)/1.2 Georgia,serif;margin:0 0 34px;color:var(--texto)}
+.cu-tl-lista{display:grid;gap:var(--espaco);padding:0;margin:0;list-style:none}
+.cu-tl-etapa{position:relative;display:grid;grid-template-columns:var(--numero) 26px minmax(0,1fr);align-items:start;gap:18px;margin:0;padding:0;list-style:none}
+.cu-tl-etapa:not(:last-child)::before,.cu-tl-etapa:not(:last-child)::after{content:"";position:absolute;left:calc(var(--numero)/2 - 1px);top:var(--numero);width:2px;height:calc(100% - var(--numero) + var(--espaco));pointer-events:none}
+.cu-tl-etapa::before{background:#91a99430}
+.cu-tl-etapa::after{background:linear-gradient(var(--cor-clara),var(--cor));box-shadow:0 0 12px #d0b77c55;transform-origin:top;transform:scaleY(var(--linha,1))}
+.cu-tl-numero{width:var(--numero);height:var(--numero);border:1px solid var(--cor);border-radius:50%;position:relative;display:grid;place-items:center;background:#183927;isolation:isolate;color:var(--cor-clara);font-size:13px;line-height:1}
+.cu-tl-numero::before{content:"";position:absolute;inset:-1px;border-radius:50%;background:linear-gradient(135deg,var(--cor-clara),var(--cor));opacity:var(--aceso,0);box-shadow:0 0 0 6px #d0b77c24,0 0 28px #d0b77c80;z-index:-1}
+.cu-tl-numero b{font-weight:500}
+.cu-tl-icone{width:26px;height:26px;margin-top:8px;fill:none;stroke:var(--cor);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.cu-tl-card{min-height:72px;padding-top:6px}
+.cu-tl-card h4{font:600 18px/1.4 Arial,sans-serif;letter-spacing:-.02em;margin:0 0 6px;color:var(--texto)}
+.cu-tl-card p{font:400 15px/1.65 Arial,sans-serif;margin:0;color:var(--muted)}
+@media(max-width:1024px){.cu-tl-grade{grid-template-columns:1fr;gap:40px;max-width:680px}.cu-tl-fixo{padding:48px 24px}.cu-tl h2{font-size:40px}.cu-tl-resumo{display:none}.cu-tl-intro>p{max-width:none}}
+@media(max-width:560px){.cu-tl{--espaco:26px;--numero:38px}.cu-tl-fixo{padding:40px 20px}.cu-tl-etapa{grid-template-columns:var(--numero) 22px minmax(0,1fr);gap:12px}.cu-tl-icone{width:22px;height:22px}.cu-tl-card h4{font-size:16px}.cu-tl-card p{font-size:14px}.cu-tl h2{font-size:35px}.cu-tl h3{font-size:27px}}
+</style>
+<script>
+(() => {
+  const DISTANCIA = 2.2; // Distância da animação, em alturas úteis de tela.
+  const SUAVIDADE = .18; // Suaviza só o conteúdo. A posição da seção nunca atrasa.
+  const DESKTOP = 1025;
+  const CORRIGIR_OVERFLOW = true;
+  const limitar = n => Math.max(0,Math.min(1,n));
+  const ease = n => 1-Math.pow(1-limitar(n),3);
+  const toque = matchMedia('(pointer: coarse)');
+  const rolaDeVerdade = (el,cs) => /(auto|scroll|overlay)/.test(cs.overflowY) && el.scrollHeight>el.clientHeight+1;
+  function encontrarRolagem(el,corrigir=false){
+    for(let p=el.parentElement;p&&p!==document.documentElement;p=p.parentElement){
+      if(p===document.scrollingElement)break;
+      const cs=getComputedStyle(p);
+      if(rolaDeVerdade(p,cs))return p; // Preserva o wrapper que realmente rola.
+      if(!corrigir||p.scrollHeight>p.clientHeight+1)continue;
+      if(cs.overflowX==='visible'&&cs.overflowY==='visible')continue;
+      // Clip conserva o recorte sem criar o scroll container que bloqueia sticky.
+      const x=cs.overflowX==='visible'?'visible':'clip';
+      const y=/^(hidden|clip)$/.test(cs.overflowY)?'clip':'visible';
+      if(cs.overflowX!==x)p.style.setProperty('overflow-x',x,'important');
+      if(cs.overflowY!==y)p.style.setProperty('overflow-y',y,'important');
+    }
+    return window;
+  }
+  document.querySelectorAll('.cu-tl:not([data-iniciada])').forEach(root=>{
+    root.dataset.iniciada='true';
+    const fixo=root.querySelector('.cu-tl-fixo'),grade=root.querySelector('.cu-tl-grade'),lista=root.querySelector('.cu-tl-lista');
+    const etapas=[...root.querySelectorAll('.cu-tl-etapa')].map((el,i)=>{
+      const numero=el.querySelector('.cu-tl-numero');
+      numero.querySelector('b').textContent=String(i+1).padStart(2,'0');
+      return {el,numero,card:el.querySelector('.cu-tl-card'),icone:el.querySelector('.cu-tl-icone')};
+    });
+    if(!etapas.length)return;
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+    let presa=false,estatica=false,modoJs=false,distancia=1,topo=0,atual=0,quadro=0,ultimo=0;
+    let scroller=window,largura=innerWidth,alturaJanela=innerHeight,alturaUtil=innerHeight;
+    // Borda interna do wrapper, ou topo da janela. Não supõe que o wrapper comece em y=0.
+    function topoRolagem(){return scroller===window?0:scroller.getBoundingClientRect().top+scroller.clientTop}
+    function topoEsperado(){return topoRolagem()+topo}
+    function progresso(){
+      if(estatica)return 1;
+      if(presa)return limitar((topoEsperado()-root.getBoundingClientRect().top)/distancia);
+      const r=lista.getBoundingClientRect();
+      return limitar((topoEsperado()+alturaUtil*.72-r.top)/(r.height+alturaUtil*.2));
+    }
+    function desenhar(p){
+      const t=p*(etapas.length-.1),indice=Math.min(etapas.length-1,Math.max(0,Math.floor(t)));
+      etapas.forEach(({el,numero,card,icone},i)=>{
+        const entrada=estatica?1:ease((t-i)/.5);
+        const aceso=estatica?0:ease((t-i)/.4)*(i===etapas.length-1?1:1-ease((t-i-1)/.4));
+        el.style.setProperty('--linha',estatica?1:limitar((t-i-.3)/.7));
+        numero.style.setProperty('--aceso',aceso);
+        numero.style.color=aceso>.5?'var(--fundo)':'var(--cor-clara)';
+        card.style.opacity=.28+.72*entrada;
+        card.style.transform=`translateX(${(1-entrada)*14}px)`;
+        if(icone)icone.style.opacity=.35+.65*entrada;
+        if(i===indice&&!estatica)el.setAttribute('aria-current','step');else el.removeAttribute('aria-current');
+      });
+    }
+    function posicionar(){
+      if(!presa){fixo.style.transform='';return}
+      const topoAlvo=topoEsperado(),r=topoAlvo-root.getBoundingClientRect().top;
+      if(!modoJs&&r>4&&r<distancia-4&&Math.abs(fixo.getBoundingClientRect().top-topoAlvo)>4){
+        modoJs=true;root.classList.add('cu-tl-modo-js');
+      }
+      // Este deslocamento é direto: usar o progresso suavizado aqui faz o bloco escapar.
+      fixo.style.transform=modoJs?`translate3d(0,${Math.max(0,Math.min(distancia,r))}px,0)`:'';
+    }
+    function animar(agora){
+      quadro=0;
+      posicionar();
+      const alvo=progresso(),dt=ultimo?Math.min(.1,(agora-ultimo)/1000):1/60;ultimo=agora;
+      atual=estatica||!SUAVIDADE?alvo:atual+(alvo-atual)*(1-Math.exp(-dt/SUAVIDADE));
+      if(Math.abs(alvo-atual)<.0001)atual=alvo;
+      desenhar(atual);
+      if(atual!==alvo)quadro=requestAnimationFrame(animar);else ultimo=0;
+    }
+    function agendar(){if(!quadro)quadro=requestAnimationFrame(animar)}
+    function medir(){
+      // Guarda uma altura estável mesmo se fonts/ResizeObserver dispararem após a barra móvel.
+      if(!(toque.matches&&innerWidth===largura&&Math.abs(innerHeight-alturaJanela)<120)){
+        largura=innerWidth;alturaJanela=innerHeight;
+      }
+      topo=Math.max(0,parseFloat(getComputedStyle(root).getPropertyValue('--topo'))||0);
+      modoJs=false;root.classList.remove('cu-tl-modo-js');fixo.style.transform='';
+      const cs=getComputedStyle(fixo);
+      const conteudo=grade.offsetHeight+(parseFloat(cs.paddingTop)||0)+(parseFloat(cs.paddingBottom)||0);
+      // Define a altura antes de procurar o wrapper: um wrapper auto pode só passar a rolar
+      // depois que a distância extra da animação existir.
+      function dimensionar(){
+        const viewport=scroller===window?alturaJanela:Math.min(alturaJanela,scroller.clientHeight);
+        alturaUtil=Math.max(1,viewport-topo);
+        estatica=reduced.matches||conteudo>alturaUtil;
+        presa=innerWidth>=DESKTOP&&!estatica;
+        distancia=Math.max(1,viewport*DISTANCIA);
+        root.classList.toggle('cu-tl-fixada',presa);
+        root.style.setProperty('--altura',alturaUtil+'px');
+        root.style.height=presa?(alturaUtil+distancia)+'px':'auto';
+      }
+      scroller=window;dimensionar();
+      scroller=encontrarRolagem(root,presa&&CORRIGIR_OVERFLOW);dimensionar();
+      posicionar();atual=progresso();desenhar(atual);agendar();
+    }
+    document.addEventListener('scroll',agendar,{passive:true,capture:true});
+    window.addEventListener('resize',()=>{
+      if(toque.matches&&innerWidth===largura&&Math.abs(innerHeight-alturaJanela)<120)return;
+      medir();
+    },{passive:true});
+    if(reduced.addEventListener)reduced.addEventListener('change',medir);else reduced.addListener(medir);
+    if(window.ResizeObserver){
+      const ro=new ResizeObserver(medir);ro.observe(grade);
+      // Um wrapper pode mudar de altura mesmo sem resize da janela.
+      for(let p=root.parentElement;p&&p!==document.body;p=p.parentElement)ro.observe(p,{box:'border-box'});
+    }
+    root.querySelectorAll('img').forEach(img=>img.addEventListener('load',medir));
+    window.addEventListener('load',medir,{once:true});
+    if(document.fonts)document.fonts.ready.then(medir);
+    medir();
+  });
+})();
+</script>

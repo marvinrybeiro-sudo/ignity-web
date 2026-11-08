@@ -1,0 +1,19 @@
+.btn4{
+  border-radius: 8px;  /*defina o arredondamento aqui*/
+  text-shadow: none; 
+  background: transparent !important;  /*defina a cor do BG aqui*/
+  border: 1px solid #ffffff80; /*configure a borda*/
+  transition: 0.5s ease;
+}
+
+.btn4:hover,:focus {
+  background: #6121ff; /*defina a cor do BG no hover*/
+  border: 1px solid #6121fff;/*configure a borda no hover*/
+  text-shadow: 0 0 5px #ffffff, /*defina o brilho no texto aqui*/
+              0 0 10px #ffffff, /*defina o brilho no texto aqui*/
+              0 0 20px #ffffff; /*defina o brilho no texto aqui*/
+  box-shadow: 0 0 5px #6121ff, /*defina o brilho do hover aqui*/
+              0 0 20px #6121ff, /*defina o brilho do hover aqui*/
+              0 0 50px #6121ff, /*defina o brilho do hover aqui*/
+              0 0 100px #6121ff; /*defina o brilho do hover aqui*/
+}

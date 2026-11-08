@@ -1,0 +1,40 @@
+selector{
+    background: #11111160; /* Cor de fundo*/
+    padding: 25px; /* Espaçamento interno */
+    border-radius: 6px; /* Arredondamento das bordas */
+    backdrop-filter: blur(13px); /* Efeito de desfoque no fundo */
+    -webkit-backdrop-filter: blur(13px); /* Efeito de desfoque no fundo */
+
+.elementor-form-fields-wrapper{
+    display: grid; 
+    grid-template-areas: 
+    "a a b b"
+    "c c b b"
+    "d d e e"
+    "f f f f";
+}
+
+.elementor-field-group-name{
+    grid-area: a; 
+    align-self: start; 
+}
+
+.elementor-field-group-message{
+    grid-area: b; 
+    align-self: start; 
+
+.elementor-field-group-email{
+    grid-area: c; 
+}
+
+.elementor-field-group-wpp{
+    grid-area: d; 
+}
+
+.elementor-field-group-data{
+    grid-area: e;
+}
+
+.elementor-field-type-submit{
+    grid-area: f; 
+}

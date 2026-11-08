@@ -1,0 +1,41 @@
+{
+  "id": "cards-com-glow-no-ponteiro-do-mouse-1765385081018-1765385081130",
+  "titulo": "Cards com Glow no ponteiro do mouse",
+  "modulo": "Módulo: Cards",
+  "categoria": "cards",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-12-10T16:44:41.000Z",
+  "atualizado": "2025-12-10T16:44:41.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1765385081091.gif",
+  "video": null,
+  "arquivos": [
+    "json"
+  ],
+  "peso": {
+    "bytes": 87,
+    "gzip": 99
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": false,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": true
+}

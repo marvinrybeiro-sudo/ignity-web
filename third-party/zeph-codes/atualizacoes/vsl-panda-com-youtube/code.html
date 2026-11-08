@@ -1,0 +1,270 @@
+<div id="vsl-container">
+  <div class="video-wrapper">
+    <div id="player-wrapper">
+      <div id="player"></div>
+      <div id="contextBlocker"></div>
+    </div>
+
+    <!-- Overlay de áudio -->
+    <div class="overlay-audio" id="audioOverlay">
+      <div class="audio-content" id="unmuteBtn">
+        <p>Clique aqui</p>
+        <div class="icon-container">
+          <video
+            src="https://zeph.com.br/wp-content/uploads/2025/06/21volume.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            class="volume-video"
+          ></video>
+        </div>
+        <p>para ativar o som</p>
+      </div>
+    </div>
+
+    <!-- Overlay de pausa com botão de play -->
+    <div class="overlay-pause" id="pauseOverlay">
+      <div id="resumeBtn" class="pause-play-button">
+        <img src="https://zeph.com.br/wp-content/uploads/2025/06/play-button-arrowhead.svg" class="pause-icon" />
+      </div>
+    </div>
+
+    <!-- Barra de progresso -->
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+</div>
+
+<style>
+  #vsl-container {
+    position: relative;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+  }
+
+  #player-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  #player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  #contextBlocker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: auto;
+  }
+
+  .overlay-audio, .overlay-pause {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 4;
+    flex-direction: column;
+    font-family: sans-serif;
+  }
+
+  .overlay-audio {
+    background: transparent;
+  }
+
+  .audio-content {
+    background: #4564FF;
+    padding: 30px;
+    border: solid 2px white;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    max-width: 300px;
+    width: 100%;
+    animation: fadeIn 0.8s ease;
+  }
+
+  .audio-content p {
+    margin: 8px 0;
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .volume-video {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    pointer-events: none;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .overlay-pause {
+    display: none;
+    background-color: transparent;
+  }
+
+  .pause-play-button {
+    width: 90px;
+    height: 90px;
+    background: #4564FFE0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .pause-play-button:hover {
+    background: #4564FF;
+    transform: scale(1.05);
+  }
+
+  .pause-icon {
+    margin-right: -2px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .progress-bar {
+    height: 6px;
+    background: white;
+    width: 0%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    transition: width 0.2s ease;
+  }
+
+  iframe[src*="youtube.com"]::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 60px; height: 60px;
+    background: transparent;
+    z-index: 10;
+  }
+</style>
+
+<script>
+  let tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.body.appendChild(tag);
+
+  let player, interval;
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      videoId: 'tjR6Fb20_c8',
+      playerVars: {
+        'autoplay': 1,
+        'controls': 0,
+        'mute': 1,
+        'rel': 0,
+        'modestbranding': 1,
+        'showinfo': 0,
+        'enablejsapi': 1,
+        'fs': 0,
+        'playsinline': 1
+      },
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
+
+  function onPlayerReady(event) {
+    event.target.playVideo();
+    updateProgress();
+  }
+
+  function updateProgress() {
+    interval = setInterval(() => {
+      if (player && player.getDuration) {
+        const duration = player.getDuration();
+        const current = player.getCurrentTime();
+        const percent = (current / duration) * 100;
+        document.getElementById("progressBar").style.width = percent + "%";
+      }
+    }, 500);
+  }
+
+  document.getElementById("unmuteBtn").addEventListener("click", () => {
+    player.unMute();
+    player.seekTo(0);
+    player.playVideo();
+    document.getElementById("audioOverlay").style.display = "none";
+  });
+
+  document.getElementById("resumeBtn").addEventListener("click", () => {
+    player.playVideo();
+    document.getElementById("pauseOverlay").style.display = "none";
+  });
+
+  function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.PAUSED) {
+      document.getElementById("pauseOverlay").style.display = "flex";
+    } else {
+      document.getElementById("pauseOverlay").style.display = "none";
+    }
+  }
+
+  // ✅ Bloqueia botão direito só no player
+  const blocker = document.getElementById("contextBlocker");
+
+  blocker.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+  });
+
+  blocker.addEventListener("click", function () {
+    const state = player.getPlayerState();
+    if (state === YT.PlayerState.PLAYING) {
+      player.pauseVideo();
+    } else {
+      player.playVideo();
+    }
+  });
+
+  // ✅ Bloqueia botão direito da página toda
+  document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+  });
+</script>

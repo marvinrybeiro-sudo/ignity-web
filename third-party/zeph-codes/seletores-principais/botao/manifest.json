@@ -1,0 +1,41 @@
+{
+  "id": "botao-1764182368287-1764182373800",
+  "titulo": "Botão",
+  "modulo": "Módulo: Seletores Principais",
+  "categoria": "seletores-principais",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-26T18:39:33.000Z",
+  "atualizado": "2025-11-26T18:39:33.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1764182371660.jpg",
+  "video": null,
+  "arquivos": [
+    "css"
+  ],
+  "peso": {
+    "bytes": 77,
+    "gzip": 57
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": false,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

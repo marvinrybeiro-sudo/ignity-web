@@ -1,0 +1,266 @@
+<!-- Código 01 -->
+  <div class="container">
+    <div class="grid">
+      <!-- COLUNA ESQUERDA -->
+      <aside class="card">
+        <h3 class="title">Galeria / Benefícios</h3>
+        <div class="gallery__main"><span>[ Prévia da embalagem / imagem do sabor ]</span></div>
+
+        <div class="benefits">
+          <div class="benefit">◻️ Reduz o inchaço abdominal e gases</div>
+          <div class="benefit">◻️ Energia constante, sem picos ou quedas</div>
+          <div class="benefit">◻️ Promove a saúde do intestino</div>
+        </div>
+
+        <div class="gallery__thumb"><span>[ Thumb / ângulo 2 ]</span></div>
+      </aside>
+
+      <!-- COLUNA DIREITA -->
+      <section class="card config" aria-labelledby="cfg-title">
+        <h3 id="cfg-title" class="title">Selecione o sabor e a quantidade</h3>
+        <p class="subtitle">Wireframe com estados reais de seleção</p>
+
+        <!-- VARIANTES -->
+        <div class="variants" role="radiogroup" aria-label="Sabor">
+          <button class="variant" role="radio" aria-checked="true" data-variant="limao">
+            <div class="wf-badge">IMG</div>
+            <span>Limão Siciliano</span>
+          </button>
+          <button class="variant" role="radio" aria-checked="false" data-variant="laranja">
+            <div class="wf-badge">IMG</div>
+            <span>Laranja</span>
+          </button>
+          <button class="variant" role="radio" aria-checked="false" data-variant="mix">
+            <div class="wf-badge">IMG</div>
+            <span>Laranja + Limão</span>
+          </button>
+        </div>
+
+        <!-- PACOTES -->
+        <fieldset class="bundles" aria-label="Quantidade de caixas">
+          <label class="bundle">
+            <input type="radio" name="bundle" value="1" checked>
+            <div class="bundle__card">
+              <div class="bundle__top">
+                <div class="bundle__title">1 Caixa — <span class="js-flavor">Limão</span></div>
+              </div>
+              <div class="prices">
+                <span class="from js-from">R$ 227,00</span>
+                <span class="off js-off">- R$ 59,10 OFF</span>
+                <span class="to js-to">R$ 167,90</span>
+              </div>
+            </div>
+          </label>
+
+          <label class="bundle">
+            <input type="radio" name="bundle" value="2">
+            <div class="bundle__card">
+              <div class="bundle__top">
+                <div class="bundle__title">2 Caixas — <span class="js-flavor">Limão</span></div>
+                <span class="tag">Mais vendido</span>
+              </div>
+              <div class="prices">
+                <span class="from js-from">R$ 454,00</span>
+                <span class="off js-off">- R$ 186,10 OFF</span>
+                <span class="to js-to">R$ 267,90</span>
+              </div>
+            </div>
+          </label>
+
+          <label class="bundle">
+            <input type="radio" name="bundle" value="3plus1">
+            <div class="bundle__card">
+              <div class="bundle__top">
+                <div class="bundle__title">3 caixas + 1 grátis — <span class="js-flavor">Limão</span></div>
+              </div>
+              <div class="prices">
+                <span class="from js-from">R$ 908,00</span>
+                <span class="off js-off">- R$ 470,10 OFF</span>
+                <span class="to js-to">R$ 437,90</span>
+              </div>
+            </div>
+          </label>
+        </fieldset>
+
+        <!-- RESUMO -->
+        <div class="summary">
+          <div class="meta">
+            <span class="js-boxes">1 caixa</span>
+            <span class="dot"></span>
+            <span>Duração de 30 dias</span>
+          </div>
+          <div class="sumcard">
+            <div class="installments">12x de <strong class="js-installment">R$ 17,36</strong></div>
+            <span class="cash">Ou <strong class="js-cash">R$ 167,90</strong> à vista</span>
+            <button class="cta" id="buyBtn" disabled>COMPRAR AGORA</button>
+            <div class="trust">
+              <span>🧾 Compra segura</span>
+              <span>🔁 Satisfação garantida</span>
+              <span>📦 Entrega protegida</span>
+            </div>
+            <div class="rating">★ 4.8 de 1.325 avaliações</div>
+          </div>
+        </div>
+
+        <!-- BARRA INFERIOR -->
+        <div class="benefits-bar">
+          <span>R$ <span class="js-dose">7,89</span> por dose</span>
+          <span>Frete grátis para todo o Brasil</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+<script>
+  // ------- ESTADO E DADOS DE TABELA (wireframe) -------
+  const pricing = {
+    limao: {
+      '1':      { from: 227.00, to: 167.90, boxes: 1, flavor: 'Limão' },
+      '2':      { from: 454.00, to: 267.90, boxes: 2, flavor: 'Limão' },
+      '3plus1': { from: 908.00, to: 437.90, boxes: 4, flavor: 'Limão' },
+    },
+    laranja: {
+      '1':      { from: 227.00, to: 172.90, boxes: 1, flavor: 'Laranja' },
+      '2':      { from: 454.00, to: 279.90, boxes: 2, flavor: 'Laranja' },
+      '3plus1': { from: 908.00, to: 449.90, boxes: 4, flavor: 'Laranja' },
+    },
+    mix: {
+      '1':      { from: 227.00, to: 169.90, boxes: 1, flavor: 'Mix' },
+      '2':      { from: 454.00, to: 269.90, boxes: 2, flavor: 'Mix' },
+      '3plus1': { from: 908.00, to: 439.90, boxes: 4, flavor: 'Mix' },
+    }
+  };
+  const state = { variant: 'limao', bundle: '1', installments: 12 };
+
+  // ------- HELPERS -------
+  const $ = sel => document.querySelector(sel);
+  const $$ = sel => document.querySelectorAll(sel);
+  const money = n => n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+
+  function renderVariantButtons() {
+    $$('.variant').forEach(btn=>{
+      const active = btn.dataset.variant === state.variant;
+      btn.setAttribute('aria-checked', active);
+      btn.classList.toggle('is-active', active);
+    });
+  }
+
+  function renderBundleCards(){
+    // atualiza rótulos/valores dos cards conforme o sabor
+    $$('.bundle').forEach(lbl=>{
+      const val = lbl.querySelector('input').value;
+      const p = pricing[state.variant][val];
+      lbl.querySelector('.js-flavor').textContent = p.flavor;
+      lbl.querySelector('.js-from').textContent = money(p.from);
+      lbl.querySelector('.js-to').textContent = money(p.to);
+      const off = p.from - p.to;
+      lbl.querySelector('.js-off').textContent = `- ${money(off)} OFF`;
+    });
+  }
+
+  function renderSummary(){
+    const p = pricing[state.variant][state.bundle];
+    $('.js-boxes').textContent = p.boxes + (p.boxes>1?' caixas':' caixa');
+    $('.js-cash').textContent = money(p.to);
+    $('.js-installment').textContent = money((p.to/state.installments));
+    $('#buyBtn').disabled = false; // habilita quando há seleção válida
+  }
+
+  // ------- EVENTOS -------
+  $$('.variant').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      state.variant = btn.dataset.variant;
+      renderVariantButtons();
+      renderBundleCards();
+      renderSummary();
+    });
+    // Acessibilidade teclado (espaço/enter)
+    btn.addEventListener('keydown', (e)=>{
+      if(e.key===' '||e.key==='Enter'){ e.preventDefault(); btn.click(); }
+    });
+  });
+
+  $$('input[name="bundle"]').forEach(r=>{
+    r.addEventListener('change', ()=>{
+      state.bundle = r.value;
+      renderSummary();
+    });
+  });
+
+  $('#buyBtn').addEventListener('click', ()=>{
+    // Wireframe: apenas demonstra a URL que seria usada
+    const url = new URL('/checkout', location.origin);
+    url.searchParams.set('variant', state.variant);
+    url.searchParams.set('bundle', state.bundle);
+    alert('Exemplo de redirecionamento:\n' + url.toString());
+  });
+
+  // ------- INIT -------
+  renderVariantButtons();
+  renderBundleCards();
+  renderSummary();
+</script>
+
+<!-- Código 02 -->
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#fff; --ink:#111; --muted:#6b7280; --line:#e5e7eb; 
+    --brand:#0ea5a3; --brand-weak:#e6f7f6;
+  }
+  *{box-sizing:border-box} html,body{height:100%}
+  body{margin:0; font:16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, Arial; color:var(--ink); background:var(--bg)}
+  .container{max-width:1120px; margin:auto; padding:20px}
+
+  /* Grid principal */
+  .grid{display:grid; grid-template-columns:1.1fr .9fr; gap:24px}
+  @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
+
+  /* Cartões base */
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px}
+  .title{font-weight:700; margin:0 0 10px}
+
+  /* COLUNA ESQUERDA */
+  .gallery__main{height:360px; background:repeating-linear-gradient(-45deg,#f2f3f5,#f2f3f5 16px,#eceef2 16px,#eceef2 32px);
+    border:1px dashed #cdd4df; border-radius:12px; display:grid; place-items:center; color:#64748b}
+  .gallery__main span{opacity:.9}
+  .benefits{display:grid; gap:10px; margin:12px 0}
+  .benefit{display:flex; gap:10px; align-items:center; border:1px dashed #d1d5db; border-radius:10px; padding:10px; color:#374151; background:#fafafa}
+  .gallery__thumb{height:140px; border:1px dashed #cdd4df; border-radius:12px; display:grid; place-items:center; color:#64748b; background:#f9fafb}
+
+  /* COLUNA DIREITA */
+  .config .subtitle{font-size:.95rem; color:var(--muted); margin:4px 0 10px}
+  .variants{display:flex; gap:10px; background:#eef8f7; border:1px solid #d7efed; border-radius:999px; padding:8px}
+  .variant{flex:1 1 auto; min-width:0; display:grid; place-items:center; gap:6px;
+    padding:10px; background:#fff; border:2px solid transparent; border-radius:999px; cursor:pointer}
+  .variant span{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:.9rem}
+  .variant[aria-checked="true"]{border-color:var(--brand)}
+  .variant:focus-visible{outline:3px solid #b9eeeb; outline-offset:2px}
+
+  .bundles{display:grid; gap:10px; margin:12px 0 0; padding:0; border:0}
+  .bundle{display:block; position:relative}
+  .bundle input{position:absolute; inset:0; opacity:0}
+  .bundle__card{border:2px solid #e5e7eb; border-radius:12px; padding:12px; background:#fff; display:grid; gap:6px}
+  .bundle input:checked + .bundle__card{border-color:var(--brand); background:var(--brand-weak)}
+  .bundle__top{display:flex; gap:8px; align-items:center; justify-content:space-between}
+  .bundle__title{font-weight:600}
+  .tag{font-size:.75rem; background:#fff3cd; color:#7b5d00; padding:2px 8px; border-radius:6px}
+  .prices{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+  .from{color:#9aa2ad; text-decoration:line-through}
+  .off{font-weight:700; font-size:.9rem; background:#ffe9ec; color:#b42318; border-radius:999px; padding:2px 8px}
+  .to{font-weight:800}
+
+  .summary{margin-top:12px}
+  .meta{display:flex; gap:12px; align-items:center; color:#6b7280; font-size:.92rem}
+  .meta .dot::after{content:"•"; margin-left:12px; color:#9aa7b2}
+  .sumcard{margin-top:10px; border:1px dashed #d1e7e4; border-radius:12px; padding:12px; background:#fff}
+  .installments{font-size:1.5rem}
+  .cash{color:#111; display:block; margin-top:2px}
+  .cta{display:block; width:100%; margin-top:10px; border:0; border-radius:12px; padding:14px; background:var(--brand); color:#fff; font-weight:800; cursor:pointer}
+  .cta:disabled{opacity:.55; cursor:not-allowed}
+  .trust{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; color:#667085}
+  .rating{margin-top:6px; color:#111}
+
+  .benefits-bar{margin-top:12px; padding:10px 12px; border-radius:12px; background:#eefcf7; display:flex; gap:10px; justify-content:space-between; font-weight:600}
+  /* wireframe badges */
+  .wf-badge{font-size:.78rem; padding:2px 8px; background:#eef2f7; border-radius:999px; border:1px solid #dde3ea; color:#4b5563}
+</style>

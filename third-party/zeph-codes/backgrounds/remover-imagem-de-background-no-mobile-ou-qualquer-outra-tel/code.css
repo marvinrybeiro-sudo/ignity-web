@@ -1,0 +1,30 @@
+@media(max-width:767px) {
+  selector {
+    background-image: none !important;
+  }
+}
+
+/*ULTRAWIDE*/
+@media(min-width: 2400px){
+  
+}
+
+/*DESKTOP*/
+@media(min-width: 1367px) and (max-width: 2399px){
+  
+}
+
+/*NOTEBOOK*/
+@media(min-width: 1025px) and (max-width: 1366px){
+  
+}
+
+/*TABLET*/
+@media(min-width: 768px) and (max-width: 1024px){
+  
+}
+
+/*CELULAR*/
+@media(max-width: 767px){
+  
+}

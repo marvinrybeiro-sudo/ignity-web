@@ -1,0 +1,4 @@
+selector .swiper-wrapper{
+  transition-timing-function: linear !important; 
+  -webkit-transition-timing-function: linear !important;
+}

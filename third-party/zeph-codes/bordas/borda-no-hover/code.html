@@ -1,0 +1,99 @@
+<!--
+BORDA NO HOVER
+1. Cole todo este código em um bloco/widget HTML da sua página.
+2. Substitua o conteúdo dentro de .zeph-borda-hover__conteudo pelo seu.
+3. Ajuste as cores, a espessura, os cantos e a velocidade nas variáveis abaixo.
+4. Para criar mais cards, duplique o <article class="zeph-borda-hover">.
+O brilho aparece ao passar o mouse e percorre a borda a cada 2,6 segundos.
+Ao retirar o mouse, o card volta à borda discreta. Se você inserir um link ou
+botão no card, o efeito também aparece quando ele recebe foco pelo teclado.
+Não precisa de JavaScript, biblioteca, fonte externa ou imagem.
+-->
+
+<style>
+@property --zeph-hover-angulo {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+.zeph-borda-hover {
+  /* PERSONALIZE AQUI */
+  --cor-borda: #b3f000;
+  --cor-brilho: #eaff9b;
+  --espessura: 1.4px;
+  --cantos: 20px;
+  --velocidade: 2.6s;
+  --fundo-card: #0c0c0c;
+  --fundo-hover: #101310;
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+  border-radius: var(--cantos);
+  background: var(--fundo-card);
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background .45s ease;
+}
+.zeph-borda-hover, .zeph-borda-hover * { box-sizing: border-box; }
+.zeph-borda-hover::before,
+.zeph-borda-hover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: var(--espessura);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+/* Borda discreta que permanece visível sem o mouse. */
+.zeph-borda-hover::after { background: rgb(255 255 255 / 7%); transition: background .45s; }
+/* A máscara mantém o brilho apenas no contorno, sem cobrir o conteúdo. */
+.zeph-borda-hover::before {
+  background: conic-gradient(
+    from var(--zeph-hover-angulo),
+    transparent 0deg 170deg,
+    color-mix(in srgb, var(--cor-borda) 10%, transparent) 225deg,
+    color-mix(in srgb, var(--cor-borda) 30%, transparent) 280deg,
+    color-mix(in srgb, var(--cor-brilho) 75%, transparent) 318deg,
+    var(--cor-brilho) 338deg,
+    color-mix(in srgb, var(--cor-brilho) 75%, transparent) 352deg,
+    color-mix(in srgb, var(--cor-borda) 12%, transparent) 358deg,
+    transparent 360deg
+  );
+  opacity: 0;
+  z-index: 2;
+  transition: opacity .45s ease;
+  animation: zeph-hover-girar var(--velocidade) linear infinite paused;
+}
+/* Hover só em dispositivos que têm mouse: evita ativação presa no toque. */
+@media (hover: hover) {
+  .zeph-borda-hover:hover { background: var(--fundo-hover); }
+  .zeph-borda-hover:hover::after { background: color-mix(in srgb, var(--cor-borda) 12%, transparent); }
+  .zeph-borda-hover:hover::before { opacity: 1; animation-play-state: running; }
+}
+.zeph-borda-hover:focus-within { background: var(--fundo-hover); }
+.zeph-borda-hover:focus-within::after { background: color-mix(in srgb, var(--cor-borda) 12%, transparent); }
+.zeph-borda-hover:focus-within::before { opacity: 1; animation-play-state: running; }
+.zeph-borda-hover__conteudo { padding: clamp(28px, 5vw, 44px); }
+.zeph-borda-hover h3 { margin: 0 0 12px; color: #fff; font: 500 clamp(24px, 3vw, 32px)/1.2 Arial, sans-serif; }
+.zeph-borda-hover p { margin: 0; color: #aaa; font: 400 17px/1.6 Arial, sans-serif; }
+@keyframes zeph-hover-girar { to { --zeph-hover-angulo: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .zeph-borda-hover, .zeph-borda-hover::before, .zeph-borda-hover::after { transition: none; }
+  .zeph-borda-hover::before { animation: none; }
+}
+</style>
+
+<article class="zeph-borda-hover">
+  <div class="zeph-borda-hover__conteudo">
+    <!-- COLOQUE SEU CONTEÚDO AQUI. Pode usar textos, imagens, links e botões. -->
+    <h3>Passe o mouse.</h3>
+    <p>O brilho aparece e percorre a borda deste card.</p>
+  </div>
+</article>

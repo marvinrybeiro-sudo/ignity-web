@@ -1,0 +1,41 @@
+{
+  "id": "elemento-subindo-no-hover-interatividade-1764125072872-1764125072013",
+  "titulo": "Elemento subindo no hover (interatividade)",
+  "modulo": "Módulo: Hover",
+  "categoria": "hover",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-26T02:44:32.000Z",
+  "atualizado": "2025-11-26T15:55:15.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1764125071950.gif",
+  "video": null,
+  "arquivos": [
+    "css"
+  ],
+  "peso": {
+    "bytes": 163,
+    "gzip": 145
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": false,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

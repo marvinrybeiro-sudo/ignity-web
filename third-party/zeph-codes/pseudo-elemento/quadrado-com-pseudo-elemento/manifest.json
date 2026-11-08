@@ -1,0 +1,41 @@
+{
+  "id": "quadrado-com-pseudo-elemento-1764187048755-1764187054654",
+  "titulo": "Quadrado com pseudo-elemento",
+  "modulo": "Módulo: Elementos com Pseudo-elemento",
+  "categoria": "pseudo-elemento",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-26T19:57:34.000Z",
+  "atualizado": "2025-11-26T19:57:34.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1764187054165.jpg",
+  "video": null,
+  "arquivos": [
+    "css"
+  ],
+  "peso": {
+    "bytes": 303,
+    "gzip": 206
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": false,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

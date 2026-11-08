@@ -1,0 +1,19 @@
+selector .elementor-image-carousel-wrapper,
+selector .swiper-container,
+selector .swiper-container-initialized,
+selector .swiper-container-horizontal{
+    overflow: visible !important;
+}
+
+/*css 2*/
+selector::before{
+    content: "";
+    position: absolute;
+    width: 1600px; /*altere a largura*/
+    height: 500px; /*altere a altura*/
+    background: #FFFFFF; /*altere a cor*/
+    top: 50%;  /*altere à posição ao topo*/
+    left: 0;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}

@@ -1,0 +1,43 @@
+selector{
+    overflow: hidden;
+}
+
+selector::before{
+    content: "";
+    /* Tamanho da seção */
+    width: 100%; 
+    height: 100%;
+
+    /* Plano de fundo com imagem, posição, repetição e tamanho */
+    background: url("LINK-DA-IMAGEM");
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    /* Filtro de desfoque para o plano de fundo */
+    filter: blur(200px);
+
+    /* Animação com duração, progressão e repetição */
+    animation: 12s linear infinite mov;
+
+    /* Transparência */
+    opacity: 1;
+
+    /* Ponto de origem da transformação */
+    transform-origin: 50% 50%;
+}
+
+@keyframes mov{
+    0%, 100% {
+        /* Estado inicial e final da animação: escala reduzida, rotação e desfoque */
+        transform: scale(0.8) rotate(45deg);
+        filter: blur(200px);
+        transform-origin: 50% 50%;
+    }
+    50% {
+        /* Estado intermediário da animação: escala aumentada, maior rotação e desfoque */
+        transform: scale(1.5) rotate(90deg);
+        filter: blur(200px);
+        transform-origin: 50% 50%;
+    }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "imagens-em-cascata-1791442823583-1791442824353",
+  "titulo": "Imagens em cascata",
+  "modulo": "Módulo: Scroll",
+  "categoria": "scroll",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2026-10-08T07:00:24.000Z",
+  "atualizado": "2026-10-08T07:00:24.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/76518395-2533-4d7c-8096-ee144b749055.gif",
+  "video": null,
+  "arquivos": [
+    "html"
+  ],
+  "peso": {
+    "bytes": 19796,
+    "gzip": 7105
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": true,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": true,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": true,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": true
+  },
+  "referenciaTerceiros": "Referência visual e geometria: HTML fornecido pelo usuário / igorfrosa.com/mediakit/.",
+  "elementorJson": false
+}

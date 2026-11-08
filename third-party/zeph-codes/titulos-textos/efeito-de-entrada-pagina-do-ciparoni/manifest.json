@@ -1,0 +1,45 @@
+{
+  "id": "efeito-de-entrada-pagina-do-ciparoni-1764743879582-1764743880053",
+  "titulo": "Efeito de entrada página do Ciparoni",
+  "modulo": "Módulo: Títulos e Textos",
+  "categoria": "titulos-textos",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-12-03T06:38:00.000Z",
+  "atualizado": "2025-12-10T16:44:56.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1764743880013.gif",
+  "video": null,
+  "arquivos": [
+    "js"
+  ],
+  "peso": {
+    "bytes": 3003,
+    "gzip": 1165
+  },
+  "deps": {
+    "scriptsExternos": [
+      "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js",
+      "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js",
+      "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"
+    ],
+    "imports": [],
+    "gsap": true,
+    "scrollTrigger": true,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

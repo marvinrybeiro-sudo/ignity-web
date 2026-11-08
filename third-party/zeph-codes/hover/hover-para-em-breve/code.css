@@ -1,0 +1,40 @@
+selector::before{
+    content: "";
+    /* Fundo translúcido com filtro de desfoque */
+    background: rgba(11, 13, 13, 0.8);
+    backdrop-filter: blur(5px); /* Filtro de desfoque no fundo */
+    -webkit-backdrop-filter: blur(5px); /* Filtro de desfoque no fundo para navegadores WebKit */
+
+    /* Posicionamento e tamanho */
+    position: absolute;
+    width: 100%;
+    height: calc(100% + 4px);
+    top: calc(50% + 1px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /* Estilo visual */
+    opacity: 0; /* Transparência inicial */
+    transition: .5s; /* Transição suave */
+}
+
+selector::after{
+    /* Estilo e posicionamento do texto */
+    content: "EM BREVE";
+    font-family: "sora";
+    font-size: 42px;
+    color: #abc4c4; /* Cor do texto */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /* Estilo visual */
+    opacity: 0; /* Transparência inicial */
+    transition: .5s; /* Transição suave */
+}
+
+selector:hover::before,
+selector:hover::after{
+    opacity: 1; /* Aumenta a opacidade ao passar o mouse */
+}

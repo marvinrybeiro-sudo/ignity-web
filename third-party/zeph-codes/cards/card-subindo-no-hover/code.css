@@ -1,0 +1,32 @@
+selector .card {
+  display: flex;
+  height: 280px;
+  width: 200px;
+  background-color: #232323; /* cor do bg /
+  border-radius: 10px;
+  box-shadow: -1rem 0 1rem rgba(8, 8, 8, 0.4); / cor da sombra, o último número é a opacidade */
+  transition: 0.4s ease-out;
+  position: relative;
+  left: 0px;
+}
+
+selector .card:not(:first-child) {
+    margin-left: -50px;
+}
+
+selector .card:hover {
+  transform: translateY(-20px);
+  transition: 0.4s ease-out;
+}
+
+selector .card:hover ~ .card {
+  position: relative;
+  left: 50px;
+  transition: 0.4s ease-out;
+}
+
+selector .title {
+  position: absolute;
+  left: 20px;
+  top: 25px;
+}

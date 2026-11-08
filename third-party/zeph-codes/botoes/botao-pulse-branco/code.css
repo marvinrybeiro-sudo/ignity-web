@@ -1,0 +1,44 @@
+.elementor-button {
+    background: linear-gradient(-45deg, #ffffff, #bababa, #ffffff, #bababa, #ffffff, #bababa); /* Mude as cores do degradê do botão aqui */
+    background-size: 800% 400%;
+    transition: all .5s;
+    animation: gradient 12s infinite cubic-bezier(.62, .28, .23, .99) both, pisca 1.5s infinite;
+    box-shadow: 0px 0px 20px -5px #ffffff70; /* Mude a cor aqui */
+}
+
+.elementor-button:hover{
+    transform: scale(1.05);
+}
+
+.elementor-button::before{
+    content: "";
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: inherit;
+    animation: pisca 1.5s infinite;
+    box-shadow: 0px 0px 20px -5px #ffffff80; /*mude a cor aqui*/
+}
+
+@keyframes pisca {
+    70% {
+        box-shadow: 0 0 0 30px transparent;
+    }
+    100% {
+        box-shadow: 0 0 0 0 transparent;
+    }
+}
+
+
+/* Animação do degradê */
+@keyframes gradient {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}

@@ -1,0 +1,9 @@
+imagem{
+    background: url('url_da_imagem_aqui');
+    background-repeat: no-repeat;
+    background-position: center center; /*Alinhamento da imagem*/
+    background-size: 100%; /*Largura da imagem*/
+    color: transparent;
+    padding: 25px; /*Altere o tamanho do padding para mudar o tamanho da imagem*/
+    margin: 40px; /*Distância da imagem e o texto*/
+}

@@ -1,0 +1,17 @@
+.card-prev:hover ~ .hover{
+    opacity: 1 !important;
+    z-index: 2 !important;
+}
+
+.card-prev:hover{
+    display: none;
+}
+
+.card{
+    opacity: 0;
+    z-index: -1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}

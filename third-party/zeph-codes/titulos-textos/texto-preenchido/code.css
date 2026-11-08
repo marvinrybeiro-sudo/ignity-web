@@ -1,0 +1,8 @@
+.selecionado {
+    background: linear-gradient(to right, #ffffff30 50%, #ffffff 50%);
+    background-size: 200%;
+    background-position: var(--bg-position, 0);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

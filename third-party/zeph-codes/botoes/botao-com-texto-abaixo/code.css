@@ -1,0 +1,80 @@
+/* Botão com degradê fixo */
+selector .elementor-button {
+    background: linear-gradient(90deg, #4C0DE2 0%, #3709AA 100%);
+    position: relative;
+    z-index: 2;
+    overflow: visible !important;
+    padding: 18px 70px !important;
+    min-width: 320px;
+    width: auto;
+    border-radius: 9000px !important;
+    transition: transform 0.3s ease;
+}
+
+/* Camada de profundidade */
+selector .elementor-button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #4C0DE2 0%, #3709AA 100%);
+    opacity: 0.4;
+    filter: blur(8px);
+    z-index: -1;
+}
+
+/* Texto acima de tudo */
+selector .elementor-button-text {
+    position: relative;
+    z-index: 5;
+}
+
+/* Badge escondido */
+selector .preco-tag {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 22px;
+    font-size: 0.74em;
+    white-space: nowrap;
+    color: #ffffff;
+    z-index: 5;
+    width: auto;
+    background: rgba(20, 20, 20, 0.92);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(12px);
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, bottom 0.3s ease;
+}
+
+/* Badge aparece no hover */
+selector .elementor-button:hover .preco-tag {
+    opacity: 1;
+    visibility: visible;
+    bottom: -45px;
+}
+
+/* Hover do botão */
+selector .elementor-button:hover {
+    transform: translateY(-2px);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    selector .elementor-button {
+        padding: 16px 50px !important;
+        min-width: 260px;
+    }
+    selector .preco-tag {
+        font-size: 0.7em;
+        padding: 7px 18px;
+        bottom: -36px;
+    }
+    selector .elementor-button:hover .preco-tag {
+        bottom: -32px;
+    }
+}

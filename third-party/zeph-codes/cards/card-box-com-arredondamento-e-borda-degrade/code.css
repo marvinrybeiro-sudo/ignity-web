@@ -1,0 +1,29 @@
+selector .elementor-widget-container {
+    position: relative;
+    z-index: 1;
+}
+
+selector .elementor-widget-container::before {
+    content: "";
+    background: #0F121A;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 10000px;
+    z-index: -1;
+}
+
+selector .elementor-widget-container::after {
+    content: "";
+    background: linear-gradient(90deg, red, blue);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 10000px;
+    transform: translate(-50%, -50%);
+    z-index: -2;
+}

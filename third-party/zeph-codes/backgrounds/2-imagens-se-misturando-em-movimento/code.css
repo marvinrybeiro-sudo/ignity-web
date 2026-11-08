@@ -1,0 +1,54 @@
+selector::before{
+    background: url("URL-AQUI");/*coloque a URL da imagem-1 aqui*/
+    animation: 12s linear infinite mov1; /*configure a animação-1 aqui*/
+    opacity: .8;/*defina a opacidade*/
+}
+
+selector::after {
+    background: url("URL-AQUI");/*coloque a URL da imagem-2 aqui*/
+    animation: mov3 13s linear infinite; /*configure a animação-2 aqui*/
+    animation-play-state: running;
+    scale: 1.5;
+    opacity: .5 /*defina a opacidade*/
+}
+
+selector::before,
+selector::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    filter: blur(200px);
+    animation: 12s linear infinite mov2;
+    transform-origin: 50% 50%;
+}
+
+selector{
+    overflow: hidden;
+}
+
+@keyframes mov1{/*configure a animação-1 aqui*/
+    0%{
+    transform:rotate(0deg);
+    transform-origin: 50% 50%;
+
+}
+    100% {
+    transform:rotate(360deg);
+    transform-origin: 50% 50%;
+}
+}
+
+@keyframes mov2{/*configure a animação-2 aqui*/
+    0%{
+        transform:rotate(0deg);
+        filter: blur(200px);
+    }
+    100% {
+        transform:rotate(360deg);
+        filter: blur(200px);
+    }
+}

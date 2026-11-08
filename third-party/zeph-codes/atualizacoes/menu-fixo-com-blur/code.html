@@ -1,0 +1,23 @@
+<script>
+  (function () {
+    const menu = document.querySelector('.men');
+    if (!menu) return;
+
+    let lastScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    window.addEventListener('scroll', function () {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+      // se rolar pra baixo
+      if (currentScroll > lastScroll) {
+        menu.classList.add('men-ativa');
+      } 
+      // se rolar pra cima
+      else {
+        menu.classList.remove('men-ativa');
+      }
+
+      lastScroll = currentScroll <= 0 ? 0 : currentScroll; // evita valores negativos
+    });
+  })();
+</script>

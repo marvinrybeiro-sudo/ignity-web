@@ -1,0 +1,10 @@
+selector::before{
+    content: "";
+    position: absolute;
+    width: 3px; /*altere a espessura da borda*/
+    height: 500px; /*altere a altura*/
+    background: #6121FF; /*altere a cor*/
+    top: 50%;  /*altere à posição ao topo*/
+    left: 50%; /*altere à esquerda*/
+    transform: translate(-50%, -50%);
+}

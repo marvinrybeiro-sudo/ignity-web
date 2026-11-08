@@ -1,0 +1,15 @@
+selector{
+    background-image: linear-gradient(to left, #937cff 0%,#3a0da5 100%); /*mude as cores aqui*/
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+deg{
+    background-image: linear-gradient(to left, #937cff 0%,#3a0da5 100%); /*mude as cores aqui*/
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
+}

@@ -1,0 +1,102 @@
+<!--
+GLOW NOS CARDS
+1. Cole todo este código em um bloco/widget HTML da sua página.
+2. Troque o título e a descrição nas linhas marcadas abaixo.
+3. Para mudar o brilho, ajuste --glow-cor, --glow-intensidade e --glow-tamanho.
+   O brilho acompanha o mouse. Para criar mais cards, duplique o <article>.
+-->
+
+<style>
+.zeph-glow-card {
+  /* PERSONALIZE AQUI */
+  --glow-cor: 201, 162, 78;
+  --glow-intensidade: .08;
+  --glow-tamanho: 600px;
+  --glow-fundo: #0a0908;
+  --glow-fundo-hover: #100e0b;
+  box-sizing: border-box;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  max-width: 440px;
+  padding: 38px 32px 34px;
+  border: 1px solid rgba(255, 255, 255, .06);
+  border-radius: 24px;
+  background: var(--glow-fundo);
+  color: #fbf8f2;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  transition: background .45s cubic-bezier(.22, .61, .36, 1);
+}
+.zeph-glow-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(var(--glow-tamanho) circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(var(--glow-cor), var(--glow-intensidade)), transparent 45%);
+  transition: opacity .45s;
+}
+.zeph-glow-card > * { position: relative; z-index: 1; }
+.zeph-glow-card__icone {
+  display: block;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 24px;
+  color: rgb(var(--glow-cor));
+}
+.zeph-glow-card h3 {
+  margin: 0 0 12px;
+  color: #fbf8f2;
+  font: 700 19px/1.2 Inter, system-ui, -apple-system, sans-serif;
+  letter-spacing: -.02em;
+}
+.zeph-glow-card p {
+  margin: 0;
+  color: #847f76;
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+@media (hover: hover) {
+  .zeph-glow-card:hover { background: var(--glow-fundo-hover); }
+  .zeph-glow-card:hover::before { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .zeph-glow-card, .zeph-glow-card::before { transition: none; }
+}
+</style>
+
+<article class="zeph-glow-card">
+  <!-- Ícone: você pode substituir este SVG. -->
+  <svg class="zeph-glow-card__icone" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+    <circle cx="22" cy="22" r="15" stroke="currentColor" stroke-width="1.3"/>
+    <ellipse cx="22" cy="22" rx="6.5" ry="15" stroke="currentColor" stroke-width="1.3" opacity=".65"/>
+    <path d="M7.6 17h28.8M7.6 27h28.8" stroke="currentColor" stroke-width="1.3" opacity=".65"/>
+    <circle cx="31" cy="14" r="2.6" fill="#f0dca8"/>
+  </svg>
+  <!-- EDITE SEU TÍTULO E SUA DESCRIÇÃO AQUI -->
+  <h3>Alcance global</h3>
+  <p>Receba de mais de 180 países, em múltiplas moedas, com roteamento inteligente entre adquirentes locais para maximizar aprovação.</p>
+</article>
+
+<script>
+/* Faz o brilho acompanhar o mouse. Pode manter como está. */
+(() => {
+  function iniciarGlow() {
+    document.querySelectorAll('.zeph-glow-card').forEach(card => {
+      if (card.dataset.glowPronto) return;
+      card.dataset.glowPronto = 'true';
+      card.addEventListener('pointermove', event => {
+        if (event.pointerType === 'touch') return;
+        const area = card.getBoundingClientRect();
+        card.style.setProperty('--glow-x', (event.clientX - area.left) + 'px');
+        card.style.setProperty('--glow-y', (event.clientY - area.top) + 'px');
+      }, { passive: true });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', iniciarGlow, { once: true });
+  } else iniciarGlow();
+})();
+</script>

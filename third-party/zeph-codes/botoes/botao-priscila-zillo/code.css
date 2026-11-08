@@ -1,0 +1,17 @@
+.elementor-button{
+    border-radius: 5px;  /*defina o arredondamento aqui*/
+    border-top: 1px solid #A9D6BA;  /*defina a borda aqui*/
+    background: linear-gradient(91deg, #739680 0%, #215376 100%);  /*defina a cor do BG aqui*/
+    box-shadow: 0px 5px 0px 0px #2D4636; /*defina a "borda" que fará o efeito 3d aqui*/
+    text-shadow: 0 2px 4px rgb(0 0 0 / 0%);
+    transition: all ease 0.5s;
+}
+
+.elementor-button:hover{ /*defina o brilho no hover*/
+    box-shadow: 0px 2px 0px 0px #ffffff50,
+    inset 0px 110px 60px #56d3fc,
+    inset 0px 30px 30px 0px #fff,
+    0px 0px 15px 0px #ffffff50, 
+    0px 15px 45px -15px #ffffff50;
+    border-color: #fff; 
+}

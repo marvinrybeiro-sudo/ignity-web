@@ -1,0 +1,13 @@
+.elementor-button[type="submit"] {
+    animation: pulsar 3s linear infinite; /*altere o tempo da animação*/
+}
+
+@keyframes pulsar{
+    0%, 100%{
+        scale: 1;
+    }
+    
+    50%{
+        scale: 1.1; /*altere o quanto irá aumentar*/
+    }
+}

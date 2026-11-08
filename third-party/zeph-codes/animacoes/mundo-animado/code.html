@@ -1,0 +1,358 @@
+<!--
+GLOBO 3D COM ROTAS DE PAGAMENTO (Dubai Cash)
+1. Cole todo este código em um bloco/widget HTML da sua página.
+2. O globo gira sozinho, destaca Pix, MB WAY, SPEI e UPI em sequência e pode ser
+   arrastado com o mouse ou o dedo.
+3. Cidades, nomes e bandeiras ficam no objeto CITIES do JavaScript.
+4. A ordem dos destaques fica em DESTAQUES. Para trocar o tamanho, mude
+   --globo-largura no CSS.
+O Three.js (r128) só é baixado quando o globo está chegando na tela.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+
+<div class="dcg">
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="f-br" viewBox="0 0 22 16"><rect width="22" height="16" fill="#1f9d4d"/><path d="M11 2.2 19.6 8 11 13.8 2.4 8z" fill="#F8D21C"/><circle cx="11" cy="8" r="3.3" fill="#1c3f94"/></symbol>
+  <symbol id="f-pt" viewBox="0 0 22 16"><rect width="22" height="16" fill="#d8232a"/><rect width="8.8" height="16" fill="#0b6b35"/><circle cx="8.8" cy="8" r="2.7" fill="#F8D21C"/></symbol>
+  <symbol id="f-mx" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><rect width="7.33" height="16" fill="#0b6b47"/><rect x="14.67" width="7.33" height="16" fill="#ce1126"/><circle cx="11" cy="8" r="1.7" fill="#8a5a2b"/></symbol>
+  <symbol id="f-in" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><rect width="22" height="5.33" fill="#FF9933"/><rect y="10.67" width="22" height="5.33" fill="#138808"/><circle cx="11" cy="8" r="1.9" fill="none" stroke="#1a2a80" stroke-width=".7"/></symbol>
+  <symbol id="f-us" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><path d="M0 1.23h22M0 3.69h22M0 6.15h22M0 8.62h22M0 11.08h22M0 13.54h22" stroke="#B22234" stroke-width="1.23"/><rect width="9.6" height="8.6" fill="#3C3B6E"/></symbol>
+  <symbol id="f-gb" viewBox="0 0 22 16"><rect width="22" height="16" fill="#012169"/><path d="M0 0l22 16M22 0L0 16" stroke="#fff" stroke-width="3"/><path d="M0 0l22 16M22 0L0 16" stroke="#C8102E" stroke-width="1"/><path d="M11 0v16M0 8h22" stroke="#fff" stroke-width="5"/><path d="M11 0v16M0 8h22" stroke="#C8102E" stroke-width="3"/></symbol>
+  <symbol id="f-ca" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><rect width="5.5" height="16" fill="#d52b1e"/><rect x="16.5" width="5.5" height="16" fill="#d52b1e"/><path d="M11 3.2l1 2 1.6-.6-.5 2.6 1.6-1-.3 1.5 1.2.4-2.6 2.1.4 1.3-2.4-.4V13h-.4v-1.9l-2.4.4.4-1.3-2.6-2.1 1.2-.4-.3-1.5 1.6 1-.5-2.6 1.6.6z" fill="#d52b1e"/></symbol>
+  <symbol id="f-es" viewBox="0 0 22 16"><rect width="22" height="16" fill="#c60b1e"/><rect y="4" width="22" height="8" fill="#ffc400"/></symbol>
+  <symbol id="f-fr" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><rect width="7.33" height="16" fill="#002395"/><rect x="14.67" width="7.33" height="16" fill="#ed2939"/></symbol>
+  <symbol id="f-nl" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><rect width="22" height="5.33" fill="#ae1c28"/><rect y="10.67" width="22" height="5.33" fill="#21468b"/></symbol>
+  <symbol id="f-de" viewBox="0 0 22 16"><rect width="22" height="16" fill="#ffce00"/><rect width="22" height="5.33" fill="#000"/><rect y="5.33" width="22" height="5.34" fill="#dd0000"/></symbol>
+  <symbol id="f-pl" viewBox="0 0 22 16"><rect width="22" height="16" fill="#dc143c"/><rect width="22" height="8" fill="#fff"/></symbol>
+  <symbol id="f-tr" viewBox="0 0 22 16"><rect width="22" height="16" fill="#e30a17"/><circle cx="8.4" cy="8" r="3.6" fill="#fff"/><circle cx="9.3" cy="8" r="2.9" fill="#e30a17"/><path d="M12.6 8l2.6-.9-1.6 2.2V6.7l1.6 2.2z" fill="#fff"/></symbol>
+  <symbol id="f-eg" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><rect width="22" height="5.33" fill="#ce1126"/><rect y="10.67" width="22" height="5.33" fill="#000"/><circle cx="11" cy="8" r="1.4" fill="#c09300"/></symbol>
+  <symbol id="f-sa" viewBox="0 0 22 16"><rect width="22" height="16" fill="#006c35"/><path d="M5.5 6.6h11M6 7.6h10" stroke="#fff" stroke-width=".7"/><path d="M6.5 10.4h9" stroke="#fff" stroke-width=".9"/></symbol>
+  <symbol id="f-ae" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><rect width="22" height="5.33" fill="#00732f"/><rect y="10.67" width="22" height="5.33" fill="#000"/><rect width="6" height="16" fill="#ff0000"/></symbol>
+  <symbol id="f-ng" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><rect width="7.33" height="16" fill="#008751"/><rect x="14.67" width="7.33" height="16" fill="#008751"/></symbol>
+  <symbol id="f-ke" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><rect width="22" height="4.6" fill="#000"/><rect y="5.6" width="22" height="4.8" fill="#bb0000"/><rect y="11.4" width="22" height="4.6" fill="#006600"/><ellipse cx="11" cy="8" rx="1.9" ry="3.6" fill="#bb0000" stroke="#000" stroke-width=".5"/></symbol>
+  <symbol id="f-za" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><rect width="22" height="5.3" fill="#e03c31"/><rect y="10.7" width="22" height="5.3" fill="#001489"/><path d="M0 0l9 8-9 8" fill="none" stroke="#fff" stroke-width="5"/><path d="M0 0l9 8-9 8M9 8h13" fill="none" stroke="#007749" stroke-width="3"/><path d="M0 2.6L6 8l-6 5.4z" fill="#ffb81c"/><path d="M0 4L4.5 8 0 12z" fill="#000"/></symbol>
+  <symbol id="f-sg" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><rect width="22" height="8" fill="#ef3340"/><circle cx="5" cy="4" r="2.4" fill="#fff"/><circle cx="6" cy="4" r="2.2" fill="#ef3340"/><circle cx="7.6" cy="2.6" r=".45" fill="#fff"/><circle cx="8.8" cy="3.6" r=".45" fill="#fff"/><circle cx="8.3" cy="5" r=".45" fill="#fff"/><circle cx="6.9" cy="5" r=".45" fill="#fff"/><circle cx="6.5" cy="3.6" r=".45" fill="#fff"/></symbol>
+  <symbol id="f-th" viewBox="0 0 22 16"><rect width="22" height="16" fill="#a51931"/><rect y="2.67" width="22" height="10.66" fill="#f4f5f8"/><rect y="5.33" width="22" height="5.34" fill="#2d2a4a"/></symbol>
+  <symbol id="f-id" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><rect width="22" height="8" fill="#ce1126"/></symbol>
+  <symbol id="f-ph" viewBox="0 0 22 16"><rect width="22" height="16" fill="#ce1126"/><rect width="22" height="8" fill="#0038a8"/><path d="M0 0l10 8-10 8z" fill="#fff"/><circle cx="3.6" cy="8" r="1.5" fill="#fcd116"/></symbol>
+  <symbol id="f-cn" viewBox="0 0 22 16"><rect width="22" height="16" fill="#de2910"/><path d="M4.4 2l.9 2.6H8l-2.2 1.6.8 2.6-2.2-1.6-2.2 1.6.8-2.6L.8 4.6h2.7z" fill="#ffde00"/><circle cx="9" cy="2.4" r=".6" fill="#ffde00"/><circle cx="10.2" cy="4.2" r=".6" fill="#ffde00"/><circle cx="10.2" cy="6.4" r=".6" fill="#ffde00"/><circle cx="9" cy="8" r=".6" fill="#ffde00"/></symbol>
+  <symbol id="f-kr" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><path d="M7.4 8a3.6 3.6 0 017.2 0z" fill="#cd2e3a"/><path d="M7.4 8a3.6 3.6 0 007.2 0z" fill="#0047a0"/><path d="M3 3.5l2.2-1.6M3.6 4.4l2.2-1.6M4.2 5.3l2.2-1.6M16 2l2.2 1.6M15.4 2.9l2.2 1.6M14.8 3.8 17 5.4M3 12.5l2.2 1.6M3.6 11.6l2.2 1.6M4.2 10.7l2.2 1.6M16 14l2.2-1.6M15.4 13.1l2.2-1.6M14.8 12.2l2.2-1.6" stroke="#000" stroke-width=".55"/></symbol>
+  <symbol id="f-jp" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><circle cx="11" cy="8" r="4.2" fill="#bc002d"/></symbol>
+  <symbol id="f-au" viewBox="0 0 22 16"><rect width="22" height="16" fill="#012169"/><path d="M0 0l11 8M11 0L0 8" stroke="#fff" stroke-width="1.6"/><path d="M5.5 0v8M0 4h11" stroke="#fff" stroke-width="2.4"/><path d="M5.5 0v8M0 4h11" stroke="#C8102E" stroke-width="1.2"/><circle cx="5.5" cy="12.2" r="1.1" fill="#fff"/><circle cx="16.5" cy="3.6" r=".7" fill="#fff"/><circle cx="14.4" cy="7.2" r=".7" fill="#fff"/><circle cx="18.6" cy="6.6" r=".7" fill="#fff"/><circle cx="16.5" cy="12.6" r=".8" fill="#fff"/></symbol>
+  <symbol id="f-co" viewBox="0 0 22 16"><rect width="22" height="16" fill="#ce1126"/><rect width="22" height="12" fill="#003893"/><rect width="22" height="8" fill="#fcd116"/></symbol>
+  <symbol id="f-pe" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><rect width="7.33" height="16" fill="#d91023"/><rect x="14.67" width="7.33" height="16" fill="#d91023"/></symbol>
+  <symbol id="f-cl" viewBox="0 0 22 16"><rect width="22" height="16" fill="#d52b1e"/><rect width="22" height="8" fill="#fff"/><rect width="7.4" height="8" fill="#0039a6"/><path d="M3.7 1.8l.7 2h2.1L4.8 5l.6 2-1.7-1.2L2 7l.6-2L.9 3.8H3z" fill="#fff"/></symbol>
+  <symbol id="f-ar" viewBox="0 0 22 16"><rect width="22" height="16" fill="#74acdf"/><rect y="5.33" width="22" height="5.34" fill="#fff"/><circle cx="11" cy="8" r="1.6" fill="#f6b40e"/></symbol>
+</svg>
+  <div class="globe" aria-label="Globo com rotas de pagamento saindo do Brasil"><canvas aria-hidden="true"></canvas></div>
+</div>
+
+<style>
+.dcg{--globo-largura:660px;--ease:cubic-bezier(.2,.7,.1,1);position:relative;display:grid;place-items:center;width:100%;padding:24px 0;background:#fff;color:#0E0D0A;font-family:'Archivo',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-stretch:100%;line-height:1.55;-webkit-font-smoothing:antialiased}
+.dcg,.dcg *{box-sizing:border-box}
+.dcg svg,.dcg canvas{display:block;max-width:100%}
+.dcg .flag{width:22px;height:16px;border-radius:3px;overflow:hidden;flex:none;box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+.dcg .globe{position:relative;aspect-ratio:1;width:min(100%,var(--globo-largura));cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none}
+.dcg .globe:active{cursor:grabbing}
+.dcg .globe canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .8s ease}
+.dcg .globe.is-ready canvas{opacity:1}
+.dcg .gl-label{position:absolute;left:0;top:0;display:inline-flex;align-items:center;gap:.5em;padding:.32em .7em .32em .4em;border-radius:9px;background:rgba(255,255,255,.94);border:1px solid rgba(14,13,10,.12);color:#0E0D0A;box-shadow:0 6px 16px -10px rgba(0,0,0,.3);font-size:.74rem;font-weight:650;line-height:1.55;white-space:nowrap;pointer-events:none;transition:opacity .35s;will-change:transform}
+.dcg .gl-label .flag{width:17px;height:12px}
+.dcg .gl-label--s{font-size:.66rem;padding:.26em .6em .26em .34em;border-radius:7px;gap:.42em}
+.dcg .gl-label--s .flag{width:14px;height:10px}
+@media (max-width:900px){
+  .dcg .globe{width:min(100%,460px);cursor:default}
+  .dcg .gl-label{font-size:.66rem;padding:.26em .55em .26em .34em;border-radius:7px}
+  .dcg .gl-label .flag{width:14px;height:10px}
+  .dcg .gl-label--s{font-size:.6rem;padding:.22em .48em .22em .3em}
+  .dcg .gl-label--s .flag{width:12px;height:9px}
+}
+</style>
+
+<script>
+(() => {
+  if (window.__dcGloboPronto) return; window.__dcGloboPronto = true;
+  const DESTAQUES = ['sp', 'lis', 'mex', 'mum']; // ordem em que o globo enquadra as rotas
+  const LANDMASK = window.DC_LANDMASK = window.DC_LANDMASK || "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPCf//8HAAAAAAAAAAAAAAAAyPzz//8A4AAAAAADAAAAAACAlAnw//8AAAAAB4AfAAAAAADAAywA/P8AAABgAP4fAAEAAQIAPvYH+H8AAABguP//7x8A4P//K9wc+B8AgH+g1///////z////z98+AMC4L/8////////AP///684+AAB8P7///////9/wP///wMGcAAAfP7//////38fgAf+/wd+AAAAfP7//////wEBAAH4/x9+AABAKP//////f8ABAADw/3//AQCw+P///////8AAAADg////AwDA/////////wAAAADA//8vBwDA/////////wAAAADA//8/AACA/6/v////fwAAAADA//8PAACA1wf3////PwIAAADA//8HAADwYW/P////DwEAAACA//8DAADwQPnP//9/BAEAAACA//8DAAAAD+D/////yAAAAAAA/v8BAADgD8D/////IAAAAAAA+n8AAADwf9f/////AQAAAAAA/IMAAADw///3////AQAAAAAA8IEAAAD8/7/P////AAAAAAAA4AEAAAD8/79/+P9/AQAAAAAAwBEAAAD+/3//8OcHAAAAAAAAwBsYAAD8/39/4MMLAAAAAAAAAB4AAAD+//8e4IEHAQAAAAAAAHAAAAD+//8HwIAPAwAAAAAAAAAUAAD8//8JwIAGAAAAAAAAAID+AAD4//8PAIAABAAAAAAAAAD+AQDw/f8PAAEBAAAAAAAAAAD+DwAA8P8HAIBhAAAAAAAAAAD/DwAA8P8DAABzAAAAAAAAAAD/PwAA8P8BAABzMQAAAAAAAAD//wEA8P8AAAACwQMAAAAAAAD//wMA4P8AAAAEgAcAAAAAAAD//wMA4P8AAACABQEAAAAAAAD+/wEA4P8AAAAAAAAAAAAAAAD+/wAA4P8IAAAAMAAAAAAAAAD4/wAA4P8MAAAAfgIAAAAAAADw/wAA4D8MAAAA/gcAAAAAAADw/wAA4D8GAADA/w8AAAAAAADwPwAAwD8GAADg/w8AAAAAAADwHwAAwB8AAADg/x8AAAAAAAD4DwAAgB8AAADA/x8AAAAAAAD4DwAAgA8AAADA/x8AAAAAAAD4BwAAgAMAAADAwx8AAAAAAAD4AQAAAAAAAAAAAA8AAAAAAAD4AAAAAAAAAAAAAARAAAAAAAA8AAAAAAAAAAAAAAQgAAAAAAA4AAAAAAAAAAAAAAAQAAAAAAAcAAAAAAAAAAAAAAAIAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAMAQAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAABAAAAAAABgAAAiAAAAAAAAAAAgAAAAACD+j////x8AAAAAAAB8AACg////5/////8PAACAgP/9AAD+//////////8HAMD///8PAMD///////////8BgPz///8BcPz///////////8HAPz///8fAP7///////////8AAPj///////////////////8P////////////////////////////////////////////////";
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ==========================================================================
+   Globo de rotas de pagamento (Three.js r128) — código original
+   ========================================================================== */
+function makeGlobe() { return (function () {
+  'use strict';
+  const D2R = Math.PI / 180;
+  const CITIES = {
+    sp:  { lat: -23.55, lon: -46.63, label: 'Pix', flag: 'f-br', main: 1 },
+    lis: { lat: 38.72,  lon: -9.14,  label: 'MB WAY', flag: 'f-pt', main: 1 },
+    mex: { lat: 19.43,  lon: -99.13, label: 'SPEI', flag: 'f-mx', main: 1 },
+    mum: { lat: 19.08,  lon: 72.88,  label: 'UPI', flag: 'f-in', main: 1 },
+    nyc: { lat: 40.71,  lon: -74.0,  label: 'ACH', flag: 'f-us' },
+    tor: { lat: 43.65,  lon: -79.38, label: 'Interac', flag: 'f-ca' },
+    bog: { lat: 4.71,   lon: -74.07, label: 'PSE', flag: 'f-co' },
+    lim: { lat: -12.05, lon: -77.04, label: 'Yape', flag: 'f-pe' },
+    scl: { lat: -33.45, lon: -70.67, label: 'Webpay', flag: 'f-cl' },
+    bue: { lat: -34.6,  lon: -58.38, label: 'Mercado Pago', flag: 'f-ar' },
+    ldn: { lat: 51.5,   lon: -.12,   label: 'Faster Payments', flag: 'f-gb' },
+    mad: { lat: 40.42,  lon: -3.70,  label: 'Bizum', flag: 'f-es' },
+    par: { lat: 48.86,  lon: 2.35,   label: 'CB', flag: 'f-fr' },
+    ams: { lat: 52.37,  lon: 4.90,   label: 'iDEAL', flag: 'f-nl' },
+    ber: { lat: 52.52,  lon: 13.40,  label: 'SEPA Instant', flag: 'f-de' },
+    waw: { lat: 52.23,  lon: 21.01,  label: 'BLIK', flag: 'f-pl' },
+    ist: { lat: 41.0,   lon: 28.97,  label: 'FAST', flag: 'f-tr' },
+    cai: { lat: 30.04,  lon: 31.24,  label: 'InstaPay', flag: 'f-eg' },
+    ruh: { lat: 24.71,  lon: 46.68,  label: 'mada', flag: 'f-sa' },
+    dxb: { lat: 25.20,  lon: 55.27,  label: 'Aani', flag: 'f-ae' },
+    lag: { lat: 6.52,   lon: 3.38,   label: 'NIP', flag: 'f-ng' },
+    nbo: { lat: -1.29,  lon: 36.82,  label: 'M-Pesa', flag: 'f-ke' },
+    jnb: { lat: -26.2,  lon: 28.04,  label: 'PayShap', flag: 'f-za' },
+    bkk: { lat: 13.76,  lon: 100.5,  label: 'PromptPay', flag: 'f-th' },
+    sin: { lat: 1.35,   lon: 103.82, label: 'PayNow', flag: 'f-sg' },
+    jkt: { lat: -6.2,   lon: 106.85, label: 'QRIS', flag: 'f-id' },
+    mnl: { lat: 14.6,   lon: 120.98, label: 'GCash', flag: 'f-ph' },
+    sha: { lat: 31.23,  lon: 121.47, label: 'Alipay', flag: 'f-cn' },
+    sel: { lat: 37.57,  lon: 126.98, label: 'KakaoPay', flag: 'f-kr' },
+    tyo: { lat: 35.68,  lon: 139.69, label: 'PayPay', flag: 'f-jp' },
+    syd: { lat: -33.87, lon: 151.2,  label: 'PayID', flag: 'f-au' }
+  };
+  let renderer, scene, camera, group, host, canvas, running = false, ready = false, reduced = false;
+  let pts, arcs = [], markers = [], labels = [], t0 = performance.now();
+  let rotY = .62, rotTarget = null, vel = 0, holdUntil = 0, drag = null, size = 600;
+  const TILT = .3;
+
+  const ll = (lat, lon, r) => { const a = lat * D2R, o = lon * D2R, c = Math.cos(a); return new THREE.Vector3(c * Math.sin(o) * r, Math.sin(a) * r, c * Math.cos(o) * r); };
+
+  function decodeMask(b64) {
+    const s = atob(b64), u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i);
+    const W = 144, H = 72;
+    return (lat, lon) => { let x = Math.floor((lon + 180) / 360 * W), y = Math.floor((90 - lat) / 180 * H); x = (x + W) % W; y = Math.min(H - 1, Math.max(0, y)); const i = y * W + x; return (u[i >> 3] >> (i & 7)) & 1; };
+  }
+
+  function buildDots(isLand, N) {
+    const pos = [], rnd = [], ga = Math.PI * (3 - Math.sqrt(5));
+    for (let i = 0; i < N; i++) {
+      const y = 1 - 2 * (i + .5) / N, r = Math.sqrt(1 - y * y), f = i * ga, x = Math.cos(f) * r, z = Math.sin(f) * r;
+      const lat = Math.asin(y) / D2R, lon = Math.atan2(x, z) / D2R;
+      if (lat < -60 || !isLand(lat, lon)) continue;
+      pos.push(x, y, z); rnd.push(Math.random());
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+    g.setAttribute('aR', new THREE.Float32BufferAttribute(rnd, 1));
+    const m = new THREE.ShaderMaterial({
+      transparent: true, depthWrite: false, blending: THREE.NormalBlending,
+      uniforms: { uTime: { value: 0 }, uSize: { value: 3 }, uOrigin: { value: ll(CITIES.sp.lat, CITIES.sp.lon, 1) } },
+      vertexShader: `uniform float uTime,uSize;uniform vec3 uOrigin;attribute float aR;varying float vA;varying float vW;
+        void main(){vec3 n=normalize(normalMatrix*position);vec4 mv=modelViewMatrix*vec4(position,1.);
+          vec3 vd=normalize(-mv.xyz);float f=dot(n,vd);
+          float d=acos(clamp(dot(position,uOrigin),-1.,1.));
+          float w=fract(uTime*.085);float wave=smoothstep(.2,0.,abs(d-w*3.3))*(1.-w*.75);
+          float w2=fract(uTime*.085+.5);wave+=smoothstep(.2,0.,abs(d-w2*3.3))*(1.-w2*.75);
+          float tw=.8+.2*sin(uTime*1.3+aR*60.);
+          vW=wave;vA=smoothstep(.02,.4,f)*(tw*.78+wave*.75);
+          gl_PointSize=uSize*(1.+wave*.55)*(3.7/-mv.z);gl_Position=projectionMatrix*mv;}`,
+      fragmentShader: `varying float vA;varying float vW;
+        void main(){vec2 c=gl_PointCoord-.5;float r=length(c);float a=smoothstep(.5,.18,r);
+          vec3 col=mix(vec3(.72,.52,.04),vec3(.95,.78,.06),clamp(vW,0.,1.));gl_FragColor=vec4(col,a*min(1.,vA*1.35));}`
+    });
+    pts = new THREE.Points(g, m); group.add(pts);
+  }
+
+  function buildSphere() {
+    const core = new THREE.Mesh(new THREE.SphereGeometry(.992, 64, 48), new THREE.ShaderMaterial({
+      vertexShader: `varying vec3 vN;varying vec3 vV;void main(){vN=normalize(normalMatrix*normal);vec4 mv=modelViewMatrix*vec4(position,1.);vV=normalize(-mv.xyz);gl_Position=projectionMatrix*mv;}`,
+      fragmentShader: `varying vec3 vN;varying vec3 vV;void main(){float f=pow(1.-max(dot(vN,vV),0.),3.2);
+        float l=max(dot(vN,normalize(vec3(-.6,.7,.5))),0.);
+        vec3 c=vec3(.90,.89,.865)+vec3(.075,.075,.07)*l-vec3(.16,.15,.13)*f+vec3(.20,.14,.0)*f*.35;gl_FragColor=vec4(c,1.);}`
+    }));
+    scene.add(core);
+    const halo = new THREE.Mesh(new THREE.SphereGeometry(1.2, 64, 48), new THREE.ShaderMaterial({
+      side: THREE.BackSide, transparent: true, depthWrite: false, blending: THREE.NormalBlending,
+      vertexShader: `varying vec3 vN;varying vec3 vV;void main(){vN=normalize(normalMatrix*normal);vec4 mv=modelViewMatrix*vec4(position,1.);vV=normalize(-mv.xyz);gl_Position=projectionMatrix*mv;}`,
+      fragmentShader: `varying vec3 vN;varying vec3 vV;void main(){float f=pow(max(dot(-vN,vV),0.),5.5);gl_FragColor=vec4(vec3(.62,.46,.05),f*.22);}`
+    }));
+    scene.add(halo);
+    // anéis de latitude/longitude bem sutis
+    const gm = new THREE.LineBasicMaterial({ color: 0x0E0D0A, transparent: true, opacity: .06 });
+    for (let la = -60; la <= 60; la += 30) { const p = []; for (let lo = 0; lo <= 360; lo += 4) p.push(ll(la, lo, 1.001)); group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(p), gm)); }
+    for (let lo = 0; lo < 360; lo += 30) { const p = []; for (let la = -90; la <= 90; la += 4) p.push(ll(la, lo, 1.001)); group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(p), gm)); }
+  }
+
+  function arcCurve(a, b) {
+    const va = ll(a.lat, a.lon, 1), vb = ll(b.lat, b.lon, 1), ang = va.angleTo(vb), h = .08 + ang / Math.PI * .36, P = [];
+    const sinA = Math.sin(ang);
+    for (let i = 0; i <= 48; i++) {
+      const t = i / 48, s0 = Math.sin((1 - t) * ang) / sinA, s1 = Math.sin(t * ang) / sinA;
+      const v = va.clone().multiplyScalar(s0).add(vb.clone().multiplyScalar(s1)).normalize();
+      P.push(v.multiplyScalar(1.004 + h * Math.sin(Math.PI * t)));
+    }
+    return new THREE.CatmullRomCurve3(P);
+  }
+
+  function buildArcs() {
+    const keys = Object.keys(CITIES).filter(k => k !== 'sp');
+    keys.forEach((k, i) => {
+      const main = !!CITIES[k].main;
+      const geo = new THREE.TubeGeometry(arcCurve(CITIES.sp, CITIES[k]), 72, main ? .0058 : .0026, 6, false);
+      const mat = new THREE.ShaderMaterial({
+        transparent: true, depthWrite: false, blending: THREE.NormalBlending,
+        uniforms: { uTime: { value: 0 }, uOff: { value: i * .37 }, uSp: { value: .16 + (i % 4) * .025 }, uBoost: { value: 0 }, uBase: { value: main ? .3 : .06 } },
+        vertexShader: `varying float vU;void main(){vU=uv.x;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
+        fragmentShader: `uniform float uTime,uOff,uSp,uBoost,uBase;varying float vU;
+          void main(){float h=fract(uTime*uSp+uOff)*1.5-.25;float d=h-vU;
+            float trail=smoothstep(.38,0.,d)*step(0.,d);float head=smoothstep(.025,0.,abs(d));
+            float ends=smoothstep(0.,.04,vU)*smoothstep(1.,.96,vU);
+            float a=(uBase+uBoost*.45+trail*(.85+uBoost)+head*1.4)*ends;
+            vec3 c=mix(vec3(.62,.45,.03),vec3(.95,.76,.05),clamp(head+trail*.6,0.,1.));gl_FragColor=vec4(c,min(a,1.));}`
+      });
+      const m = new THREE.Mesh(geo, mat); m.userData.key = k; group.add(m); arcs.push(m);
+    });
+  }
+
+  function buildMarkers() {
+    const dot = new THREE.CircleGeometry(.014, 20), ring = new THREE.RingGeometry(.02, .026, 32);
+    Object.keys(CITIES).forEach((k, i) => {
+      const c = CITIES[k], main = !!c.main, p = ll(c.lat, c.lon, 1.006), s = k === 'sp' ? 1.9 : main ? 1.35 : .85;
+      const d = new THREE.Mesh(dot, new THREE.MeshBasicMaterial({ color: k === 'sp' ? 0x0E0D0A : 0xC9990A, transparent: true, depthWrite: false }));
+      d.position.copy(p); d.lookAt(p.clone().multiplyScalar(2)); d.scale.setScalar(s); group.add(d);
+      const r = new THREE.Mesh(ring, new THREE.MeshBasicMaterial({ color: 0xC9990A, transparent: true, depthWrite: false, side: THREE.DoubleSide }));
+      r.position.copy(p); r.lookAt(p.clone().multiplyScalar(2)); group.add(r);
+      markers.push({ k, ring: r, s, ph: i * .41, pos: ll(c.lat, c.lon, 1) });
+      if (c.label) {
+        const el = document.createElement('div'); el.className = 'gl-label' + (main ? '' : ' gl-label--s');
+        el.innerHTML = '<svg class="flag"><use href="#' + c.flag + '"/></svg>' + c.label; el.style.opacity = '0';
+        host.appendChild(el); labels.push({ k, el, main, on: false, w: 0, h: 0, pos: ll(c.lat, c.lon, 1.05) });
+      }
+    });
+  }
+
+  function resize() {
+    const r = host.getBoundingClientRect(); size = Math.max(2, r.width);
+    renderer.setSize(size, size, false);
+    if (pts) pts.material.uniforms.uSize.value = Math.max(2.1, size / 660 * 3.5) * renderer.getPixelRatio();
+    if (!running && ready) frame(true);
+  }
+
+  const v3 = new THREE.Vector3(), camDir = new THREE.Vector3();
+  function frame(once) {
+    if (!once) { if (!running) return; requestAnimationFrame(() => frame()); }
+    const now = performance.now(), t = (now - t0) / 1000;
+    if (drag) { /* rotação guiada pelo ponteiro */ }
+    else if (rotTarget !== null) {
+      let d = rotTarget - rotY; d = Math.atan2(Math.sin(d), Math.cos(d)); rotY += d * .07;
+      if (Math.abs(d) < .002 && now > holdUntil) rotTarget = null;
+    } else { rotY += vel; vel *= .94; if (now > holdUntil && !reduced) rotY += .0016; }
+    group.rotation.set(0, rotY, 0);
+    pts.material.uniforms.uTime.value = reduced ? 3 : t;
+    arcs.forEach(a => { a.material.uniforms.uTime.value = reduced ? 2.2 : t; const tg = a.userData.key === focusKey ? 1 : 0; a.material.uniforms.uBoost.value += (tg - a.material.uniforms.uBoost.value) * .1; });
+    markers.forEach(m => { const u = reduced ? .4 : (t * .55 + m.ph) % 1; m.ring.scale.setScalar(m.s * (1 + u * 2.6)); m.ring.material.opacity = (1 - u) * .85; });
+    scene.updateMatrixWorld();
+    camDir.copy(camera.position).normalize();
+    /* todas as etiquetas: as da frente aparecem; quando duas se encostam, fica a mais importante */
+    const cand = labels.map(l => {
+      v3.copy(l.pos).applyMatrix4(group.matrixWorld); const facing = v3.clone().normalize().dot(camDir);
+      v3.project(camera);
+      if (!l.w) { l.w = l.el.offsetWidth || 80; l.h = l.el.offsetHeight || 22; }
+      const x = (v3.x * .5 + .5) * size, y = (-v3.y * .5 + .5) * size;
+      return { l, x, y, f: facing, pr: (l.k === focusKey ? 5 : 0) + (l.k === 'sp' ? 4 : 0) + (l.main ? 2 : 0) + (l.on ? .6 : 0) + facing };
+    }).sort((a, b) => b.pr - a.pr);
+    const placed = [];
+    cand.forEach(o => {
+      const l = o.l, w = l.w, h = l.h; let show = false, px = o.x + 10, py = o.y - h / 2;
+      if (o.f > .25) {
+        // tenta: direita, esquerda, acima, abaixo
+        const spots = [[o.x + 9, o.y - h / 2], [o.x - 9 - w, o.y - h / 2], [o.x - w / 2, o.y - 8 - h], [o.x - w / 2, o.y + 8]];
+        for (let s = 0; s < spots.length && !show; s++) {
+          const x0 = spots[s][0], y0 = spots[s][1], x1 = x0 + w, y1 = y0 + h; if (x0 < 2 || x1 > size - 2 || y0 < 2 || y1 > size - 2) continue;
+          let free = true;
+          for (let i = 0; i < placed.length; i++) { const q = placed[i]; if (x0 < q[2] + 3 && x1 + 3 > q[0] && y0 < q[3] + 2 && y1 + 2 > q[1]) { free = false; break; } }
+          if (free) { show = true; px = x0; py = y0; placed.push([x0, y0, x1, y1]); }
+        }
+      }
+      if (show || !l.on) l.el.style.transform = 'translate(' + px.toFixed(1) + 'px,' + py.toFixed(1) + 'px)';
+      if (show !== l.on) { l.on = show; l.el.style.opacity = show ? '1' : '0'; }
+    });
+    renderer.render(scene, camera);
+  }
+
+  let focusKey = null;
+  function focus(k) {
+    const c = CITIES[k]; if (!c || !ready) return; focusKey = k;
+    // enquadra o meio do caminho entre São Paulo e o destino, puxando pro destino
+    const mid = k === 'sp' ? c.lon : c.lon * .72 + CITIES.sp.lon * .28;
+    rotTarget = -mid * D2R; holdUntil = performance.now() + 4200; vel = 0;
+    if (!running) frame(true);
+  }
+  function blur() { focusKey = null; }
+
+  function init(hostEl, cv, maskB64, opts) {
+    host = hostEl; canvas = cv; reduced = !!(opts && opts.reduced);
+    const mobile = Math.min(window.innerWidth, window.innerHeight) < 700 || document.documentElement.classList.contains('m');
+    renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: !mobile, alpha: true, powerPreference: 'low-power' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile ? 1.75 : 2)); renderer.setClearColor(0x000000, 0);
+    scene = new THREE.Scene(); camera = new THREE.PerspectiveCamera(30, 1, .1, 50); camera.position.set(0, 0, 5.2);
+    const tilt = new THREE.Group(); tilt.rotation.x = TILT; scene.add(tilt);
+    group = new THREE.Group(); tilt.add(group);
+    buildSphere(); buildDots(decodeMask(maskB64), mobile ? 11000 : 26000); buildArcs(); buildMarkers();
+    resize();
+    if ('ResizeObserver' in window) new ResizeObserver(resize).observe(host); else window.addEventListener('resize', resize);
+    host.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse' && e.button !== 0) return; drag = { x: e.clientX, r: rotY, lx: e.clientX, id: e.pointerId }; rotTarget = null; vel = 0; });
+    window.addEventListener('pointermove', e => { if (!drag || e.pointerId !== drag.id) return; rotY = drag.r + (e.clientX - drag.x) * .0062; vel = (e.clientX - drag.lx) * .0062; drag.lx = e.clientX; }, { passive: true });
+    const end = e => { if (drag && (!e || e.pointerId === drag.id)) { drag = null; holdUntil = performance.now() + 2600; } };
+    window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+    ready = true; frame(true);
+  }
+  return {
+    init, focus, blur,
+    start() { if (running || !ready) return; running = true; frame(); },
+    stop() { running = false; },
+    get ready() { return ready; }
+  };
+})(); }
+
+  function onView(el, cb, opts) {
+    if (!el) return; opts = opts || {};
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { cb(true, e); if (!opts.repeat) io.disconnect(); }
+      else if (opts.repeat) cb(false, e);
+    }), { threshold: opts.threshold || 0, rootMargin: opts.margin || '0px' });
+    io.observe(el);
+  }
+
+  function carregarThree() {
+    if (window.THREE) return Promise.resolve();
+    if (!window.__dcThree) window.__dcThree = new Promise((ok, erro) => {
+      const sc = document.createElement('script');
+      sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'; sc.async = true;
+      sc.onload = ok; sc.onerror = erro; document.head.appendChild(sc);
+    });
+    return window.__dcThree;
+  }
+
+  function iniciar(globeBox) {
+    const G = makeGlobe();
+    try {
+      G.init(globeBox, globeBox.querySelector('canvas'), LANDMASK, { reduced: reduced });
+      onView(globeBox, on => { on ? G.start() : G.stop(); }, { repeat: true, margin: '100px' });
+      document.addEventListener('visibilitychange', () => { if (document.hidden) G.stop(); else if (globeBox.getBoundingClientRect().top < innerHeight && globeBox.getBoundingClientRect().bottom > 0) G.start(); });
+      let hover = false, ci = 0, seen = false;
+      globeBox.addEventListener('pointerdown', () => { hover = true; G.blur(); setTimeout(() => { hover = false; }, 6000); });
+      onView(globeBox, v => { seen = v; }, { repeat: true, threshold: .3 });
+      if (!reduced) setInterval(() => { if (hover || !seen || document.hidden) return; G.focus(DESTAQUES[ci++ % DESTAQUES.length]); }, 4200);
+      globeBox.classList.add('is-ready');
+    } catch (err) { globeBox.style.display = 'none'; if (window.console) console.warn('Globo indisponível:', err); }
+  }
+
+  function preparar() {
+    document.querySelectorAll('.dcg .globe').forEach(globeBox => {
+      onView(globeBox, () => {
+        carregarThree().then(() => iniciar(globeBox)).catch(() => { globeBox.style.display = 'none'; });
+      }, { margin: '1400px' });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', preparar, { once: true });
+  else preparar();
+})();
+</script>

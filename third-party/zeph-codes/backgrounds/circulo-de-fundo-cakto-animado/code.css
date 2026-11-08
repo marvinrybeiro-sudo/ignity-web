@@ -1,0 +1,73 @@
+
+.circle-bg {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+/* Cada órbita */
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  animation: spin linear infinite;
+}
+
+/* Os círculos */
+.orbit .circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 255, 150, 0.25);
+  box-shadow: 0 0 10px rgba(0, 255, 150, 0.1);
+}
+
+/* As bolinhas orbitando */
+.orbit .dot {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: #00c46c;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 8px #00c46c;
+}
+
+/* Tamanhos e velocidades */
+.orbit.one {
+  width: 600px;
+  height: 600px;
+  animation-duration: 120s;
+}
+
+.orbit.two {
+  width: 400px;
+  height: 400px;
+  animation-duration: 90s;
+  animation-direction: reverse;
+}
+
+.orbit.three {
+  width: 200px;
+  height: 200px;
+  animation-duration: 60s;
+}
+
+/* Animação */
+@keyframes spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+body {
+  background: #000;
+}

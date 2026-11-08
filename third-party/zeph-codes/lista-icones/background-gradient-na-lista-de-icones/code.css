@@ -1,0 +1,4 @@
+selector .elementor-icon-list-item {
+    padding: 10px; /* Espaçamento interno ao redor do item da lista */
+    background: linear-gradient(90deg, #440dca, transparent); /* Gradiente de fundo do vermelho ao azul */
+}

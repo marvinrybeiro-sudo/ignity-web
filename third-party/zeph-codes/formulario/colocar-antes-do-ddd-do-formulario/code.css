@@ -1,0 +1,25 @@
+.iti {
+  width: 100% !important; /* Garante que o campo ocupe toda a largura */
+}
+
+.iti--allow-dropdown input,
+.iti--allow-dropdown input[type=tel] {
+  width: 100% !important;
+  padding-left: 95px !important; /* espaço pro ícone da bandeira */
+  height: 45px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.iti__flag-container {
+  z-index: 1;
+}
+
+.iti input:focus {
+  outline: none;
+  border-color: #3b82f6; /* cor do foco, pode mudar */
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}

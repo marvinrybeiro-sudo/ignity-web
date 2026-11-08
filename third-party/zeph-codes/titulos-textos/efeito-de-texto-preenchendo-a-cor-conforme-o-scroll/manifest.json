@@ -1,0 +1,45 @@
+{
+  "id": "efeito-de-texto-preenchendo-a-cor-conforme-o-scroll-1764182318308-1764182318462",
+  "titulo": "Efeito de texto preenchendo a cor conforme o scroll",
+  "modulo": "Módulo: Títulos e Textos",
+  "categoria": "titulos-textos",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-26T18:38:38.000Z",
+  "atualizado": "2025-11-27T15:46:02.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1764182318417.gif",
+  "video": null,
+  "arquivos": [
+    "css",
+    "js"
+  ],
+  "peso": {
+    "bytes": 2425,
+    "gzip": 993
+  },
+  "deps": {
+    "scriptsExternos": [
+      "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+    ],
+    "imports": [],
+    "gsap": true,
+    "scrollTrigger": true,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

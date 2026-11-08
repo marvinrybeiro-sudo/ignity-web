@@ -1,0 +1,44 @@
+{
+  "id": "botao-thiago-finch-1764096810371-1764096811094",
+  "titulo": "Botão Thiago Finch",
+  "modulo": "Módulo: Botões",
+  "categoria": "botoes",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-25T18:53:31.000Z",
+  "atualizado": "2025-11-25T18:53:31.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1764096810902.gif",
+  "video": null,
+  "arquivos": [
+    "css",
+    "js"
+  ],
+  "peso": {
+    "bytes": 3135,
+    "gzip": 1193
+  },
+  "deps": {
+    "scriptsExternos": [
+      "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"
+    ],
+    "imports": [],
+    "gsap": true,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

@@ -1,0 +1,123 @@
+<link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.css" />
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+let lenis;
+function initLenisIfDesktop() {
+  if (window.innerWidth > 1024 && !lenis && typeof Lenis !== "undefined") {
+    lenis = new Lenis({ duration: 1.5 });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    ScrollTrigger.scrollerProxy(document.documentElement, {
+      scrollTop(value) {
+        if (arguments.length) {
+          lenis.scrollTo(value, { immediate: true });
+        }
+        return window.scrollY || window.pageYOffset;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: innerWidth,
+          height: innerHeight
+        };
+      },
+      fixedMarkers: true
+    });
+
+    lenis.on("scroll", ScrollTrigger.update);
+  }
+}
+
+window.addEventListener("load", () => {
+  initLenisIfDesktop();
+});
+
+
+if (window.matchMedia("(max-width: 1024px)").matches) {
+  ScrollTrigger.normalizeScroll(true);
+}
+
+const mm = gsap.matchMedia();
+const containerCards = document.querySelector(".container-cards");
+const cards = document.querySelector(".cards");
+
+let endLen = 0;
+let finalX = 0;
+
+function measure(respiroPx = 0) {
+  const prev = cards.style.transform;
+  cards.style.transform = "none";
+
+  const contRect = containerCards.getBoundingClientRect();
+  const lastRect = cards.lastElementChild.getBoundingClientRect();
+  const padR = parseFloat(getComputedStyle(containerCards).paddingRight || 0);
+
+  const overflowRight = lastRect.right - (contRect.right - padR);
+  const need = Math.max(0, Math.ceil(overflowRight) + respiroPx);
+
+  cards.style.transform = prev;
+
+  endLen = need;
+  finalX = -need;
+}
+
+let tl;
+function build(respiroPx = 0) {
+  ScrollTrigger.getAll().forEach((st) => {
+    if (st.vars?.trigger === containerCards) st.kill();
+  });
+
+  gsap.set(cards, { x: 0, force3D: true, willChange: "transform" });
+
+  measure(respiroPx);
+
+  tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: containerCards,
+      start: "top top",
+      end: () => "+=" + endLen,
+      scrub: true,
+      pin: true,
+      pinType: window.matchMedia("(max-width: 767px)").matches
+        ? "transform"
+        : "fixed",
+      anticipatePin: 1,
+      fastScrollEnd: true,
+      invalidateOnRefresh: true,
+      onRefreshInit: () => gsap.set(cards, { x: 0 }),
+      onRefresh: () => {
+        measure(respiroPx);
+        tl.scrollTrigger.end = tl.scrollTrigger.start + endLen;
+      }
+    }
+  }).to(cards, { x: () => finalX, ease: "none", immediateRender: false });
+
+  return tl;
+}
+
+/*ajuste onde os cards devem parar por aqui*/
+mm.add("(max-width: 767px)", () => build(0)); //mobile
+mm.add("(min-width: 768px) and (max-width: 1024px)", () => build(20)); //tablet
+mm.add("(min-width: 1025px)", () => build(80)); //desktop
+
+let rTO;
+window.addEventListener("resize", () => {
+  clearTimeout(rTO);
+  rTO = setTimeout(() => {
+    initLenisIfDesktop();
+    ScrollTrigger.refresh();
+  }, 120);
+});
+</script>

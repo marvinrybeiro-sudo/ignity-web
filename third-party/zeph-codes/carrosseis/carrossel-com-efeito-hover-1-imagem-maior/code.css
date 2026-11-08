@@ -1,0 +1,22 @@
+.swiper-slide-prev {
+filter: blur(10px);
+transform: scale(0.5);
+transition: 0.5s;
+}
+
+.swiper-slide-active{
+filter: blur(3px);
+transform: scale(0.7);
+transition: 0.5s;
+}
+
+.swiper-slide-next ~ .swiper-slide{
+transform: scale(0.7);
+transition: 0.5s;
+}
+
+.swiper-slide-next ~ .swiper-slide{
+filter: blur(3px);
+transform: scale(0.7);
+transition: 0.5s;
+}

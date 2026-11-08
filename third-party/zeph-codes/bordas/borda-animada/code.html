@@ -1,0 +1,86 @@
+<!--
+BORDA ANIMADA
+1. Cole todo este código em um bloco/widget HTML da sua página.
+2. Substitua o conteúdo dentro de .zeph-borda__conteudo pelo seu.
+3. Ajuste cor, brilho, espessura, cantos e velocidade nas variáveis abaixo.
+   --velocidade: 7s significa uma volta a cada 7 segundos.
+4. Para criar outros cards, duplique o <article class="zeph-borda">.
+O brilho percorre a borda continuamente, sem precisar passar o mouse.
+Não precisa de JavaScript, biblioteca, fonte externa ou imagem.
+-->
+
+<style>
+/* Esta propriedade permite animar o ângulo do brilho de forma contínua. */
+@property --zeph-borda-angulo {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.zeph-borda {
+  /* PERSONALIZE AQUI */
+  --cor-borda: #b3f000;
+  --cor-brilho: #eaff9b;
+  --espessura: 1.5px;
+  --cantos: 32px;
+  --velocidade: 7s;
+  --fundo-card: #090c0b;
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 780px;
+  margin: auto;
+  border-radius: var(--cantos);
+  background: var(--fundo-card);
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.zeph-borda, .zeph-borda * { box-sizing: border-box; }
+.zeph-borda::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: var(--espessura);
+  background: conic-gradient(
+    from var(--zeph-borda-angulo),
+    color-mix(in srgb, var(--cor-borda) 6%, transparent) 0deg 200deg,
+    color-mix(in srgb, var(--cor-borda) 10%, transparent) 250deg,
+    color-mix(in srgb, var(--cor-borda) 22%, transparent) 285deg,
+    color-mix(in srgb, var(--cor-brilho) 55%, transparent) 315deg,
+    color-mix(in srgb, var(--cor-brilho) 95%, transparent) 335deg,
+    color-mix(in srgb, var(--cor-brilho) 55%, transparent) 350deg,
+    color-mix(in srgb, var(--cor-borda) 18%, transparent) 358deg,
+    color-mix(in srgb, var(--cor-borda) 6%, transparent) 360deg
+  );
+  /* A máscara recorta o centro e deixa somente a borda visível. */
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: zeph-borda-girar var(--velocidade) linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+.zeph-borda__conteudo {
+  min-height: 320px;
+  padding: clamp(32px, 6vw, 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.zeph-borda h2 { margin: 0 0 16px; color: #fff; font: 600 clamp(26px, 4vw, 42px)/1.15 Arial, sans-serif; }
+.zeph-borda p { margin: 0; color: #a3aaa6; font: 400 17px/1.6 Arial, sans-serif; }
+@keyframes zeph-borda-girar { to { --zeph-borda-angulo: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .zeph-borda::before { animation: none; }
+}
+</style>
+
+<article class="zeph-borda">
+  <div class="zeph-borda__conteudo">
+    <!-- COLOQUE SEU CONTEÚDO AQUI. Pode usar textos, imagens e botões. -->
+    <h2>Seu conteúdo aqui.</h2>
+    <p>Um card simples com brilho percorrendo a borda.</p>
+  </div>
+</article>

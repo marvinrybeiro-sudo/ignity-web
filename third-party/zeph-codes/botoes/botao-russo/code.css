@@ -1,0 +1,8 @@
+.elementor-button{
+    padding: 1.5em !important; /* Espaçamento interno */
+    box-shadow: 0px 5px 0px 0px #440dca, /* Sombra da borda superior (altere a cor aqui) */
+                0px 20px 20px -10px rgba(0, 0, 0, 0.7), /* Sombra externa */
+                inset 0px 0px 20px 2px #7247ff!important; /* Sombra interna (altere a cor aqui) */
+    background: linear-gradient(to bottom, #6121ff, #4c0de2)!important; /* Gradiente de fundo (altere as cores aqui) */
+    border-radius: 7% 7% 7% 7% / 100% 100% 100% 100%!important; /* Arredondamento das bordas */
+}

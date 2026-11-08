@@ -1,0 +1,41 @@
+{
+  "id": "grade-no-cursor-1791441024743-1791441025446",
+  "titulo": "Grade no cursor",
+  "modulo": "Módulo: Cursor",
+  "categoria": "cursor",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2026-10-08T06:30:25.000Z",
+  "atualizado": "2026-10-08T06:30:25.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/7e2d174a-150d-4d17-9b6f-f495d2eaa069.gif",
+  "video": null,
+  "arquivos": [
+    "html"
+  ],
+  "peso": {
+    "bytes": 11312,
+    "gzip": 4782
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": true,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": true,
+    "canvasWebGL": true
+  },
+  "a11y": {
+    "prefersReducedMotion": true
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

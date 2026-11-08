@@ -1,0 +1,16 @@
+selector{ /*Posicione o Contêiner entre o espaçamento da Lista*/
+    position: relative;
+    width: 30px;
+    min-height: 100%;
+}
+
+selector::before{ /*Configure a linha fixa*/
+    content: "";
+    position: absolute;
+    width: 3px; /*altere a espessura da borda*/
+    height: 260px; /*altere a altura*/
+    background: #697085; /*altere a cor*/
+    top: 50%;  /*altere à posição ao topo*/
+    left: 50%; /*altere à esquerda*/
+    transform: translate(-50%, -50%);
+}

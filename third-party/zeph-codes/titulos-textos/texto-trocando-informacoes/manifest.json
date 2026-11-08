@@ -1,0 +1,42 @@
+{
+  "id": "texto-trocando-informacoes-1764743639691-1764743640233",
+  "titulo": "Texto trocando informações",
+  "modulo": "Módulo: Títulos e Textos",
+  "categoria": "titulos-textos",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-12-03T06:34:00.000Z",
+  "atualizado": "2025-12-03T06:34:00.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1764743640188.gif",
+  "video": null,
+  "arquivos": [
+    "css",
+    "js"
+  ],
+  "peso": {
+    "bytes": 1553,
+    "gzip": 673
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

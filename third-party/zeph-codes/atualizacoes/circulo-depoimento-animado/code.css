@@ -1,0 +1,15 @@
+.imgg {
+    margin-right: -15px;
+    transition: 0.5s ease all
+}
+
+.imgg:hover {
+    margin-left: 10px;
+    filter: grayscale(100%)
+}
+.imgg img{
+    border-radius: 200px !important;
+    border: solid 1px #ffffff60;
+    transition: 0.5s ease all
+
+}

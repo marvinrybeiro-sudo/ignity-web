@@ -1,0 +1,44 @@
+{
+  "id": "texto-sendo-revelado-com-scroll-1763746414808",
+  "titulo": "Texto sendo revelado com scroll",
+  "modulo": "Módulo: Titulos e Textos",
+  "categoria": "titulos-textos",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-21T17:34:16.000Z",
+  "atualizado": "2025-11-21T17:34:16.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1763746455454.gif",
+  "video": null,
+  "arquivos": [
+    "html"
+  ],
+  "peso": {
+    "bytes": 2339,
+    "gzip": 894
+  },
+  "deps": {
+    "scriptsExternos": [
+      "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+    ],
+    "imports": [],
+    "gsap": true,
+    "scrollTrigger": true,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

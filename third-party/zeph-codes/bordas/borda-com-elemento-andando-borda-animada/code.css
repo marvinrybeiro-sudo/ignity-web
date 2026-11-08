@@ -1,0 +1,49 @@
+.card {
+  isolation: isolate;
+}
+
+.media-object {
+  --border-width: 2px; /* Variável para largura da borda */
+  --radius: 24px; /* Variável para raio da borda */
+  position: relative;
+  border-radius: var(--radius); 
+  border: var(--border-width) solid transparent; 
+  width: 500px; /* Largura do objeto */
+  height: 200px; /* Altura do objeto */
+}
+
+.media-object::before {
+  content: " ";
+  position: absolute; 
+  inset: calc(var(--border-width) * -1);
+  border: inherit; 
+  border-radius: inherit;
+  background-image: conic-gradient(from var(--angle), #2267c7 80%, #34e0e0 88%, #34e0e0 92%, #2267c7 100%); /* Gradiente cônico */
+  background-origin: border-box; 
+  -webkit-mask:
+    linear-gradient(black, black) content-box,
+    linear-gradient(black, black);
+  mask: linear-gradient(black, black),
+        linear-gradient(black, black);  
+  -webkit-mask-clip: content-box, border-box;
+  mask-clip: content-box, border-box;
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spin 3s linear infinite; /* Animação giratória */
+}
+
+.media-object:hover::before {
+  animation-play-state: paused; /* Pausa a animação ao passar o mouse */
+}
+
+@property --angle {
+  syntax: "<angle>"; 
+  inherits: true;
+  initial-value: 0turn; 
+}
+
+@keyframes spin {
+  to {
+    --angle: 1turn; /* Animação para girar o gradiente */
+  }
+}

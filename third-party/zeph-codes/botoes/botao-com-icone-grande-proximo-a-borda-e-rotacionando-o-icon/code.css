@@ -1,0 +1,32 @@
+.bth .elementor-button{
+    padding: 0.4rem 0.4rem 0.4rem 2rem !important;
+    border-radius: 55px !important;
+    background: linear-gradient(92deg, #6121ff -3.01%, #440dca 95.31%) !important; /*Gradiente do BG*/
+}
+
+.bth .elementor-button-text{
+align-self: center;
+}
+
+.bth .elementor-button-icon{ /*Tamanho do ícone*/
+font-size: 19px !important;
+padding: 10px;
+margin-left: 10px;
+background: white;
+border-radius: 200px;
+color: black !important;
+vertical-align: middle;
+rotate: -45deg;
+transition: 0.5s ease all
+}
+
+.bth .elementor-button-icon svg path{
+    rotate: 0deg;
+    fill: black !important;
+    color: black !important;
+    transition: 0.7s ease all;
+}
+
+.bth:hover .elementor-button-icon{
+    rotate: 0deg;
+}

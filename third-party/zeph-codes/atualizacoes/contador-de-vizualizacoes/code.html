@@ -1,0 +1,41 @@
+<div class="pcl-viewers"> 
+<svg xmlns="http://www.w3.org/2000/svg" width="29" height="22" viewBox="0 0 29 22" fill="none">
+      <g clip-path="url(#clip0_2_403)">
+          <path class="olho" d="M25.7203 9.69622C26.3156 10.4749 26.3156 11.5262 25.7203 12.3036C23.8451 14.7516 19.3462 19.7919 14.0936 19.7919C8.84105 19.7919 4.3421 14.7516 2.46691 12.3036C2.17726 11.9308 2.02002 11.4721 2.02002 10.9999C2.02002 10.5278 2.17726 10.0691 2.46691 9.69622C4.3421 7.2483 8.84105 2.20801 14.0936 2.20801C19.3462 2.20801 23.8451 7.2483 25.7203 9.69622Z" stroke="#fff" stroke-width="2.15313" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path class="pupila" d="M14.0937 14.7679C16.1746 14.7679 17.8616 13.0809 17.8616 10.9999C17.8616 8.91891 16.1746 7.23193 14.0937 7.23193C12.0127 7.23193 10.3257 8.91891 10.3257 10.9999C10.3257 13.0809 12.0127 14.7679 14.0937 14.7679Z" stroke="#fff" stroke-width="2.15313" stroke-linecap="round" stroke-linejoin="round"></path>
+          </g>
+</svg>
+  <div class="usuarios">
+      <div id="numberViewer">264</div>
+  </div>
+  <div class="texto">assistindo agora</div>
+</div>    
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function random(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    function countViewer(min, max, elementID) {
+        var element = document.querySelector(elementID);
+        var count = random(min, max);
+
+        setInterval(function() {
+            var variation = random(-5, 5);
+
+            count += variation;
+            if (count < min) {
+                count = min;
+            } else if (count > max) {
+                count = max;
+            }
+            element.textContent = count;
+
+        }, 2000); // Ajuste o intervalo conforme necessário
+    }
+
+    // Definindo 194 como mínimo e 243 como máximo para a contagem de visualizadores
+    countViewer(94, 143, '#numberViewer');
+});
+</script>

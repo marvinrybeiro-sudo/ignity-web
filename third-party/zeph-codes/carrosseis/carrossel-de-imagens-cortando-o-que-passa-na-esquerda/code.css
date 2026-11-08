@@ -1,0 +1,7 @@
+selector .elementor-image-carousel-wrapper,
+selector .swiper-container,
+selector .swiper-container-initialized,
+selector .swiper-container-horizontal{
+    overflow: visible !important;
+    clip-path: inset(0 -100% 0 0);
+}

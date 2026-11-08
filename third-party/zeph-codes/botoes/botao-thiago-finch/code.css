@@ -1,0 +1,53 @@
+.elementor-button {
+    position: relative;
+    background: white !important;
+    border-radius: 2000px;
+    --left: 0%; /* Definir a variável inicialmente */
+}
+
+.elementor-button-text {
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);  /* Aplica a sombra no texto */
+}
+
+
+
+.elementor-button::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    z-index: 99;
+    width: calc(100% + 12px);
+    height: calc(100% + 12px);
+    border-radius: inherit;
+    border: solid 1px white;
+    opacity: 50%;
+    background: #ffffff40;
+    transition: 0.5s ease;
+}
+
+.elementor-button:hover::before {
+    transition: 0.5s ease;
+    opacity: 0%;
+    background: #ffffff40
+}
+
+.elementor-button::after {
+    content: "";
+    z-index: 9999;
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+    left: var(--left, 0%);
+    background: rgb(255, 207, 74);
+    width: 15%;
+    height: 80%;
+    filter: blur(15px);
+    opacity: 70%;
+    mix-blend-mode: screen;
+    /* Remova a transição */
+    transition: none;
+}
+
+

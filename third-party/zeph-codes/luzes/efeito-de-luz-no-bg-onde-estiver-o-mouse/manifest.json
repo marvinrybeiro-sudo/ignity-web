@@ -1,0 +1,42 @@
+{
+  "id": "efeito-de-luz-no-bg-onde-estiver-o-mouse-1764179871126-1764179871558",
+  "titulo": "Efeito de luz no BG onde estiver o mouse",
+  "modulo": "Módulo: Luzes",
+  "categoria": "luzes",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-26T17:57:51.000Z",
+  "atualizado": "2025-11-26T17:57:51.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1764179871422.gif",
+  "video": null,
+  "arquivos": [
+    "css",
+    "js"
+  ],
+  "peso": {
+    "bytes": 1220,
+    "gzip": 624
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": true,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

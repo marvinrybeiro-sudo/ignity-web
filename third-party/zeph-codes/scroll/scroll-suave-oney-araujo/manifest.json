@@ -1,0 +1,43 @@
+{
+  "id": "scroll-suave-oney-araujo-1764172828269-1764172830577",
+  "titulo": "Scroll suave  - Oney Araújo",
+  "modulo": "Módulo: Scroll",
+  "categoria": "scroll",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-26T16:00:30.000Z",
+  "atualizado": "2025-11-26T16:00:30.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1764172829998.jpg",
+  "video": null,
+  "arquivos": [
+    "html"
+  ],
+  "peso": {
+    "bytes": 425,
+    "gzip": 263
+  },
+  "deps": {
+    "scriptsExternos": [
+      "https://cdn.jsdelivr.net/gh/studio-freight/lenis@1/bundled/lenis.min.js"
+    ],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": true,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": true,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

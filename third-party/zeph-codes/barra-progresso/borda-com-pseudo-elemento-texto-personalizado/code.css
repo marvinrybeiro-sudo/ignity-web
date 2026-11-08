@@ -1,0 +1,26 @@
+selector::before{ /*borda em volta*/
+    content:"";
+    position: absolute;
+    width: 102%; /*defina a largura aqui*/
+    height: 140%; /*defina a altura aqui*/
+    border: 1px solid #fff; /*defina a cor e espessura aqui*/
+    border-radius: 30px; /*defina o arredondamento aqui*/
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.elementor-progress-bar{
+    border-radius: 20px !important; /*defina o arredondamento da barra aqui*/
+}
+
+.elementor-progress-text{ /*texto*/
+    letter-spacing: 5.4px;
+    font-size: 12px !important;
+}
+
+.elementor-progress-percentage{  /*percentual*/
+    font-weight: 800 !important;
+    font-size: 20px !important;
+    color: #ffffff !important;
+}

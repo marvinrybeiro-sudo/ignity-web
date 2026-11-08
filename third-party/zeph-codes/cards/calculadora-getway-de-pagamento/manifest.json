@@ -1,0 +1,45 @@
+{
+  "id": "calculadora-getway-de-pagamento-1763602601970",
+  "titulo": "Calculadora getway de pagamento",
+  "modulo": "Módulo: Cards",
+  "categoria": "cards",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-20T01:36:42.000Z",
+  "atualizado": "2025-11-20T01:36:42.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1763602602705.png",
+  "video": null,
+  "arquivos": [
+    "html"
+  ],
+  "peso": {
+    "bytes": 12812,
+    "gzip": 4453
+  },
+  "deps": {
+    "scriptsExternos": [
+      "https://unpkg.com/lenis@1.1.18/dist/lenis.min.js",
+      "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js",
+      "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"
+    ],
+    "imports": [],
+    "gsap": true,
+    "scrollTrigger": true,
+    "lenis": true,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": true,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

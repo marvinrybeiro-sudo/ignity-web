@@ -1,0 +1,30 @@
+selector {
+    background: linear-gradient(270deg, #140537, #4d19db, #891cec); /* cria um gradiente linear com três cores começando de 270 graus */
+    background-size: 600% 600%; /* aumenta o tamanho do fundo para permitir a animação do gradiente */
+
+    -webkit-animation: AnimationName 7s ease infinite; /* aplica a animação para navegadores WebKit (como Chrome e Safari) com duração de 7 segundos, ritmo suave e de forma infinita */
+    -moz-animation: AnimationName 7s ease infinite; /* aplica a animação para navegadores Mozilla Firefox */
+    -o-animation: AnimationName 7s ease infinite; /* aplica a animação para navegadores Opera */
+    animation: AnimationName 7s ease infinite; /* aplica a animação para navegadores padrão */
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%} /* início da animação com posição inicial do fundo */
+    50%{background-position:100% 50%} /* ponto intermediário da animação, movendo o fundo completamente para a direita */
+    100%{background-position:0% 50%} /* final da animação, retornando o fundo para a posição inicial */
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}

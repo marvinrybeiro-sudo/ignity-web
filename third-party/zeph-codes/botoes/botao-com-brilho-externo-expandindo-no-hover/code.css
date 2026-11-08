@@ -1,0 +1,36 @@
+.button {
+  border-radius: 50px; /*defina o arredondamento*/
+  transition: transform 50ms ease;
+  background: linear-gradient(90deg, #4c0de2, #3a0da5, #210471, #4c0de2); /*defina as cores do BG aqui*/
+  background-size: 400%;
+  overflow: visible;
+  transition: box-shadow, 0.4s;
+}
+
+.button:hover {
+  -webkit-box-shadow: 0px 0px 15px 0px rgba(155, 0, 194, 0.9);/*defina a cor do efeito no hover*/
+  box-shadow: 0px 0px 35px 0px rgba(155, 0, 194, 0.6); /*defina a cor do efeito no hover*/
+  animation: animate 8s ease infinite; 
+  transform: scale(1.05, 1.05);
+  animation: animate 7s cubic-bezier(0.75, 0.75, 0.75, 0.75) infinite;
+}
+
+.button:hover:before {
+  filter: blur(20px); /*tamanho do desfoque*/
+  opacity: 1;
+  animation: animate 8s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    background-position: 0%;
+  }
+
+  100% {
+    background-position: 400%;
+  }
+}
+
+selector{
+    overflow: visible;
+}

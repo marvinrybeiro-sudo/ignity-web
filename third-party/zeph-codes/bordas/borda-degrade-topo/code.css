@@ -1,0 +1,6 @@
+selector {
+    background: #0F0F0F;
+    border-radius: 20px;
+border-top: 3px solid; /*defina a largura da borda*/
+border-image: linear-gradient(to right, transparent, #937cff, transparent) 1; /*defina as cores*/
+}

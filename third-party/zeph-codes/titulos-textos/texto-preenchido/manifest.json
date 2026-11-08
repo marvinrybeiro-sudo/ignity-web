@@ -1,0 +1,45 @@
+{
+  "id": "texto-preenchido-1763609464442",
+  "titulo": "Texto preenchido",
+  "modulo": "Módulo: Titulos e Textos",
+  "categoria": "titulos-textos",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-20T03:31:06.000Z",
+  "atualizado": "2025-11-20T03:31:06.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1763609466213.gif",
+  "video": null,
+  "arquivos": [
+    "html",
+    "css"
+  ],
+  "peso": {
+    "bytes": 1167,
+    "gzip": 577
+  },
+  "deps": {
+    "scriptsExternos": [
+      "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+    ],
+    "imports": [],
+    "gsap": true,
+    "scrollTrigger": true,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

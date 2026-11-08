@@ -1,0 +1,38 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script>
+  // Registrar o plugin ScrollTrigger
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Selecionar o elemento com a classe .linee
+  const lineeElement = document.querySelector('.linee');
+
+  // Criar um elemento dinâmico para simular o ::after no DOM
+  const afterElement = document.createElement('div');
+  afterElement.style.position = 'absolute';
+  afterElement.style.top = '0';
+  afterElement.style.left = window.innerWidth <= 768 ? '0px' : '-20px'; // Definir o left com base no tamanho da janela
+  afterElement.style.width = '2px';
+  afterElement.style.height = '0%';
+  afterElement.style.background = 'linear-gradient(0deg, #FFF7A1, #E4A837)';
+  lineeElement.style.position = 'relative';
+  lineeElement.appendChild(afterElement);
+
+  // Atualizar o left dinamicamente no resize
+  window.addEventListener('resize', () => {
+    afterElement.style.left = window.innerWidth <= 768 ? '0px' : '-20px';
+  });
+
+  // Animar a altura do elemento ::after com GSAP e ScrollTrigger
+  gsap.to(afterElement, {
+    height: '100%',
+    scrollTrigger: {
+      trigger: lineeElement,
+      start: 'top 70%',
+      end: 'top top',
+      scrub: true,
+      markers: false // Exibir os markers para depuração
+    }
+  });
+</script>

@@ -1,0 +1,112 @@
+<div class="img-compare-container">
+  <div class="img-compare-wrapper">
+    <img src="URL-DA-IMAGEM-DEPOIS.jpg" alt="Antes" class="img-compare img-before" loading="eager">
+    <img src="URL-DA-IMAGEM-ANTES.jpg" alt="Depois" class="img-compare img-after" loading="eager">
+    <div class="slider"></div>
+  </div>
+</div>
+
+<style>
+.img-compare-container{
+  width:100%;
+  max-width:800px;
+  margin:auto;
+  position:relative;
+  overflow:hidden;
+}
+.img-compare-wrapper{
+  position:relative;
+  width:100%;
+  /* a altura será definida via JS conforme a proporção da imagem */
+  cursor:ew-resize;
+  touch-action:none; /* melhora o arraste no mobile */
+}
+.img-compare{
+  width:100%;
+  height:auto;
+  display:block;
+  position:absolute;
+  top:0; left:0;
+  user-select:none;
+  pointer-events:none; /* evita “pegar” a imagem ao arrastar */
+}
+.img-after{
+  clip-path: inset(0 50% 0 0);
+  transition: clip-path 0.1s ease;
+}
+.slider{
+  position:absolute;
+  top:0;
+  left:50%;
+  width:4px;
+  height:100%;
+  background:#FFA600;
+  z-index:10;
+  pointer-events:none;
+}
+</style>
+
+<script>
+(function(){
+  function initCompare(container){
+    const wrapper = container.querySelector(".img-compare-wrapper");
+    const before  = container.querySelector(".img-before");
+    const after   = container.querySelector(".img-after");
+    const slider  = container.querySelector(".slider");
+
+    // Ajusta a altura do wrapper pela proporção da imagem "Antes"
+    function setHeight(){
+      // Se a imagem já carregou, usamos naturalWidth/Height
+      if (before.naturalWidth > 0) {
+        const ratio = before.naturalHeight / before.naturalWidth;
+        wrapper.style.height = (wrapper.clientWidth * ratio) + "px";
+      } else {
+        // fallback quando ainda não carregou
+        before.addEventListener("load", setHeight, { once:true });
+      }
+    }
+
+    function moveTo(clientX){
+      const rect = wrapper.getBoundingClientRect();
+      let x = clientX - rect.left;
+      x = Math.max(0, Math.min(x, rect.width)); // clamp
+      const percent = (x / rect.width) * 100;
+      after.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+      slider.style.left = `${percent}%`;
+    }
+
+    // Eventos mouse + touch
+    wrapper.addEventListener("mousemove", (e)=> moveTo(e.clientX));
+    wrapper.addEventListener("touchstart", (e)=> moveTo(e.touches[0].clientX), {passive:true});
+    wrapper.addEventListener("touchmove",  (e)=> moveTo(e.touches[0].clientX), {passive:true});
+
+    // Recalcula em resize
+    window.addEventListener("resize", setHeight);
+
+    // Inicializa quando as imagens estiverem prontas
+    if (document.readyState === "complete") {
+      setHeight();
+    } else {
+      window.addEventListener("load", setHeight);
+    }
+  }
+
+  // Inicializa todas as instâncias na página
+  function boot(){
+    document.querySelectorAll(".img-compare-container").forEach(initCompare);
+  }
+
+  // Site publicado
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+
+  // Editor do Elementor (conteúdo pode ser injetado depois)
+  if (window.elementorFrontend && elementorFrontend.hooks) {
+    elementorFrontend.hooks.addAction('frontend/element_ready/widget', boot);
+    elementorFrontend.hooks.addAction('frontend/element_ready/global', boot);
+  }
+})();
+</script>

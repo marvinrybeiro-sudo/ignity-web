@@ -1,0 +1,14 @@
+.btn12{
+  background: transparent;  /*defina a cor do BG aqui*/
+  transition: ease-out 0.5s;
+  border: 2px solid #6121ff; /*configure a borda aqui*/
+  border-radius: 10px; /*defina o arredondamento aqui*/
+}
+
+.btn12:hover {
+  box-shadow: inset 0 -100px 0 0 #6121ff; /*cor do preenchimento no hover*/
+}
+
+.btn12:active {
+  transform: scale(0.9);
+}

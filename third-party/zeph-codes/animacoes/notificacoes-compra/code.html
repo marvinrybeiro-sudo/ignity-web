@@ -1,0 +1,139 @@
+<!-- HTML - Contêiner onde as notificações vão aparecer -->
+<div id="custom-notifications-container"></div>
+
+<style>
+  /* 🔹 Contêiner fixo no canto inferior esquerdo */
+  #custom-notifications-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* 🔹 Estilo da notificação */
+  .custom-notification {
+    background-color: #1e9b25; /* ✅ ALTERAR COR DE FUNDO AQUI */
+    color: white;
+    padding: 10px 15px;
+    min-width: 280px;
+    max-width: 320px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+    opacity: 0;
+    transform: translateX(-30px); /* inicia levemente deslocado */
+    transition: opacity 0.4s ease, transform 0.4s ease; /* ✅ Entrada e saída suaves */
+    font-family: sans-serif;
+  }
+
+  /* 🔹 Quando a notificação aparece */
+  .custom-notification.show {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* 🔹 Quando a notificação some */
+  .custom-notification.hide {
+    opacity: 0;
+    transform: translateX(-30px); /* movimento suave para esquerda */
+  }
+
+  .custom-notification .text {
+    flex: 1;
+    padding-left: 10px;
+    font-size: 14px;
+  }
+
+  /* 🔹 Botão de fechar (X) */
+  .custom-notification .close {
+    cursor: pointer;
+    margin-left: 10px;
+    font-weight: bold;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+  }
+
+  /* 🔹 Ícone de check */
+  .custom-notification .check {
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  /* 🔹 Barra de tempo */
+  .time-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background-color: #fff; /* ✅ COR DA BARRA */
+    animation: timeProgress 8s linear forwards; /* ✅ TEMPO DE PERMANÊNCIA */
+  }
+
+  @keyframes timeProgress {
+    from { width: 100%; }
+    to { width: 0%; }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    /* ✅ ALTERE OS TEXTOS DAS NOTIFICAÇÕES AQUI */
+    const notifications = [
+      "Rafael Souza entrou no grupo de ODDs Altas",
+      "Carlos Pereira entrou no grupo de ODDs Altas",
+      "Pedro Oliveira entrou no grupo de ODDs Altas"
+    ];
+
+    /* ✅ Contêiner onde as notificações serão inseridas */
+    const container = document.getElementById("custom-notifications-container");
+
+    /* 🔹 Função para criar cada notificação */
+    function createNotification(text, delay) {
+      setTimeout(() => {
+        const box = document.createElement('div');
+        box.className = 'custom-notification';
+
+        box.innerHTML = `
+          <div class="check">✓</div>
+          <div class="text">${text}</div>
+          <button class="close">×</button>
+          <div class="time-bar"></div>
+        `;
+
+        container.appendChild(box);
+
+        /* 🔹 Ativa animação de entrada */
+        setTimeout(() => box.classList.add('show'), 50);
+
+        /* 🔹 Clique no X fecha suavemente */
+        box.querySelector(".close").addEventListener("click", () => {
+          box.classList.remove('show');
+          box.classList.add('hide');
+          setTimeout(() => box.remove(), 400); // remove após animação
+        });
+
+        /* 🔹 Remove automaticamente após 8s */
+        setTimeout(() => {
+          box.classList.remove('show');
+          box.classList.add('hide');
+          setTimeout(() => box.remove(), 400);
+        }, 8000); // ✅ ALTERE O TEMPO (em ms) SE QUISER
+      }, delay);
+    }
+
+    /* 🔹 Inicia 3s após a página carregar */
+    setTimeout(() => {
+      notifications.forEach((text, i) => {
+        createNotification(text, i * 300); // ✅ ALTERE O ATRASO ENTRE ELAS AQUI
+      });
+    }, 3000); // ✅ ALTERE O ATRASO INICIAL AQUI
+  });
+</script>

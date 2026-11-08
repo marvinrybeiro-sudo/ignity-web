@@ -1,0 +1,84 @@
+.botao{
+    overflow: hidden !important;
+    border-radius: 10px;
+}
+
+.botao .elementor-button{
+    background: linear-gradient(-45deg, #4C0DE2, #370C9D,#4C0DE2, #370C9D, #4C0DE2, #370C9D); /*mude as cores do degradê do botão aqui*/
+    background-size: 800% 400%;
+    transition: all .5s;
+    animation: gradient 5s infinite cubic-bezier(.62, .28, .23, .99) both;
+}
+
+@keyframes gradient {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.botao .elementor-button-text{
+    align-self: center;
+    padding-right: 0px;
+    z-index: 9;
+    transition: 1s ease;
+}
+
+.botao:hover .elementor-button-text{
+    color: black;
+    transition: 1s ease;
+}
+
+.botao .elementor-button::before{
+    content: "";
+    background: white;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 10px;
+    transform: scalex(0);
+    transform-origin: left;
+    transition: 0.5s ease;
+}
+
+.botao:hover .elementor-button::before{
+    transform: scalex(1);
+    transform-origin: left;
+    transition: 1s ease;
+}
+
+.botao .elementor-button::after {
+    content: '';
+    background: linear-gradient(10deg, #D1D2EA 12.81%, rgba(209, 210, 234, 0.00) 66.66%);
+    mix-blend-mode: overlay;
+    width: 90px;
+    height: 160%;
+    position: absolute;
+    transform: translateX(-50%) skew(-25deg);
+    bottom: 0%;
+    user-select: none;
+    pointer-events: none;
+    animation: shinery 6s infinite ease-in-out;
+    
+    
+}
+
+@keyframes shinery{
+    0%, 100% {
+    left: -10%;
+    opacity: 0;
+}
+20% {
+    opacity: 1;
+}
+48% {
+    left: 140%;
+    opacity: 1;
+}
+51% {
+    opacity: 0;
+}}

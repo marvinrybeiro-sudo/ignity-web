@@ -1,0 +1,7 @@
+.transparency{
+    transition: 0.5s all; /*mude o tempo da animação*/
+}
+
+.transparency:hover{
+    opacity: 0.5;
+}

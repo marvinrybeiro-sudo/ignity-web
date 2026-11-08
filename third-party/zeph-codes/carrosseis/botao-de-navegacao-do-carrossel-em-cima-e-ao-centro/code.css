@@ -1,0 +1,11 @@
+selector .elementor-swiper-button-prev{
+    top: -18% !important;
+    left: calc(50% - 50px);
+    transform: translate-x(-50%);
+}
+
+selector .elementor-swiper-button-next{
+    top: -18% !important;
+    right: calc(50% - 50px);
+    transform: translate-x(-50%);
+}

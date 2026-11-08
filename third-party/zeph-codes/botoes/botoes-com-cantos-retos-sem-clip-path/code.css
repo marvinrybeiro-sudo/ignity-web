@@ -1,0 +1,78 @@
+**Para aplicar somente na inferior direita**
+
+```css
+.elementor-button{
+    background: linear-gradient(-45deg, transparent 10px, #440dca 0);
+}
+```
+
+---
+
+**Para aplicar somente na inferior esquerda**
+
+```css
+.elementor-button{
+    background: linear-gradient(-45deg, transparent 10px, #440dca 0);
+}
+```
+
+---
+
+**Para aplicar somente na superior esquerda**
+
+```css
+.elementor-button{
+    background: linear-gradient(135deg, transparent 10px, #440dca 0);
+}
+```
+
+---
+
+**Para aplicar somente na superior direita**
+
+```css
+.elementor-button{
+    background: linear-gradient(-135deg, transparent 10px, #440dca 0);
+}
+```
+
+---
+
+**Para aplicar nos dois cantos de baixo**
+
+```css
+.elementor-button{
+    background: linear-gradient(-45deg, transparent 10px, #440dca 0) right,
+    linear-gradient(45deg, transparent 10px, #440dca 0) left;
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+}
+```
+
+---
+
+**Para aplicar nos dois cantos de cima**
+
+```css
+.elementor-button{
+    background: linear-gradient(-135deg, transparent 10px, #440dca 0) right,
+    linear-gradient(135deg, transparent 10px, #440dca 0) left;
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+}
+```
+
+---
+
+**Para aplicar nos quatro cantos**
+
+```css
+.elementor-button{
+    background: linear-gradient(135deg, transparent 10px, #440dca 0) top left,
+    linear-gradient(-135deg, transparent 10px, #440dca 0) top right,
+    linear-gradient(-45deg, transparent 10px, #440dca 0) bottom right,
+    linear-gradient(45deg, transparent 10px, #440dca 0) bottom left;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+}
+```

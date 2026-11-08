@@ -1,0 +1,41 @@
+{
+  "id": "mundo-animado-1791438042808-1791438043338",
+  "titulo": "Mundo animado",
+  "modulo": "Módulo: Animações e outros",
+  "categoria": "animacoes",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2026-10-08T05:40:43.000Z",
+  "atualizado": "2026-10-08T06:06:05.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/fe5ae30e-c71d-4803-b27a-a1af76ec4fc4.gif",
+  "video": null,
+  "arquivos": [
+    "html"
+  ],
+  "peso": {
+    "bytes": 30469,
+    "gzip": 10068
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": true
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": true,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": true,
+    "canvasWebGL": true
+  },
+  "a11y": {
+    "prefersReducedMotion": true
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

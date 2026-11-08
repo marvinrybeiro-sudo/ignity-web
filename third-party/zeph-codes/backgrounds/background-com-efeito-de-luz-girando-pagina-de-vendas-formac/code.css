@@ -1,0 +1,20 @@
+selector{
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 60%;
+    filter: blur(180px);
+    width: 1154px;
+    z-index: -1;
+    animation: 10s linear infinite turn;
+    transform-origin: center;
+}
+
+@keyframes turn{
+    0% {
+    transform: translate(-50%, -50%) rotate(0);
+}
+100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+}
+}

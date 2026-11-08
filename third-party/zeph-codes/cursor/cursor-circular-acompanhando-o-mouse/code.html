@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Faz o layout ser responsivo, ajustando-se à largura da tela do dispositivo -->
+    <title>Cursor Background</title> <!-- Título da página exibido na aba do navegador -->
+</head>
+<body>
+    <!-- Div usada como fundo do cursor personalizado -->
+    <div id="cursor-background"></div>
+
+    <!-- Script que manipula o comportamento do cursor e seu fundo -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cursorBackground = document.getElementById("cursor-background"); // Seleciona o elemento com id "cursor-background"
+
+            // Detecta o movimento do mouse e atualiza a posição da div de fundo
+            document.addEventListener("mousemove", function (e) {
+                const x = e.clientX; // Pega a posição X do mouse
+                const y = e.clientY; // Pega a posição Y do mouse
+
+                // Move o fundo para o centro da posição do cursor
+                cursorBackground.style.left = x - cursorBackground.clientWidth / 2 + "px"; 
+                cursorBackground.style.top = y - cursorBackground.clientHeight / 2 + "px"; 
+            });
+
+            // Quando o mouse entra na página, exibe o fundo do cursor
+            document.addEventListener("mouseenter", function () {
+                cursorBackground.style.display = "block"; // Exibe o fundo do cursor
+            });
+
+            // Quando o mouse sai da página, oculta o fundo do cursor
+            document.addEventListener("mouseleave", function () {
+                cursorBackground.style.display = "none"; // Oculta o fundo do cursor
+            });
+        });
+    </script>
+</body>
+</html>

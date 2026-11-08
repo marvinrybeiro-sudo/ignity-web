@@ -1,0 +1,44 @@
+selector {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+selector::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px; 
+    background: linear-gradient(90deg, 
+        rgba(0, 255, 136, 0) 0%, 
+        rgba(0, 255, 136, 0.05) 15%, 
+        rgba(0, 255, 136, 1) 50%, 
+        rgba(0, 255, 136, 0.05) 85%, 
+        rgba(0, 255, 136, 0) 100%
+    ) !important;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+    z-index: 10;
+    pointer-events: none;
+    
+    /* 1. DIMINUÍ O TEMPO (de 6s para 3s) para passar mais vezes */
+    /* 2. Mudei para 'linear' para não ter a "freada" no final que demora a volta */
+    animation: scanLineMove 3s linear infinite !important;
+}
+
+@keyframes scanLineMove {
+    0% {
+        /* 3. Começa exatamente na borda esquerda */
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    10%, 90% {
+        /* 4. Aparece muito mais rápido e some só no finalzinho */
+        opacity: 1;
+    }
+    100% {
+        /* 5. Termina exatamente na borda direita */
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}

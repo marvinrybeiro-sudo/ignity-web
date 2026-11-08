@@ -1,0 +1,12 @@
+.video {
+    transform-origin: bottom;
+    transform: perspective(1000px) rotateX(20deg) !important; /* Inicialmente fechada com perspectiva */
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  
+  .video-ativoo {
+    transform-origin: bottom;
+    transform: perspective(1000px) rotateX(0deg) !important; /* Inicialmente fechada com perspectiva */
+    transition: transform 0.5s ease-in-out;
+  }

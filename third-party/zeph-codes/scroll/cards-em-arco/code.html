@@ -1,0 +1,271 @@
+<!--
+CARDS EM ARCO NO SCROLL
+1. Cole este bloco inteiro em um widget HTML. Não precisa de React ou bibliotecas.
+2. Troque os textos em .smc-intro e .smc-end.
+3. Cada .smc-card é um card. Pode duplicar/remover cards. O exemplo não carrega imagens.
+   Para usar fotos, substitua o número dentro de .smc-front por:
+   <img src="URL-DA-SUA-IMAGEM" alt="Descrição da imagem">
+4. Personalize cores e largura em .smc-section. Use --topo:80px se houver menu fixo.
+5. No JS, DISTANCIA controla o percurso de scroll e SUAVIDADE a animação dos cards.
+   A fixação acompanha o scroll sem atraso. O scroll normal continua depois da seção.
+6. A entrada vai de dispersão → linha → círculo. Ao rolar, o círculo vira um arco.
+   Continue rolando para percorrer os cards. Hover/foco ou toque mostram o verso.
+7. Funciona em wrappers que rolam e com cópias independentes do bloco.
+   Conteúdo alto ou movimento reduzido: exibe todos os cards em uma grade legível.
+Fonte da referência: Scroll Morph Hero — Prashant Som
+https://21st.dev/@prashantsom75/components/scroll-morph-hero
+-->
+<style>
+.smc-section{--topo:0px;--smc-fundo:#fafafa;--smc-texto:#171717;--smc-card:#141414;--smc-largura:60px;
+ position:relative;width:100%;box-sizing:border-box;color:var(--smc-texto);font-family:Arial,Helvetica,sans-serif}
+.smc-section *, .smc-section *::before,.smc-section *::after{box-sizing:border-box}
+.smc-stage{position:relative;width:100%;padding:48px 24px;background:var(--smc-fundo)}
+.smc-clip{position:relative;width:100%;overflow:hidden}
+.smc-intro{display:none}
+.smc-end{text-align:center;width:min(100%,620px);margin:0 auto 36px}
+.smc-section h2{font:600 clamp(25px,3.3vw,48px)/1.1 Arial,Helvetica,sans-serif!important;letter-spacing:-.04em;margin:0 0 16px!important;color:inherit!important}
+.smc-section p{font:400 15px/1.55 Arial,Helvetica,sans-serif!important;margin:0!important;color:inherit!important;opacity:.65}
+.smc-intro p{font-size:10px!important;letter-spacing:.18em;text-transform:uppercase}
+.smc-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(60px,1fr));gap:18px;max-width:1000px;margin:auto}
+.smc-card{display:block;position:relative;aspect-ratio:12/17;width:100%;padding:0!important;margin:0!important;
+ border:0!important;border-radius:10px!important;background:transparent!important;color:#fff!important;cursor:pointer;
+ perspective:900px;transform-origin:center;box-shadow:none!important;-webkit-tap-highlight-color:transparent}
+.smc-inner{display:block;position:absolute;inset:0;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.smc-front,.smc-back{display:flex;position:absolute;inset:0;align-items:center;justify-content:center;overflow:hidden;
+ border-radius:10px;background:var(--smc-card);backface-visibility:hidden;-webkit-backface-visibility:hidden;
+ box-shadow:0 8px 16px #0002;font:500 18px/1.3 Arial,Helvetica,sans-serif;color:white}
+.smc-front img{display:block;width:100%;height:100%;object-fit:cover}
+.smc-back{transform:rotateY(180deg);background:#e7e7e7;color:#222;font-size:9px;text-align:center}
+.smc-card:hover .smc-inner,.smc-card:focus-visible .smc-inner,.smc-card[aria-pressed="true"] .smc-inner{transform:rotateY(180deg)}
+.smc-card:focus-visible{outline:2px solid #635bff!important;outline-offset:5px}
+.smc-active .smc-stage{position:-webkit-sticky;position:sticky;top:var(--topo);height:var(--smc-altura);padding:0}
+.smc-active .smc-clip{height:100%}
+.smc-active .smc-intro{display:block;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;width:var(--smc-miolo);z-index:1;pointer-events:none}
+.smc-active .smc-intro h2{font-size:clamp(22px,2.4vw,36px)!important}
+.smc-active .smc-end{position:absolute;left:50%;top:10%;width:min(88%,620px);margin:0;z-index:2;pointer-events:none}
+.smc-active .smc-cards{position:absolute;inset:0;display:block;max-width:none;margin:0}
+.smc-active .smc-card{position:absolute;left:50%;top:50%;width:var(--smc-card-w);height:var(--smc-card-h);aspect-ratio:auto;will-change:transform}
+.smc-active.smc-js .smc-stage{position:relative!important;top:0!important}
+.smc-static .smc-intro{display:none}
+.smc-static .smc-end{opacity:1!important;transform:none!important}
+.smc-static .smc-card{opacity:1!important;transform:none!important}
+@media(max-width:600px){.smc-section p{font-size:13px!important}.smc-intro p{font-size:9px!important}.smc-cards{gap:12px}.smc-stage{padding:32px 18px}}
+@media(prefers-reduced-motion:reduce){.smc-inner{transition:none}}
+</style>
+<section class="smc-section" aria-label="Cards em arco no scroll">
+  <div class="smc-stage"><div class="smc-clip">
+    <div class="smc-intro"><h2>Uma coleção em movimento.</h2><p>Role para explorar</p></div>
+    <div class="smc-end"><h2>Explore sua coleção.</h2><p>Continue rolando para percorrer os cards.<br>Passe o cursor ou toque para ver o outro lado.</p></div>
+    <div class="smc-cards">
+      <button type="button" class="smc-card" aria-label="Card 01: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">01</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 02: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">02</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 03: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">03</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 04: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">04</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 05: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">05</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 06: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">06</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 07: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">07</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 08: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">08</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 09: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">09</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 10: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">10</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 11: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">11</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 12: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">12</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 13: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">13</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 14: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">14</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 15: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">15</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 16: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">16</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 17: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">17</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 18: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">18</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 19: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">19</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+      <button type="button" class="smc-card" aria-label="Card 20: mostrar verso" aria-pressed="false">
+        <span class="smc-inner"><span class="smc-front">20</span><span class="smc-back">Seu<br>conteúdo</span></span>
+      </button>
+    </div>
+  </div></div>
+</section>
+<script>
+(function(){
+ 'use strict';
+ const root=document.currentScript.previousElementSibling;
+ if(!root||!root.classList.contains('smc-section'))return;
+ const DISTANCIA=3.3; // Percurso em alturas úteis. Aumente para um scroll mais longo.
+ const SUAVIDADE=.18; // Segundos: suaviza somente os cards, nunca a fixação.
+ const stage=root.querySelector('.smc-stage'),intro=root.querySelector('.smc-intro'),end=root.querySelector('.smc-end');
+ const cards=[...root.querySelectorAll('.smc-card')];if(!cards.length)return;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)'),touch=matchMedia('(pointer: coarse)');
+ const clamp=n=>Math.max(0,Math.min(1,n)),mix=(a,b,t)=>a+(b-a)*t,ease=t=>1-Math.pow(1-clamp(t),3);
+ let scroller=window,top=0,distance=1,height=1,width=1,cardW=60,cardH=85;
+ let viewportW=innerWidth,viewportH=innerHeight,active=false,fallback=false,visible=false,disposed=false;
+ let raf=0,measureRAF=0,last=0,current=0,mouseX=0,parallax=0,introStart=null,introDone=false;
+ let ro,io;
+ const scatter=cards.map((_,i)=>({x:Math.sin(i*19.17)*.42,y:Math.cos(i*12.31)*.38,r:Math.sin(i*8.81)*95}));
+ function findScroller(repair){
+  for(let p=root.parentElement;p&&p!==document.documentElement;p=p.parentElement){
+   if(p===document.scrollingElement)break;
+   const cs=getComputedStyle(p),real=/(auto|scroll|overlay)/.test(cs.overflowY)&&p.scrollHeight>p.clientHeight+1;
+   if(real)return p;
+   if(!repair||p.scrollHeight>p.clientHeight+1)continue;
+   const x=cs.overflowX==='visible'?'visible':'clip';
+   const y=/^(hidden|clip)$/.test(cs.overflowY)?'clip':'visible';
+   if(cs.overflowX!==x)p.style.setProperty('overflow-x',x,'important');
+   if(cs.overflowY!==y)p.style.setProperty('overflow-y',y,'important');
+  }
+  return window;
+ }
+ function expectedTop(){return (scroller===window?0:scroller.getBoundingClientRect().top+scroller.clientTop)+top;}
+ function progress(){return active?clamp((expectedTop()-root.getBoundingClientRect().top)/distance):1;}
+ function position(){
+  if(!active){stage.style.transform='';return;}
+  const target=expectedTop(),advance=target-root.getBoundingClientRect().top;
+  if(!fallback&&advance>4&&advance<distance-4&&Math.abs(stage.getBoundingClientRect().top-target)>4){
+   fallback=true;root.classList.add('smc-js');
+  }
+  // Correção física DIRETA, sem interpolação: acompanha o scroll do site ou wrapper.
+  stage.style.transform=fallback?'translate3d(0,'+Math.max(0,Math.min(distance,advance))+'px,0)':'';
+ }
+ function draw(p,now){
+  if(!active){
+   intro.setAttribute('aria-hidden','true');end.removeAttribute('aria-hidden');
+   intro.style.opacity='';end.style.opacity='';end.style.transform='';
+   cards.forEach(c=>{c.style.transform='';c.style.opacity='';c.tabIndex=0;});return false;
+  }
+  if(progress()>.003){introDone=true;}
+  if(visible&&introStart===null)introStart=now;
+  const elapsed=introStart===null?0:(now-introStart)/1000;
+  if(elapsed>=3.4)introDone=true;
+  const morph=clamp(p/.2),shuffle=clamp((p-.2)/.8),mobile=width<768;
+  const radius=Math.min(Math.min(width,height)*.30,300);
+  const arcRadius=Math.min(width,height*1.5)*(mobile?1.4:1.1),spread=mobile?100:130;
+  const apex=height*(mobile?.72:.70),centerY=apex+arcRadius;
+  const spreadStep=cards.length>1?spread/(cards.length-1):0;
+  const lineSpacing=Math.min(cardW+10,(width*.91-cardW)/Math.max(1,cards.length-1));
+  const introOpacity=(introDone?1:ease((elapsed-2.4)/1))*(1-clamp(morph*2));
+  const endOpacity=clamp((morph-.8)/.2);
+  intro.style.opacity=introOpacity;intro.setAttribute('aria-hidden',String(introOpacity<.05));
+  end.style.opacity=endOpacity;end.style.transform='translate(-50%,'+((1-endOpacity)*20)+'px)';
+  end.setAttribute('aria-hidden',String(endOpacity<.05));
+  cards.forEach((card,i)=>{
+   const angle=i/cards.length*360,rad=angle*Math.PI/180;
+   const circle={x:Math.cos(rad)*radius,y:Math.sin(rad)*radius,r:angle+90,s:1,o:1};
+   let target;
+   if(!introDone){
+    const lineX=(i-(cards.length-1)/2)*lineSpacing;
+    const from=scatter[i],a=ease((elapsed-.15)/1.05),b=ease((elapsed-2)/1.4);
+    target={x:mix(mix(from.x*width,lineX,a),circle.x,b),y:mix(from.y*height*(1-a),circle.y,b),
+     r:mix(from.r*(1-a),circle.r,b),s:mix(.6,1,a),o:a};
+   }else{
+    // O último card termina no centro do arco; não deixa a coleção desaparecer.
+    const arcAngle=-90-spread/2+i*spreadStep-shuffle*spread/2;
+    const ar=arcAngle*Math.PI/180;
+    target={x:mix(circle.x,Math.cos(ar)*arcRadius+parallax,morph),
+     y:mix(circle.y,Math.sin(ar)*arcRadius+centerY-height/2,morph),
+     r:mix(circle.r,arcAngle+90,morph),s:mix(1,mobile?1.35:1.8,morph),o:1};
+   }
+   card.style.transform='translate3d('+target.x.toFixed(2)+'px,'+target.y.toFixed(2)+'px,0) translate(-50%,-50%) rotate('+target.r.toFixed(2)+'deg) scale('+target.s.toFixed(3)+')';
+   card.style.opacity=target.o;
+   const x=width/2+target.x,y=height/2+target.y,margin=cardH*target.s;
+   card.tabIndex=target.o>.8&&x>-margin&&x<width+margin&&y>-margin&&y<height+margin?0:-1;
+  });
+  return !introDone&&visible;
+ }
+ function frame(now){
+  raf=0;if(disposed)return;if(!root.isConnected){dispose();return;}
+  position();
+  const target=progress(),dt=last?Math.min(.1,(now-last)/1000):1/60;last=now;
+  const factor=SUAVIDADE>0?1-Math.exp(-dt/SUAVIDADE):1;
+  current=active?mix(current,target,factor):1;parallax=mix(parallax,mouseX,factor);
+  if(Math.abs(target-current)<.0001)current=target;if(Math.abs(mouseX-parallax)<.02)parallax=mouseX;
+  const entering=draw(current,now);
+  if(!document.hidden&&active&&(entering||current!==target||mouseX!==parallax))raf=requestAnimationFrame(frame);else last=0;
+ }
+ function schedule(){if(!raf&&!disposed)raf=requestAnimationFrame(frame);}
+ function measure(){
+  measureRAF=0;if(disposed)return;if(!root.isConnected){dispose();return;}
+  // Essa altura estável é usada também quando ResizeObserver/fontes/load disparam.
+  if(!(touch.matches&&innerWidth===viewportW&&Math.abs(innerHeight-viewportH)<120)){
+   viewportW=innerWidth;viewportH=innerHeight;
+  }
+  const style=getComputedStyle(root);top=Math.max(0,parseFloat(style.getPropertyValue('--topo'))||0);
+  width=root.clientWidth;cardW=Math.min(parseFloat(style.getPropertyValue('--smc-largura'))||60,width*.105);cardH=cardW*85/60;
+  root.style.setProperty('--smc-card-w',cardW+'px');root.style.setProperty('--smc-card-h',cardH+'px');
+  const radius=Math.min(Math.min(width,viewportH-top)*.30,300);
+  root.style.setProperty('--smc-miolo',Math.max(120,Math.min(width*.7,radius*1.65-cardH*.4))+'px');
+  fallback=false;root.classList.remove('smc-js');stage.style.transform='';
+  function dimensions(){
+   const vp=scroller===window?viewportH:Math.min(viewportH,scroller.clientHeight);
+   height=Math.max(1,vp-top);distance=Math.max(1,height*DISTANCIA);
+   root.style.setProperty('--smc-altura',height+'px');
+   // Mede os textos na largura real do layout animado antes de permitir a fixação.
+   root.classList.add('smc-active');root.classList.remove('smc-static');
+   const need=Math.max(335,end.offsetHeight+220,intro.offsetHeight+180);
+   active=!reduced.matches&&height>=need&&width>=200;
+   root.classList.toggle('smc-active',active);root.classList.toggle('smc-static',!active);
+   root.style.height=active?(height+distance)+'px':'auto';
+  }
+  scroller=window;dimensions();scroller=findScroller(active);dimensions();
+  // Recalcula o miolo com a altura efetiva do wrapper, se houver.
+  root.style.setProperty('--smc-miolo',Math.max(120,Math.min(width*.7,Math.min(Math.min(width,height)*.30,300)*1.65-cardH*.4))+'px');
+  if(!active){mouseX=parallax=0;introDone=true;}
+  position();current=progress();draw(current,performance.now());schedule();
+ }
+ function queueMeasure(){if(!measureRAF&&!disposed)measureRAF=requestAnimationFrame(measure);}
+ function resized(){if(touch.matches&&innerWidth===viewportW&&Math.abs(innerHeight-viewportH)<120)return;queueMeasure();}
+ function pointer(event){if(!active||reduced.matches||event.pointerType==='touch')return;const r=stage.getBoundingClientRect();mouseX=((event.clientX-r.left)/r.width*2-1)*Math.min(100,width*.06);schedule();}
+ function pointerLeave(){mouseX=0;schedule();}
+ function visibility(){if(document.hidden){cancelAnimationFrame(raf);raf=0;last=0;}else schedule();}
+ function flip(event){const card=event.target.closest('.smc-card');if(!card||!root.contains(card))return;const pressed=card.getAttribute('aria-pressed')!=='true';card.setAttribute('aria-pressed',String(pressed));card.setAttribute('aria-label','Card '+(cards.indexOf(card)+1)+': '+(pressed?'mostrar frente':'mostrar verso'));}
+ function dispose(){
+  disposed=true;cancelAnimationFrame(raf);cancelAnimationFrame(measureRAF);ro.disconnect();io.disconnect();
+  document.removeEventListener('scroll',schedule,true);document.removeEventListener('visibilitychange',visibility);
+  window.removeEventListener('resize',resized);window.removeEventListener('load',queueMeasure);reduced.removeEventListener('change',queueMeasure);
+  stage.removeEventListener('pointermove',pointer);stage.removeEventListener('pointerleave',pointerLeave);root.removeEventListener('click',flip);
+ }
+ document.addEventListener('scroll',schedule,{passive:true,capture:true});window.addEventListener('resize',resized,{passive:true});
+ document.addEventListener('visibilitychange',visibility);reduced.addEventListener('change',queueMeasure);
+ stage.addEventListener('pointermove',pointer,{passive:true});stage.addEventListener('pointerleave',pointerLeave);root.addEventListener('click',flip);
+ window.addEventListener('load',queueMeasure,{once:true});
+ ro=new ResizeObserver(queueMeasure);ro.observe(intro);ro.observe(end);
+ for(let p=root.parentElement;p&&p!==document.body;p=p.parentElement)ro.observe(p,{box:'border-box'});
+ io=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible)schedule();});io.observe(root);
+ root.querySelectorAll('img').forEach(img=>img.addEventListener('load',queueMeasure));
+ if(document.fonts)document.fonts.ready.then(queueMeasure);measure();
+})();
+
+</script>

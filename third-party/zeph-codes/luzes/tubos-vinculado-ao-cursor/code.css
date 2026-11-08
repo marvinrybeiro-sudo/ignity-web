@@ -1,0 +1,24 @@
+/* Torna a seção um “container” para o canvas de fundo */
+#tubes-section {
+  position: relative;
+  overflow: hidden;     /* impede que os tubos vazem para fora */
+  min-height: 100vh;     /* ajuste conforme seu layout */
+}
+
+/* Canvas fica por trás do conteúdo da seção */
+#tubesCanvasSection {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Conteúdo da seção por cima */
+#tubes-section > .elementor-container,
+#tubes-section .elementor-widget-wrap 
+{
+  position: relative;
+  z-index: 1;
+}

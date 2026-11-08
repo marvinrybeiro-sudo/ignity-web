@@ -1,0 +1,3 @@
+selector .elementor-button[type="submit"] {
+background-image: linear-gradient(150deg, #6121ff, #3a0da5); /*mude as cores aqui*/
+}

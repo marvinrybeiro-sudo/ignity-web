@@ -1,0 +1,19 @@
+selector .elementor-heading-title{
+    display: flex;
+    gap: 10px; /*mude o espaçamento*/
+}
+
+.giro{
+    animation: giro 1.5s linear infinite; /*mude o tempo da animação no 1.5*/
+    transform-origin: center !important;
+}
+
+@keyframes giro{
+    0%{
+        transform: rotate(0deg);
+    }
+    
+    100%{
+        transform: rotate(360deg);
+    }
+}

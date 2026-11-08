@@ -1,0 +1,48 @@
+/*botão no estado padrão - sem hover*/
+.custom-glowing-button {
+    position: relative;
+    
+    /*BG, cor do texto, padding e borda*/
+    background-color: #4c0de2;
+    color: #fff; 
+    padding: 20px 40px;
+    border: none;
+    border-radius: 5px;
+    
+    /*configuração de fonte*/
+    font-family: Sora;
+    font-size: 18px;
+    font-weight: 700;
+    
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.5s all;
+}
+
+/*luz do botão no hover*/
+.custom-glowing-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /*cor da luz*/
+    background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), #7247ff 0%, rgba(85, 144, 209, 0) 80%);
+    
+    transition: all 0.1s ease;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.custom-glowing-button:hover::before {
+    opacity: 1;
+}
+
+/*cor do bg, texto e borda do botão no hover*/
+.custom-glowing-button:hover {
+    background-color: #3a0da5;
+    color: #f0f7ff;
+    border: 1px solid #937cff;
+}

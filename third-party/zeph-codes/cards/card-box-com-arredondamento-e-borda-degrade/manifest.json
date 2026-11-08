@@ -1,0 +1,41 @@
+{
+  "id": "card-box-com-arredondamento-e-borda-degrade-1764095800047-1764095800223",
+  "titulo": "Card/box com arredondamento e borda degradê",
+  "modulo": "Módulo: Cards",
+  "categoria": "cards",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-25T18:36:40.000Z",
+  "atualizado": "2025-11-25T18:36:40.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1764095800187.png",
+  "video": null,
+  "arquivos": [
+    "css"
+  ],
+  "peso": {
+    "bytes": 614,
+    "gzip": 279
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": false,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

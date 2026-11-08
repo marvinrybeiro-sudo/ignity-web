@@ -1,0 +1,20 @@
+.img-seta{
+    content: url("https://designersagaz.com.br/wp-content/uploads/2024/01/base-seta-1.svg");
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    width: fit-content;
+    height:fit-contenat;
+    transform: translate(-50%);
+    display: visible;
+}
+
+selector{
+    background: #0f081b !important;
+}
+}
+
+
+.img-seta{
+    display: hidden;
+}

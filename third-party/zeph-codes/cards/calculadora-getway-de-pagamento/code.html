@@ -1,0 +1,450 @@
+<!-- ===================================================
+= CONFIGURAÇÃO PRINCIPAL (ALTERAR SÓ AQUI)
+   - Plataformas: nome, taxa (%) e imagem (logo)
+=================================================== -->
+<script>
+  const PLATAFORMAS = {
+    hotmart: {
+      label: "Hotmart",
+      taxa: 9.5,
+      icon: "https://i.pinimg.com/564x/d8/0d/f7/d80df792101e31b0b88650fefb67622a.jpg"
+    },
+    kiwify: {
+      label: "Kiwify",
+      taxa: 9.0,
+      icon: "https://stract.to/wp-content/uploads/2023/12/kiwify.png"
+    },
+    eduzz: {
+      label: "Eduzz",
+      taxa: 9.2,
+      icon: "https://play-lh.googleusercontent.com/K3-rcwv7mDsxb_ixD1ZGSIIbk-ZGHaQyVwC4oovULzK-gneqydUBZkrJN9IihypY3A"
+    },
+    perfectpay: {
+      label: "PerfectPay",
+      taxa: 9.0,
+      icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3Fq1dPNtX2XNPQ6pn3ssBSOT41BR3vmh6XA&s"
+    },
+    braip: {
+      label: "Braip",
+      taxa: 9.5,
+      icon: "https://ocupom.com.br/wp-content/uploads/2021/10/Cupom-Braip-250x250.png"
+    },
+    ticto: {
+      label: "Ticto",
+      taxa: 9.2,
+      icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuI68ciSfkKccjHQwgbyxzWRxWeIXfYv5eFA&s"
+    },
+    monetizze: {
+      label: "Monetizze",
+      taxa: 9.9,
+      icon: "https://i2.wp.com/robbu.global/wp-content/uploads/2021/10/monetize.png?fit=361%2C356&ssl=1"
+    },
+    kirvano: {
+      label: "Kirvano",
+      taxa: 10.0,
+      icon: "https://example.com/replace-with-your-asset"
+    }
+  };
+
+  const TAXA_KUPFY = 4.98; // taxa fixa da KupFy
+</script>
+
+<!-- ===================================================
+= ESTILO GERAL (NÃO PRECISA MEXER)
+=================================================== -->
+<style>
+  :root {
+    --bg: #000000;
+    --text: #ffffff;
+    --muted: #ffffff80;
+    --card: #ffffff10;
+    --card-border: #ffffff1a;
+    --ok: #ffffff33;
+    --bad: #ffffff1a;
+    --chip-bg: #ffffff10;
+    --chip-border: #ffffff10;
+    --chip-hover-bg: #ffffff30;   /* hover corrigido */
+    --chip-active-bg: #ffffff1a;
+    --chip-active-bord: #ffffff66;
+    --input-bg: #0f0f0f;
+    --input-border: #1a1a1a;
+    --input-border-focus: #ffffff40;
+    --logo-size: 28px;
+  }
+
+  * { box-sizing: border-box; }
+  .calc-wrap {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+  }
+  .calc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .label {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0 0 8px;
+  }
+  .valor {
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0 0 8px;
+  }
+
+  /* slider */
+  .range { width: 100%; }
+  .range input[type="range"] { width: 100%; }
+  .minmax {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  /* chips */
+  .plat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .plat {
+    background: var(--chip-bg);
+    border: 2px solid var(--chip-border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: .2s;
+    color: var(--text);          /* texto branco */
+  }
+  .plat:hover {
+    background: var(--chip-hover-bg);
+  }
+  .plat.active {
+    background: var(--chip-active-bg);
+    border-color: var(--chip-active-bord);
+  }
+  .plat span { font-weight: 600; color: var(--text); }
+
+  .plat .logo {
+    width: var(--logo-size);
+    height: var(--logo-size);
+    border-radius: 9999px;
+    overflow: hidden;
+    background: #ffffff;
+    flex: 0 0 var(--logo-size);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .plat .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* input taxa */
+  .custom-tax { margin-top: 16px; }
+  .custom-tax input {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 10px;
+    color: var(--text);
+    padding: 14px 16px;
+    font-size: 14px;
+    outline: none;
+  }
+  .custom-tax input:focus { border-color: var(--input-border-focus); }
+
+  /* cards */
+  .cards { display: grid; gap: 16px; }
+  .card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 24px;
+    border: 2px solid var(--card-border);
+  }
+  .card.bad { box-shadow: 0 0 0 1px var(--bad) inset; }
+  .card.ok  { box-shadow: 0 0 0 1px var(--ok) inset; }
+  .card h4 {
+    margin: 0 0 6px;
+    font-weight: 700;
+    color: var(--muted);
+  }
+  .card .grande {
+    font-size: 32px;
+    font-weight: 900;
+    margin: 6px 0 8px;
+    color: var(--text);
+  }
+  .card .tax { font-size: 13px; color: var(--muted); }
+
+  /* responsivo */
+  @media (max-width: 1100px) {
+    .plat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 900px) {
+    .calc-grid { grid-template-columns: 1fr; }
+    .plat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width: 600px) {
+    .plat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+</style>
+
+<!-- ===================================================
+= HTML
+=================================================== -->
+<div class="calc-wrap">
+  <div class="calc-grid">
+    <div class="left">
+      <div class="label">Seu Faturamento Mensal</div>
+      <div id="valorMostrado" class="valor">R$ 290.000,00</div>
+
+      <div class="range">
+        <input id="fat" type="range" min="100000" max="1000000" value="290000" step="1000" />
+        <div class="minmax"><span>R$ 100.000</span><span>R$ 1.000.000</span></div>
+      </div>
+
+      <div class="label" style="margin-top: 18px">Plataforma Utilizada</div>
+      <div class="plat-grid" id="platGrid">
+        <!-- ícones e nomes são preenchidos pelo JS -->
+      </div>
+
+      <div class="custom-tax">
+        <div class="label">Taxa customizada (opcional)</div>
+        <input id="taxCustom" type="text" inputmode="decimal" placeholder="Insira a taxa em % (ex.: 8,5)" />
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="cards">
+        <div class="card bad">
+          <h4>Receberia com outros gateways</h4>
+          <div id="outrosValor" class="grande">R$ 0,00</div>
+          <div id="outrosTax" class="tax">—</div>
+        </div>
+        <div class="card ok">
+          <h4>Receberia com a KupFy</h4>
+          <div id="kupfyValor" class="grande">R$ 0,00</div>
+          <div id="kupfyTax" class="tax">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================================================
+= LÓGICA (NÃO PRECISA MEXER)
+=================================================== -->
+<script>
+(function () {
+  const SLIDER = { min: 100000, max: 1000000, step: 1000, start: 290000 };
+
+  const fat = document.getElementById("fat");
+  const valorMostrado = document.getElementById("valorMostrado");
+  const platGrid = document.getElementById("platGrid");
+  const taxCustom = document.getElementById("taxCustom");
+  const outrosValor = document.getElementById("outrosValor");
+  const outrosTax = document.getElementById("outrosTax");
+  const kupfyValor = document.getElementById("kupfyValor");
+  const kupfyTax = document.getElementById("kupfyTax");
+
+  const fmtBRL = (v) => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  const parsePercent = (str) => !str ? NaN : parseFloat(String(str).replace(",", "."));
+
+  // renderiza botões de plataformas
+  function renderPlataformas() {
+    platGrid.innerHTML = "";
+    Object.entries(PLATAFORMAS).forEach(([key, conf]) => {
+      const btn = document.createElement("button");
+      btn.className = "plat";
+      btn.dataset.key = key;
+      btn.innerHTML = `
+        <span class="logo"><img src="${conf.icon}" alt="${conf.label}"></span>
+        <span>${conf.label}</span>
+      `;
+      platGrid.appendChild(btn);
+    });
+  }
+
+  let plataformaAtiva = "perfectpay";
+
+  function marcarAtiva(key) {
+    [...platGrid.querySelectorAll(".plat")].forEach(b => {
+      b.classList.toggle("active", b.dataset.key === key);
+    });
+  }
+
+  function atualizar() {
+    const faturamento = +fat.value;
+    valorMostrado.textContent = fmtBRL(faturamento);
+
+    const custom = parsePercent(taxCustom.value);
+    const taxaOutros = isNaN(custom) ? (PLATAFORMAS[plataformaAtiva]?.taxa || 0) : custom;
+
+    const receOutros = faturamento * (1 - taxaOutros / 100);
+    const receKupfy  = faturamento * (1 - TAXA_KUPFY / 100);
+
+    outrosValor.textContent = fmtBRL(Math.round(receOutros));
+    outrosTax.textContent   = `${taxaOutros.toFixed(2)}% de taxa`;
+
+    kupfyValor.textContent  = fmtBRL(Math.round(receKupfy));
+    kupfyTax.textContent    = `${TAXA_KUPFY.toFixed(2)}% de taxa`;
+  }
+
+  // eventos
+  fat.addEventListener("input", atualizar);
+  taxCustom.addEventListener("input", atualizar);
+  platGrid.addEventListener("click", (e) => {
+    const btn = e.target.closest(".plat");
+    if (!btn) return;
+    plataformaAtiva = btn.dataset.key;
+    marcarAtiva(plataformaAtiva);
+    atualizar();
+  });
+
+  // init
+  fat.min = SLIDER.min; fat.max = SLIDER.max; fat.step = SLIDER.step; fat.value = SLIDER.start;
+  renderPlataformas();
+  marcarAtiva(plataformaAtiva);
+  atualizar();
+})();
+</script>
+
+
+<!--Colar no fim da página em outro widget html-->
+<link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.css" />
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+let lenis;
+function initLenisIfDesktop() {
+  if (window.innerWidth > 1024 && !lenis && typeof Lenis !== "undefined") {
+    lenis = new Lenis({ duration: 1.5 });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    ScrollTrigger.scrollerProxy(document.documentElement, {
+      scrollTop(value) {
+        if (arguments.length) {
+          lenis.scrollTo(value, { immediate: true });
+        }
+        return window.scrollY || window.pageYOffset;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: innerWidth,
+          height: innerHeight
+        };
+      },
+      fixedMarkers: true
+    });
+
+    lenis.on("scroll", ScrollTrigger.update);
+  }
+}
+
+window.addEventListener("load", () => {
+  initLenisIfDesktop();
+});
+
+
+if (window.matchMedia("(max-width: 1024px)").matches) {
+  ScrollTrigger.normalizeScroll(true);
+}
+
+const mm = gsap.matchMedia();
+const containerCards = document.querySelector(".container-cards");
+const cards = document.querySelector(".cards");
+
+let endLen = 0;
+let finalX = 0;
+
+function measure(respiroPx = 0) {
+  const prev = cards.style.transform;
+  cards.style.transform = "none";
+
+  const contRect = containerCards.getBoundingClientRect();
+  const lastRect = cards.lastElementChild.getBoundingClientRect();
+  const padR = parseFloat(getComputedStyle(containerCards).paddingRight || 0);
+
+  const overflowRight = lastRect.right - (contRect.right - padR);
+  const need = Math.max(0, Math.ceil(overflowRight) + respiroPx);
+
+  cards.style.transform = prev;
+
+  endLen = need;
+  finalX = -need;
+}
+
+let tl;
+function build(respiroPx = 0) {
+  ScrollTrigger.getAll().forEach((st) => {
+    if (st.vars?.trigger === containerCards) st.kill();
+  });
+
+  gsap.set(cards, { x: 0, force3D: true, willChange: "transform" });
+
+  measure(respiroPx);
+
+  tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: containerCards,
+      start: "top top",
+      end: () => "+=" + endLen,
+      scrub: true,
+      pin: true,
+      pinType: window.matchMedia("(max-width: 767px)").matches
+        ? "transform"
+        : "fixed",
+      anticipatePin: 1,
+      fastScrollEnd: true,
+      invalidateOnRefresh: true,
+      onRefreshInit: () => gsap.set(cards, { x: 0 }),
+      onRefresh: () => {
+        measure(respiroPx);
+        tl.scrollTrigger.end = tl.scrollTrigger.start + endLen;
+      }
+    }
+  }).to(cards, { x: () => finalX, ease: "none", immediateRender: false });
+
+  return tl;
+}
+
+/*ajuste onde os cards devem parar por aqui*/
+mm.add("(max-width: 767px)", () => build(0)); //mobile
+mm.add("(min-width: 768px) and (max-width: 1024px)", () => build(20)); //tablet
+mm.add("(min-width: 1025px)", () => build(80)); //desktop
+
+let rTO;
+window.addEventListener("resize", () => {
+  clearTimeout(rTO);
+  rTO = setTimeout(() => {
+    initLenisIfDesktop();
+    ScrollTrigger.refresh();
+  }, 120);
+});
+</script>
+

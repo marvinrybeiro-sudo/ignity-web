@@ -1,0 +1,38 @@
+selector .elementor-progress-wrapper {
+    background: linear-gradient(90deg, #243357 80%, #0e1832);
+    overflow: visible !important; 
+    box-shadow: 0 1px 1px #273149 inset, 0 5px 10px #0206104d inset, 0 10px 20px -10px #000;
+}
+
+selector .elementor-progress-bar {
+    background-image: linear-gradient(90deg, #ff6f2b 80%, #ffb664);
+    border-radius: 10px !important;
+    box-shadow: 0 0 15px #ff6f2b8a, 0 6px 6px #ffa435 inset, 0 8px 12px -5px #eb2216, 0 0 0 6px #ff6f2b0f;
+    position: relative;
+}
+
+selector .elementor-progress-bar::before {
+    content: '';
+    box-shadow: 0 0 50px red, 0 0 50px red, 0 0 30px red, 0 0 30px red;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    z-index: 0;
+    right: -7px;
+    bottom: 5px;
+    display: block;
+    border-radius: 50%;
+    animation: 1s ease 0s normal forwards 1 fadein;
+}
+
+selector .elementor-progress-bar::after {
+    content: '';
+    background: url("URL DO SEU GIF AQUI") top center;
+    background-size: cover;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: -15px;
+    bottom: -3px;
+    transform: scale(1.1);
+}

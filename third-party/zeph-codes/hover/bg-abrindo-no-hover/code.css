@@ -1,0 +1,25 @@
+selector:before{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #140424CC; /*cor no hover*/
+    transform: scalex(0);/*altere para scaley(0) para mudar de horizontal para vertical*/
+    transform-origin: top; /*mude a origem de onde começa o efeito (top / center / left / right / bottom)*/
+    transition: 0.4s ease-out;
+}
+
+selector:hover:before{
+    transform: scalex(1); /*altere para scaley(1) para mudar de horizontal para vertical*/
+}
+
+selector .elementor-heading-title{ /*elemento interno, exemplo com texto*/
+color: #000000 !important;
+    transition: 0.4s;
+}
+
+selector:hover .elementor-heading-title{/*elemento interno, exemplo com texto*/
+    color: #fff !important;
+}

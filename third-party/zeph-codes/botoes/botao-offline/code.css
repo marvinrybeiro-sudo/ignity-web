@@ -1,0 +1,106 @@
+.container-botao{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    border-radius: 100px;
+    z-index: 1;
+    padding: 3px;
+    background: linear-gradient(to right, rgba(255, 255, 255, var(--dg1, 0)) 0%, transparent 40%, transparent 60%, rgba(255, 255, 255, var(--dg2, 0.2)))
+}
+
+.botao{
+    border-radius: 100px;
+    z-index: 3;
+    border-radius: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.botao .elementor-button {
+    background: rgba(209, 209, 209, 1) !important;
+    border: 2px solid #ffffff;
+    padding: 0.5rem 4rem;
+    border-radius: 100px;
+    transition: 0.3s;
+}
+
+.botao .elementor-button::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 204px;
+    height: 103px;
+    background-image: radial-gradient(43.3% 44.23% at 50% 49.51%, #fffff7 29%,#fffacd 48.5%, #f4d2bf 60.71%, hsla(15,5%,83%,0) 100%);
+    filter: blur(6px);
+    transform: translate(var(--J7p, 10%), -50%);
+    border-radius: 100%;
+    transition: 0.3s ease-in-out;
+}
+
+.container-botao::before,
+.container-botao::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 102%;
+    height: 95%;
+    transition: 0.3s ease-out;
+    filter: blur(8px);
+    background: linear-gradient(to right, transparent 0%, rgba(255,137,100, 0.3) 46.45%, #cd3100 90%, #ff7950);
+    border-radius: 100px;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    opacity: var(--R4h, 1);
+}
+
+.container-botao::after {
+    background: linear-gradient(to left, transparent 0%, rgba(255,137,100, 0.2) 46.45%, #cd3100 90%, #ff7950);
+    opacity: var(--K9y, 0);
+}
+
+.botao .elementor-button-text,
+.botao .elementor-button-icon {
+    position: relative;
+    z-index: 3;
+    white-space: nowrap;
+}
+
+.botao .elementor-button.ativo::before {
+  transition: transform 0.1s ease-out !important;
+}
+
+.container-html{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: none !important;
+    mix-blend-mode: plus-lighter;
+}
+
+.glow::before,
+.glow::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 50%;
+    transition: 0.3s ease-out;
+    filter: blur(16px);
+    background: linear-gradient(to right, transparent 0%, rgba(255,137,100, 0.2) 50%, #ff7950 80%, #FF9F50);
+    border-radius: 100px;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    opacity: var(--R4h, 1);
+}
+
+.glow::before {
+    background: linear-gradient(to left, transparent 0%, rgba(255,137,100, 0.2) 50%, #ff7950 80%, #FF9F50);
+    opacity: var(--K9y, 0);
+}

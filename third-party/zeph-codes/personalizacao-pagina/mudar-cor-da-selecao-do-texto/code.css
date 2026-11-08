@@ -1,0 +1,4 @@
+*::selection{
+    color: #ffffff; /*cor do texto selecionado*/
+    background: #4c0de2; /*cor do Bg selecionado*/
+}

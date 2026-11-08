@@ -1,0 +1,37 @@
+
+.scroll-left,
+.scroll-right,
+.scroll-bottom,
+.scroll-top{
+    opacity: 0 !important;
+    filter: blur(7px) !important;              /* << adiciona blur inicial */
+    transition: 0.5s ease all !important;
+}
+
+.scroll-left{  transform: translate(-30px, 0) !important; }
+.scroll-right{ transform: translate(30px, 0) !important; }
+.scroll-bottom{ transform: translate(0, 80px) !important; }
+.scroll-top{ transform: translate(0, -80px) !important; }
+
+.ativo{
+    opacity: 1 !important;
+    filter: blur(0px) !important;              /* << anima até 0 */
+    transform: translate(0, 0) !important;
+    transition: 0.5s ease all !important;
+    will-change: transform, filter;            /* opcional: melhora suavidade */
+}
+
+
+@media only screen and (min-width: 600px) {
+.e1{
+        transition: 0.5s 0.5s ease all;
+}
+.e2{
+        transition: 0.5s 1s ease all;
+}
+.e3{
+        transition: 0.5s 1.5s ease all;
+}
+.e4{
+        transition: 0.5s 2s ease all;
+}}

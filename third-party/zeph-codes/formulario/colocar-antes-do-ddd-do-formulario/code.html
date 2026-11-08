@@ -1,0 +1,38 @@
+<!-- Intl-Tel-Input CSS e JS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const input = document.querySelector("#form-field-field_00fb978");
+    if (!input) return;
+
+    const iti = window.intlTelInput(input, {
+      initialCountry: "br",
+      separateDialCode: true,
+      nationalMode: true,
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+      formatOnDisplay: true,
+    });
+
+    // Limita para formato (XX) 9XXXX-XXXX para BR
+    input.addEventListener("input", function () {
+      let value = input.value.replace(/\D/g, '');
+
+      if (value.length > 11) {
+        value = value.slice(0, 11);
+      }
+
+      // Formata como (31) 9XXXX-XXXX
+      if (value.length >= 2) {
+        value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+      }
+
+      if (value.length >= 10) {
+        value = `${value.slice(0, 10)}-${value.slice(10)}`;
+      }
+
+      input.value = value;
+    });
+  });
+</script>

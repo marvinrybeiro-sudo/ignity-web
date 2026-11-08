@@ -1,0 +1,14 @@
+.menor{
+    font-size: 1.5rem !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1em;
+}
+
+selector .elementor-heading-title{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    gap: 0.5rem
+}

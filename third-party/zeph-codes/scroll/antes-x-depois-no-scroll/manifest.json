@@ -1,0 +1,41 @@
+{
+  "id": "antes-x-depois-no-scroll-1791437971144-1791437971536",
+  "titulo": "Antes x depois no scroll",
+  "modulo": "Módulo: Scroll",
+  "categoria": "scroll",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2026-10-08T05:39:31.000Z",
+  "atualizado": "2026-10-08T05:54:26.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/3c41851e-ed8c-4367-8469-8b5f54db572b.gif",
+  "video": null,
+  "arquivos": [
+    "html"
+  ],
+  "peso": {
+    "bytes": 10377,
+    "gzip": 4031
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": true,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": true
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

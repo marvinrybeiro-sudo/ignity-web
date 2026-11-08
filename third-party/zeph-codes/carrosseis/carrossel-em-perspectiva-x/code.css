@@ -1,0 +1,5 @@
+selector .elementor-image-carousel-wrapper{
+    transform: perspective(100rem) translate3d(0, 0, 10rem) rotatey(-10deg) scale(1, 1) !important;
+    left: -3%;
+    position: relative;
+}

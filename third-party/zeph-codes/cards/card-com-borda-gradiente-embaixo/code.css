@@ -1,0 +1,6 @@
+selector{
+    border-bottom: 3px solid; /*defina o tamanho da borda*/
+    border-image: var(--deg, linear-gradient(90deg, #5404EB, #3D04B1))1; /*defina as cores da borda*/
+    background: #1c1e24;/*defina a cor do bg*/
+    border-radius: 10px !important;
+}

@@ -1,0 +1,43 @@
+{
+  "id": "bg-animado-1764095088725-1764095089423",
+  "titulo": "BG animado",
+  "modulo": "Módulo: Backgrounds",
+  "categoria": "backgrounds",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-25T18:24:49.000Z",
+  "atualizado": "2025-11-25T18:24:49.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1764095089304.gif",
+  "video": null,
+  "arquivos": [
+    "html"
+  ],
+  "peso": {
+    "bytes": 4711,
+    "gzip": 2046
+  },
+  "deps": {
+    "scriptsExternos": [
+      "https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js"
+    ],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": true
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": true,
+    "canvasWebGL": true
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

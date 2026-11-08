@@ -1,0 +1,37 @@
+selector{
+    width: fit-content !important;
+    overflow: hidden;
+}
+
+selector .elementor-button:hover::before {
+  animation: brilho 0.8s linear;
+}
+
+selector .elementor-button::before {
+  content: "";
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  background: #ffffff;
+  box-shadow: 0 0 30px 20px #ffffffaa;
+  transform: skewX(-30deg);
+  mix-blend-mode: plus-lighter;
+}
+
+@keyframes brilho {
+  0% {
+    opacity: 0;
+    left: 0%;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    left: 100%;
+  }
+}

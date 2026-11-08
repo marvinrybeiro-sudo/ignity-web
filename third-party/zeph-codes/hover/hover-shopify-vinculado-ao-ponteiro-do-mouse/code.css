@@ -1,0 +1,50 @@
+.pai {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.pai img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.imagem-base {
+  position: relative;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+.pai:hover .imagem-base {
+  opacity: 0.2;
+}
+
+.imagem-mascara {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+
+  mask-image: radial-gradient(circle 250px at center, black 0%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle 250px at center, black 0%, transparent 100%);
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: -9999px -9999px;
+  -webkit-mask-position: -9999px -9999px;
+  transition: mask-position 0.05s, -webkit-mask-position 0.05s;
+  opacity: 0; /* Começa invisível */
+  transition: opacity 0.5s ease;
+}
+
+.pai:hover .imagem-mascara {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}

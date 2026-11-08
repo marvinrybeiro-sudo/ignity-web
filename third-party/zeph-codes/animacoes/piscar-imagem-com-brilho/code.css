@@ -1,0 +1,18 @@
+/* Brilhos tipo “flash” aleatórios e sutis */
+selector {
+  animation: flashAleatorio 8s infinite ease-in-out;
+  will-change: filter;
+}
+
+@keyframes flashAleatorio {
+  0%, 10%   { filter: brightness(1); }
+  12%       { filter: brightness(2.2); } /* flash rápido */
+  14%       { filter: brightness(1); }
+  25%, 40%  { filter: brightness(1); }
+  42%       { filter: brightness(1.6); } /* segundo flash */
+  44%       { filter: brightness(1); }
+  60%, 70%  { filter: brightness(1); }
+  72%       { filter: brightness(2); }   /* flash mais forte */
+  74%       { filter: brightness(1); }
+  90%, 100% { filter: brightness(1); }
+}

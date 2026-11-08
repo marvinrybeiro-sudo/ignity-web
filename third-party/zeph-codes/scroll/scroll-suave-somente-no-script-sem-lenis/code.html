@@ -1,0 +1,38 @@
+<script> //suave
+    document.addEventListener('DOMContentLoaded', function() {
+    let targetScroll = 0;
+    let currentScroll = 0;
+    let isScrolling = false;
+
+    // Função para realizar a animação do scroll
+    function smoothScroll() {
+        const difference = targetScroll - currentScroll;
+        const distance = difference / 8;
+
+        currentScroll += distance;
+
+        window.scrollTo(0, currentScroll);
+
+        if (Math.abs(difference) > 1) {
+            requestAnimationFrame(smoothScroll);
+        } else {
+
+            isScrolling = false;
+        }
+    }
+
+    window.addEventListener('wheel', function(event) {
+
+        targetScroll += event.deltaY;
+        
+        targetScroll = Math.max(0, Math.min(targetScroll, document.body.scrollHeight - window.innerHeight));
+
+        if (!isScrolling) {
+            isScrolling = true;
+            requestAnimationFrame(smoothScroll);
+        }
+
+        event.preventDefault();
+    }, { passive: false });
+});
+</script>

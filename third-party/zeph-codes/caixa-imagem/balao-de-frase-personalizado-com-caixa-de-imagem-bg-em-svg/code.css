@@ -1,0 +1,13 @@
+selector p{
+    background: url("LINK");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 25.125rem;
+    height: 6em;
+    padding-left:56px;
+    padding-top: 11px;
+}
+
+selector{
+        overflow: visible !important;
+}

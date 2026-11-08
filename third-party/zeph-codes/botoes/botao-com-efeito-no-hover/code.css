@@ -1,0 +1,26 @@
+.button .elementor-button{
+ background: linear-gradient(30deg, #0400ff, #4ce3f7); /*defina as cores do BG aqui*/
+ border-radius: 20px; /*defina o arredondamento aqui*/
+ background-size: 100% auto;
+}
+
+.button:hover .elementor-button{
+ background-position: right center;
+ background-size: 200% auto;
+ -webkit-animation: pulse 2s infinite; /*defina o tempo da animação*/
+ animation: pulse512 2s infinite; /*defina o tempo da animação*/
+}
+
+@keyframes pulse512 {
+ 0% {
+  box-shadow: 0 0 0 0 #05bada66;
+ }
+
+ 70% {
+  box-shadow: 0 0 0 20px rgb(218 103 68 / 0%); /*a cor do efeito no hover*/
+ }
+
+ 100% {
+  box-shadow: 0 0 0 0 rgb(218 103 68 / 0%); /*a cor do efeito no hover*/
+ }
+}

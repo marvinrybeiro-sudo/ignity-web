@@ -1,0 +1,41 @@
+{
+  "id": "borda-com-pseudo-elemento-texto-personalizado-1764180214939-1764180215017",
+  "titulo": "Borda com pseudo-elemento + texto personalizado",
+  "modulo": "Módulo: Barra de Progresso",
+  "categoria": "barra-progresso",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-26T18:03:35.000Z",
+  "atualizado": "2025-11-26T18:03:35.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1764180214978.gif",
+  "video": null,
+  "arquivos": [
+    "css"
+  ],
+  "peso": {
+    "bytes": 702,
+    "gzip": 339
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": false,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

@@ -1,0 +1,123 @@
+:root {
+  /* Cores principais */
+  --zeph-color-primary: #00991220;
+  --zeph-color-primary-dark: #00991230;
+  --zeph-color-primary-light: #009912;
+  --zeph-color-primary-medium: #00991250;
+
+  /* Cores de fundo */
+  --zeph-color-bg: #ffffff10;
+  --zeph-color-bg-outline: #ffffff20;
+
+  /* Transparências */
+  --zeph-color-primary-transparent: #9c4eff00;
+}
+
+.zeph20 .elementor-button {
+  background: var(--zeph-color-bg) !important;
+  border: 1px solid var(--zeph-color-bg);
+  padding: 15px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  position: relative;
+  transition: 2s;
+}
+@media (max-width: 767px) {
+  .zeph20 .elementor-button {
+    padding: 15px 30px;
+  }
+}
+
+.zeph20 .elementor-button:before {
+  background-image: radial-gradient(
+    43.3% 44.23% at 50% 49.51%,
+    var(--zeph-color-primary-light) 29%,
+    var(--zeph-color-primary-medium) 48.5%,
+    var(--zeph-color-primary) 60.71%,
+    var(--zeph-color-primary-transparent) 100%
+  );
+  filter: blur(5px);
+  width: 300px;
+  height: 150px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(var(--button-translate-x, -10%), -50%);
+  border-radius: 100%;
+  transition: transform 0.8s cubic-bezier(.4, 0, .2, 1);
+}
+.zeph20 .elementor-button.hovering:before {
+  transition: transform 0.15s ease-out !important;
+}
+
+.zeph19 {
+  padding: 0px !important;
+  border-radius: 100px;
+  outline: 1px solid var(--zeph-color-bg-outline);
+}
+.zeph19::before {
+  transition: 0.35s ease-out;
+  filter: blur(12px);
+  background: linear-gradient(
+    to right,
+    transparent 30%,
+    var(--zeph-color-primary) 80%,
+    var(--zeph-color-primary-dark) 95%
+  );
+  width: 108%;
+  height: 125%;
+  left: 50%;
+  top: 50%;
+  content: "";
+  will-change: filter;
+  border-radius: 100px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  opacity: var(--before-opacity, 1);
+}
+.zeph19::after {
+  transition: 0.35s ease-out;
+  filter: blur(12px);
+  background: linear-gradient(
+    to left,
+    transparent 30%,
+    var(--zeph-color-primary) 80%,
+    var(--zeph-color-primary-dark) 95%
+  );
+  width: 108%;
+  height: 125%;
+  left: 50%;
+  top: 50%;
+  content: "";
+  will-change: filter;
+  border-radius: 100px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  opacity: var(--after-opacity, 0);
+}
+
+.zeph20 .elementor-button-text,
+.zeph20 .elementor-button-icon {
+  z-index: 5;
+  align-self: center !important;
+  vertical-align: center !important;
+}
+
+.zeph19 {
+  width: fit-content;
+  overflow: visible;
+  z-index: 1;
+  position: relative;
+  padding: 0px;
+}
+.zeph20 {
+  z-index: 5;
+  overflow: hidden;
+  border-radius: 100px;
+  position: relative;
+}

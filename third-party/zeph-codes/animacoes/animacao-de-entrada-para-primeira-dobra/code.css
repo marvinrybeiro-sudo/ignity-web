@@ -1,0 +1,21 @@
+selector{
+    opacity: 0;
+    filter: blur(7px);
+    transform: translate(0px, 80px);
+    animation: showFromBottom 0.5s ease forwards;  /*Para adicionar o delay, basta adicionar ao lado do 0.5s o tempo que vc deseja (Ex. 0.5s 1s ease forwards;)*/
+}
+
+
+/* Keyframe que anima de "scroll-bottom" para o estado final */
+@keyframes showFromBottom {
+    from {
+        opacity: 0;
+        filter: blur(7px);
+        transform: translate(0px, 80px);
+    }
+    to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translate(0, 0);
+    }
+}

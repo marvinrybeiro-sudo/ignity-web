@@ -1,0 +1,43 @@
+<!-- TUBES CURSOR – SECTION BACKGROUND -->
+<script type="module">
+  import TubesCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js";
+
+  const section = document.getElementById('tubes-section');
+
+  // Cria e injeta o canvas dentro da seção
+  const canvas = document.createElement('canvas');
+  canvas.id = 'tubesCanvasSection';
+  section.prepend(canvas);
+
+  // Ajusta o canvas para ocupar a seção
+  function sizeCanvas() {
+    const rect = section.getBoundingClientRect();
+    canvas.width  = rect.width  * devicePixelRatio;
+    canvas.height = rect.height * devicePixelRatio;
+  }
+  sizeCanvas();
+  window.addEventListener('resize', sizeCanvas);
+
+  // Inicializa o efeito + Ajuste de Cores
+  const app = TubesCursor(canvas, {
+    tubes: {
+      colors: ["#f967fb", "#53bc28", "#6958d5"],
+      lights: {
+        intensity: 200,
+        colors: ["#83f36e", "#fe8a2e", "#ff008a", "#60aed5"]
+      }
+    }
+  });
+
+  // Cores aleatórias ao clicar na seção (opcional)
+  section.addEventListener('click', () => {
+    app.tubes.setColors(randomColors(3));
+    app.tubes.setLightsColors(randomColors(4));
+  });
+
+  function randomColors (count) {
+    return new Array(count)
+      .fill(0)
+      .map(() => "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0'));
+  }
+</script>

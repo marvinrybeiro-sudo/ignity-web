@@ -1,0 +1,20 @@
+selector::before{
+    content: "";
+    background: white; /*ajuste cor aqui*/
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: -30px; /*ajuste aqui*/
+}
+
+selector .elementor-icon-list-icon::before{
+    content: "";
+    background: white; /*ajuste cor aqui*/
+    width: 11px;
+    height: 11px;
+    position: absolute;
+    top: 0;
+    left: -35px; /*ajuste aqui*/
+    border-radius: 2000px;
+}

@@ -1,0 +1,19 @@
+.elementor-button{
+    background-image: linear-gradient(91deg, red, blue, yellow); /*defina as cores do BG aqui*/
+    background-size: 800% 800%;
+    animation: AnimationName 12s ease infinite; /*defina o tempo da animação*/
+    z-index: 1;
+    transition: 0.5s;
+}
+
+@keyframes AnimationName{
+    0% {
+    background-position: 0% 51%;
+}
+    50% {
+    background-position: 100% 50%;
+}
+    100% {
+    background-position: 0% 51%;
+}
+}

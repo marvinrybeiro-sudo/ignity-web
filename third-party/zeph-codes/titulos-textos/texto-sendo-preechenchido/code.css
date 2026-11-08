@@ -1,0 +1,45 @@
+selector{
+    -webkit-text-stroke-width: 0.3px; /*Mude a expesura da borda aqui*/
+  -webkit-text-stroke-color: white; /*Mude a cor da borda aqui*/
+    display: table;
+    width: -moz-fit-content;
+    width: -webkit-fit-content;
+    width: fit-content;
+    text-align: center;
+    margin: 0 auto
+}
+selector .elementor-heading-title::before{
+    content: "Sed eiusmod sed vivamus consectetur";
+    color: white; /*Mude a cor do texto aqui*/
+    position: absolute;
+    top: 0;
+    width: 0%;
+    height: 100%;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    border-image: linear-gradient(0deg,#6121ff,#b6abff)1 !important; /*Mude a cor da barra aqui*/
+    -webkit-animation:animateX 6s linear infinite;
+            animation:animateX 6s linear infinite;
+}
+@-webkit-keyframes animateX{
+   0%,10%,100%{
+        width:0%;
+    }
+   70%, 90%{
+        width: 100%;
+    }
+}
+@keyframes animateX{
+   0%,10%,100%{
+        width:0%;
+    }
+   70%, 90%{
+        width: 100%;
+    }
+}
+
+selector {
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+}

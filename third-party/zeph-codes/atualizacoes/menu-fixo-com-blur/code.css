@@ -1,0 +1,34 @@
+selector{
+    width: 90%;
+    height: 90px;
+    border-radius: 200px;
+    border: solid 1px #ffffff20;
+    backdrop-filter: blur(20px);
+    webkit-backdrop-filter: blur(20px);
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translatex(-50%);
+    z-index: 9999999999999999999 !important;
+}
+
+.men{
+    backdrop-filter: blur(20px);
+    webkit-backdrop-filter: blur(20px);
+    position: fixed;
+    top: 5% !important;
+    left: 50%;
+    transform: translatex(-50%);
+    transition: 0.5s;
+    z-index: 9999999999999999999 !important;
+}
+
+.men-ativa{
+    backdrop-filter: blur(20px);
+    webkit-backdrop-filter: blur(20px);
+    position: fixed;
+    top: -10% !important;
+    left: 50%;
+    transform: translatex(-50%);
+    z-index: 9999999999999999999 !important;
+}

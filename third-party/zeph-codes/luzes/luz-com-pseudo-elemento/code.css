@@ -1,0 +1,12 @@
+selector::before{
+    content: "";
+    background-color: #017CFF;
+    width: 500px;
+    height: 500px;
+    border-radius: 2000px;
+    position: absolute;
+    top: 80%;
+    left: 80%;
+    mix-blend-mode: screen;
+    filter: blur(220px)
+}

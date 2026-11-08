@@ -1,0 +1,42 @@
+{
+  "id": "luz-animada-1763611621088",
+  "titulo": "Luz animada",
+  "modulo": "Módulo: Personalização da Página",
+  "categoria": "personalizacao-pagina",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-20T04:07:02.000Z",
+  "atualizado": "2025-11-20T04:07:02.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1763611622025.gif",
+  "video": null,
+  "arquivos": [
+    "html",
+    "css"
+  ],
+  "peso": {
+    "bytes": 1216,
+    "gzip": 478
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": false,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

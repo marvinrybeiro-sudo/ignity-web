@@ -1,0 +1,15 @@
+body {
+    margin: 0; /* Remove as margens padrão do corpo da página */
+    overflow: hidden; /* Impede que a barra de rolagem apareça, ocultando qualquer conteúdo que exceda o tamanho da tela */
+}
+
+#cursor-background {
+    position: fixed; /* Fixa o fundo do cursor em relação à tela, mesmo durante a rolagem */
+    width: 40px; /* Define a largura do fundo do cursor */
+    height: 40px; /* Define a altura do fundo do cursor */
+    border-radius: 50%; /* Faz com que o fundo do cursor tenha bordas arredondadas, formando um círculo */
+    border: solid 1px #ffffff; /* Adiciona uma borda sólida de 1px da cor que você definir*/
+    pointer-events: none; /* Garante que o cursor não interfira nas interações da página, como cliques ou seleções */
+    z-index: 9999; /* Mantém o fundo do cursor acima de todos os outros elementos da página */
+    mix-blend-mode: difference; /* Aplica o efeito de "diferença", o que inverte as cores onde o fundo do cursor passa, criando um contraste interessante */
+}

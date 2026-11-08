@@ -1,0 +1,7 @@
+.shine{
+    transition: 0.5s all;
+}
+
+.shine:hover{
+   box-shadow: 0 0 500px 0 #378ec940 !important; 
+}

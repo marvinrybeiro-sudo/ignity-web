@@ -1,0 +1,10 @@
+.elementor-button{
+    background-image: url("https://zeph.com.br/wp-content/uploads/2025/11/btn-bg.png"); /*link da imagem de fundo*/
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover
+}
+
+.elementor-button:hover{
+     box-shadow: -.1vw 0vw .57vw 0vw rgb(32 91 234 / 50%),.1vw 0vw .94vw 0vw rgb(253 1 243 / 50%) !important; /*Configuração do brilho no hover*/
+}

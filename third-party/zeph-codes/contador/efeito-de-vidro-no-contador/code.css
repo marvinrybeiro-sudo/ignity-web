@@ -1,0 +1,6 @@
+selector .elementor-countdown-item {
+    backdrop-filter: blur(10px); /* Aplica um efeito de desfoque ao fundo do item */
+    -webkit-backdrop-filter: blur(10px); /* Aplica o mesmo efeito para navegadores WebKit */
+    border-radius: 20px; /*Defina o arredondamento da borda*/
+    border: 1px solid #ffffff50; /*Defina o tamanho e a cor da borda*/
+}

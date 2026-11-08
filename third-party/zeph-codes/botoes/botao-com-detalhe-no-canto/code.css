@@ -1,0 +1,32 @@
+.button {
+  background: linear-gradient(90deg, #7247ff -12.74%, #210471 56.76%);  /*defina a cor do BG aqui*/
+  border: 2px solid #acf7ff; /*configure a borda aqui*/
+}
+
+.button:before { 
+  content: "";
+  width: 4px; /*parte do corte inferior esquerdo*/
+  height: 28px; /*parte do corte inferior esquerdo*/
+  background: #937cff;  /*parte do corte inferior esquerdo*/
+  border: 2px solid #937cff; /*parte do corte inferior esquerdo*/
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  position: absolute;
+  border-top: 0;
+  border-left: 0;
+  border-bottom: 0;
+  bottom: -7px;
+  left: 4px;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.button:after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  bottom: -2px;
+  border-top: 15px solid transparent; /*parte do corte inferior esquerdo*/
+  border-left: 15px solid #937cff; /*parte do corte inferior esquerdo*/
+}

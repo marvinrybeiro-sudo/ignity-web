@@ -1,0 +1,30 @@
+selector{
+    background: #FFFFFF1A; /*Mude a cor do BG normal*/
+    padding: 40px; /*mude o padding aqui*/
+    overflow: hidden;
+    border-radius:20px;
+}
+
+selector::before{
+    content: "";
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    top: -40%;
+    left: -40%;
+    transform: translate(-50%,-50%) rotate(45deg);
+    background-image: linear-gradient(90deg, #3a0da5, #4c0de2); /*Mude a cor do elemento do Hover*/
+    z-index: 0;
+    transition: 0.8s; /*Tempo em que o elemento vai passar no hover*/
+}
+
+selector:hover::before{
+    top: 50%;
+    left: 50%;
+    transform: translate(-45%,-45%) rotate(45deg);
+}
+
+selector *{
+    z-index: 3 !important;
+    position: relative;
+}

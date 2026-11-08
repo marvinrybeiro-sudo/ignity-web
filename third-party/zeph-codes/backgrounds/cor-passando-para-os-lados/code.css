@@ -1,0 +1,30 @@
+selector {
+    background: linear-gradient(270deg, #111111, rgba(52, 68, 83, 0.5), #111111); /* Define um gradiente linear com cores e transparência específicas */
+    background-size: 600% 600%; /* Aumenta o tamanho do fundo para criar o efeito de animação */
+
+    -webkit-animation: AnimationName 10s ease infinite; /* Animação para navegadores WebKit, duração de 10s, suave e infinita */
+    -moz-animation: AnimationName 10s ease infinite; /* Animação para navegadores Mozilla, mesma configuração */
+    -o-animation: AnimationName 10s ease infinite; /* Animação para navegadores Opera, mesma configuração */
+    animation: AnimationName 20s ease infinite; /* Animação para navegadores padrão, com duração diferente de 20s */
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%} /* Início da animação com a posição de fundo definida */
+    50%{background-position:100% 50%} /* No meio da animação, o fundo se move para a direita */
+    100%{background-position:0% 50%} /* No fim da animação, o fundo retorna à posição inicial */
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}

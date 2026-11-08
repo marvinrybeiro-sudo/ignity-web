@@ -1,0 +1,61 @@
+<style>
+  @media only screen and (min-width: 600px) {
+.cursor-inner {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: white;
+    pointer-events: none;
+    z-index: 9999999999999999;
+    transform: translate(-50%, -50%);
+  }
+
+  .cursor-outer {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #EA552F;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999999999999999;
+    transform: translate(-50%, -50%);
+  }}
+</style>
+
+<script>
+  document.body.insertAdjacentHTML('beforeend', '<div class="cursor-inner"></div><div class="cursor-outer"></div>');
+
+  const cursorInner = document.querySelector(".cursor-inner");
+  const cursorOuter = document.querySelector(".cursor-outer");
+
+  let mouseX = 0, mouseY = 0;
+  let innerX = 0, innerY = 0;
+  let outerX = 0, outerY = 0;
+
+  const lerp = (start, end, factor) => start + (end - start) * factor;
+
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animateCursor() {
+    innerX = lerp(innerX, mouseX, 0.25); // cursor interno: mais suave
+    innerY = lerp(innerY, mouseY, 0.25);
+
+    outerX = lerp(outerX, mouseX, 0.15); // cursor externo: mais ágil
+    outerY = lerp(outerY, mouseY, 0.15);
+
+    cursorInner.style.left = `${innerX}px`;
+    cursorInner.style.top = `${innerY}px`;
+
+    cursorOuter.style.left = `${outerX}px`;
+    cursorOuter.style.top = `${outerY}px`;
+
+    requestAnimationFrame(animateCursor);
+  }
+
+  animateCursor(); // iniciar a animação
+</script>
+

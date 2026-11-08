@@ -1,0 +1,140 @@
+.elementor-widget-html:has(.container-botao){
+    overflow: hidden;
+    border-radius: 100px;
+}
+
+.botao *{
+    transition: 0.5s;
+    font-size: 14px; /*tamanho da fonte*/
+    font-weight: 600; /*peso da fonte*/
+    font-family: "Sora"; /*família da fonte*/
+    text-align: center;
+}
+
+.botao{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    background: linear-gradient(104deg, rgb(206, 212, 244) 0%, rgb(24, 97, 244) 100%); /*cores do degradê do botão*/
+}
+
+.container-botao{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 30px;
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    border: 1px solid #ffffff30; /*cor da borda interna*/
+    overflow: hidden;
+}
+
+.wrapper-icones{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translate(0, -50%);
+    border-radius: 50%;
+    z-index: 2;
+    background: linear-gradient(rgb(66, 211, 255) 0%, rgb(0, 60, 255) 100%) /*cor do círculo que envolve o ícone*/;
+    box-shadow: rgba(0, 20, 255, 0.1) 0px 2.52px 4.21px 0px, rgba(0, 20, 255, 0.1) 0px 6px 10.11px 0px, rgba(0, 20, 255, 0.16) 0px 12px 19px 0px, rgba(0, 20, 255, 0.2) 0px 20px 34px 0px, rgba(0, 20, 255, 0.24) 0px 38px 63.5px 0px, rgba(0, 20, 255, 0.33) 0px 91px 152px 0px;
+}
+
+.wrapper-2{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background: #fff;
+    color: blue;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.icone-1{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.icone-2{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    z-index: 1;
+    opacity: 0;
+}
+
+.fundo{
+    position: absolute;
+    left: 0;
+    width: 0%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: #fff;
+    border-radius: 100px;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px -1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 0px 1px 0px inset, rgb(166, 173, 255) 0px 4px 44px 0px, rgb(149, 190, 255) 0px 0px 10px 0px, rgb(149, 190, 255) 0px 0px 12px 0px inset;
+}
+
+.texto-1{
+    margin-left: 20px;
+    color: #ffffff; /*cor do texto 1*/
+}
+
+.texto-2{
+    position: absolute;
+    color: rgb(117, 157, 252); /*cor do texto 2*/
+    opacity: 0;
+    transform: translatex(100%);
+}
+
+.botao:hover .fundo{
+    width: calc(100% - 35px);
+    height: 100%;
+}
+
+.botao:hover .wrapper-icones{
+    left: calc(100% - 30px)
+}
+
+.botao:hover .texto-1,
+.botao:hover .icone-1{
+    opacity: 0;
+}
+
+.botao:hover .texto-2{
+    opacity: 1;
+    transform: translatex(0%);
+}
+
+.botao:hover .icone-2{
+    opacity: 1;
+}

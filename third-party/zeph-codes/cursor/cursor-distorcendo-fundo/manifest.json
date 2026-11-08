@@ -1,0 +1,41 @@
+{
+  "id": "cursor-distorcendo-fundo-1791440574603-1791440575098",
+  "titulo": "Cursor distorcendo fundo",
+  "modulo": "Módulo: Cursor",
+  "categoria": "cursor",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2026-10-08T06:22:55.000Z",
+  "atualizado": "2026-10-08T06:22:55.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/2e565604-7dbb-4254-aab5-4f326fce373f.gif",
+  "video": null,
+  "arquivos": [
+    "html"
+  ],
+  "peso": {
+    "bytes": 12106,
+    "gzip": 5014
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": true,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": true,
+    "canvasWebGL": true
+  },
+  "a11y": {
+    "prefersReducedMotion": true
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

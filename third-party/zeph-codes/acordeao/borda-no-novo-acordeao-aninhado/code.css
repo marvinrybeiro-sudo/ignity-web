@@ -1,0 +1,14 @@
+.e-n-accordion-item-title{
+    border: none !important;
+}
+
+.e-n-accordion-item-title{
+    border-bottom: 1px solid !important; /*altere a borda aqui*/
+    border-image: linear-gradient(270deg, #000000 10%, #6121ff 98%)1 !important; /*altere as cores aqui*/
+}
+
+selector .e-n-accordion-item-title{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+}

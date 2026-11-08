@@ -1,0 +1,28 @@
+selector::before {
+    content: '';
+    background: white;
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 50%;
+    transform: translate(-50%, -50%) scalex(0);
+    transform-origin: left;
+    transition: transform 0.4s ease-in-out;
+}
+
+/* Entrada da esquerda para a direita */
+selector:hover::before {
+    transform: translate(-50%, -50%) scalex(1);
+    transform-origin: right;
+}
+
+/* Saída da direita para a esquerda */
+selector::before {
+    transition: transform 0.4s ease-in-out, transform-origin 0s 0.4s; /* Delay na troca da origem */
+}
+
+selector:not(:hover)::before {
+    transform: translate(-50%, -50%) scalex(0);
+    transform-origin: left; /* A linha recolhe para a direita */
+}

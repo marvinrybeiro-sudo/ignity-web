@@ -1,0 +1,40 @@
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const zeph19Elements = document.querySelectorAll(".zeph19");
+  const zeph20Buttons = document.querySelectorAll(".zeph20 .elementor-button");
+
+  zeph20Buttons.forEach((zeph20Button, index) => {
+    const zeph19 = zeph19Elements[index];
+    let timeoutId;
+
+    if (zeph19 && zeph20Button) {
+      zeph20Button.addEventListener("mousemove", (event) => {
+        clearTimeout(timeoutId);
+        zeph20Button.classList.add("hovering");
+
+        const zeph19Rect = zeph19.getBoundingClientRect();
+        const mouseX = event.clientX - zeph19Rect.left;
+        const mousePercentage = Math.min(Math.max(mouseX / zeph19Rect.width, 0), 1);
+
+        zeph19.style.setProperty("--before-opacity", mousePercentage.toFixed(2));
+        zeph19.style.setProperty("--after-opacity", (1 - mousePercentage).toFixed(2));
+
+        const buttonRect = zeph20Button.getBoundingClientRect();
+        const relativeMouseX = event.clientX - buttonRect.left;
+        const translateX = (relativeMouseX / buttonRect.width) * 100 - 100;
+
+        zeph20Button.style.setProperty("--button-translate-x", `${translateX}%`);
+      });
+
+      zeph20Button.addEventListener("mouseleave", () => {
+        zeph20Button.classList.remove("hovering");
+        timeoutId = setTimeout(() => {
+          zeph19.style.setProperty("--before-opacity", "1");
+          zeph19.style.setProperty("--after-opacity", "0");
+          zeph20Button.style.setProperty("--button-translate-x", "-10%");
+        }, 1200);
+      });
+    }
+  });
+});
+</script>

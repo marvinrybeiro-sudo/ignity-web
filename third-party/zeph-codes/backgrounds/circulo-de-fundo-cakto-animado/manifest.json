@@ -1,0 +1,42 @@
+{
+  "id": "círculo-de-fundo-cakto-animado-1763594411399",
+  "titulo": "Círculo de fundo cakto animado",
+  "modulo": "Módulo: Backgrounds",
+  "categoria": "backgrounds",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-19T23:20:12.000Z",
+  "atualizado": "2025-11-19T23:20:12.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1763594412595.png",
+  "video": null,
+  "arquivos": [
+    "html",
+    "css"
+  ],
+  "peso": {
+    "bytes": 1532,
+    "gzip": 552
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": false,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

@@ -1,0 +1,26 @@
+.container {
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(100, 183, 225, 1), /*mude a cor da linha*/
+    1px,
+    transparent 1px, /*espessura da linha*/
+    transparent
+  );
+  background-size: 100% 30px; /*dstância das linhas nos 30px*/
+}
+
+selector{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    opacity: .1; /*opacidade das linhas*/
+    /*as 2 linhas abaixo são para fazer um gradient suave*/
+    mask-image: linear-gradient(to top, transparent, #000000 35%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to top, transparent, #000000 35%, transparent 100%);
+}

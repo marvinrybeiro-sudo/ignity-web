@@ -1,0 +1,141 @@
+<!-- ShaderAnimation – Elementor drop-in -->
+<div class="shader-demo" style="position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; border-radius:16px; border:1px solid rgba(255,255,255,.2); background:#1d4ed8; min-height:650px;">
+  <!-- Canvas do Three entra aqui -->
+  <div class="shader-host" style="position:absolute; inset:0; overflow:hidden;"></div>
+
+  <!-- Texto sobreposto (opcional) -->
+  <span style="position:relative; z-index:10; pointer-events:none; text-align:center; color:#fff; font-weight:700; font-size:clamp(28px,7vw,72px); line-height:1; letter-spacing:-.02em;">
+    Shader Animation
+  </span>
+</div>
+
+<!-- (Opcional) estilo do canvas -->
+<style>
+  .shader-canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+</style>
+
+<!-- Three.js (versão compatível com o seu código) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js"></script>
+
+<script>
+(function(){
+  // Evita instanciar duas vezes no preview do Elementor
+  if (window.__shader_anim_boot) return; window.__shader_anim_boot = true;
+
+  function initShaderIn(host){
+    if (!window.THREE || !host || host.__mounted) return;
+    host.__mounted = true;
+
+    var THREE = window.THREE;
+
+    // Cena básica
+    var camera = new THREE.Camera();
+    camera.position.z = 1;
+
+    var scene = new THREE.Scene();
+    var geometry = new THREE.PlaneGeometry(2, 2);
+
+    // Uniforms idênticos ao React
+    var uniforms = {
+      time:       { type: "f", value: 1.0 },
+      resolution: { type: "v2", value: new THREE.Vector2() }
+    };
+
+    // Shaders (iguais ao seu trecho)
+    var vertexShader = "void main(){ gl_Position = vec4(position, 1.0); }";
+    var fragmentShader = [
+      "#define TWO_PI 6.2831853072",
+      "#define PI 3.14159265359",
+      "precision highp float;",
+      "uniform vec2 resolution;",
+      "uniform float time;",
+      "void main(void){",
+      "  vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);",
+      "  float t = time*0.05;",
+      "  float lineWidth = 0.002;",
+      "  vec3 color = vec3(0.0);",
+      "  for(int j=0;j<3;j++){",
+      "    for(int i=0;i<5;i++){",
+      "      color[j] += lineWidth*float(i*i) / abs(fract(t - 0.01*float(j)+float(i)*0.01)*5.0 - length(uv) + mod(uv.x+uv.y, 0.2));",
+      "    }",
+      "  }",
+      "  gl_FragColor = vec4(color[0], color[1], color[2], 1.0);",
+      "}"
+    ].join("\n");
+
+    var material = new THREE.ShaderMaterial({
+      uniforms: uniforms,
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader
+    });
+
+    var mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    // Renderer
+    var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+    var canvas = renderer.domElement;
+    canvas.className = "shader-canvas";
+    host.appendChild(canvas);
+
+    // Resize: usa tamanho real do host
+    function resize(){
+      var rect = host.getBoundingClientRect();
+      var w = Math.max(1, rect.width);
+      var h = Math.max(1, rect.height);
+      renderer.setSize(w, h, false);
+      uniforms.resolution.value.x = renderer.domElement.width;
+      uniforms.resolution.value.y = renderer.domElement.height;
+    }
+
+    var ro;
+    if ('ResizeObserver' in window){
+      ro = new ResizeObserver(resize);
+      ro.observe(host);
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    // Loop
+    var rafId;
+    (function animate(){
+      rafId = requestAnimationFrame(animate);
+      uniforms.time.value += 0.05;
+      renderer.render(scene, camera);
+    })();
+
+    // Cleanup em navegação/preview
+    function cleanup(){
+      try{ if (rafId) cancelAnimationFrame(rafId); }catch(e){}
+      try{ if (ro) ro.disconnect(); }catch(e){}
+      try{
+        geometry.dispose();
+        material.dispose();
+        renderer.dispose();
+        if (canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas);
+      }catch(e){}
+      host.__mounted = false;
+    }
+    // Elementor preview troca DOM com frequência
+    window.addEventListener('pagehide', cleanup, { once:true });
+    window.addEventListener('beforeunload', cleanup, { once:true });
+  }
+
+  function boot(){
+    if (!window.THREE) return;
+    var hosts = document.querySelectorAll('.shader-host');
+    if (!hosts.length) return;
+    hosts.forEach(initShaderIn);
+  }
+
+  if (window.THREE) boot();
+  else {
+    var tries = 0, iv = setInterval(function(){
+      tries++;
+      if (window.THREE){ clearInterval(iv); boot(); }
+      if (tries > 200) clearInterval(iv); // ~10s timeout
+    }, 50);
+  }
+})();
+</script>

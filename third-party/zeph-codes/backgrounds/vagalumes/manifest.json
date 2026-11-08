@@ -1,0 +1,42 @@
+{
+  "id": "vagalumes-1764180716359-1764180718390",
+  "titulo": "Vagalumes",
+  "modulo": "Módulo: Backgrounds",
+  "categoria": "backgrounds",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-26T18:11:58.000Z",
+  "atualizado": "2025-11-26T18:11:58.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1764180717701.gif",
+  "video": null,
+  "arquivos": [
+    "html",
+    "css"
+  ],
+  "peso": {
+    "bytes": 45345,
+    "gzip": 5916
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": false,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

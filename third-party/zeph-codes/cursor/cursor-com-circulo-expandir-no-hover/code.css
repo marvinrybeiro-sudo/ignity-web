@@ -1,0 +1,49 @@
+selector{
+    position: absolute;
+}
+
+#cursor {
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.cursor__circle { /*configure o círculo aqui*/
+    width: 16px;
+    height: 16px;
+    background-color: #BCCFFF90;
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    border: 0.5px solid #fff;
+    margin-top: -50%;
+    margin-left: -50%;
+    border-radius: 50%;
+    transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+      background-color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+      border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+      width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+      height 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      color: transparent;
+ }
+
+.cursor__circle::after{ /*configure o texto e fonte aqui*/
+    content: "COPIAR";
+    font-family: "int";
+    font-weight: 700;
+    font-size: 14px;
+    color: inherit;
+    position: absolute;
+    white-space: nowrap;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media(max-width: 1024px){
+    #cursor{
+        display: none;
+    }
+}

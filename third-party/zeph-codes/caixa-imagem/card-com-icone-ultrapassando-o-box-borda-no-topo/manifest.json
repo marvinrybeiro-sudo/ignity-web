@@ -1,0 +1,41 @@
+{
+  "id": "card-com-icone-ultrapassando-o-box-borda-no-topo-1764188355918-1764188356076",
+  "titulo": "Card com ícone ultrapassando o box + borda no topo",
+  "modulo": "Módulo: Caixa de Imagem",
+  "categoria": "caixa-imagem",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-26T20:19:16.000Z",
+  "atualizado": "2025-11-26T20:19:16.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1764188356034.jpg",
+  "video": null,
+  "arquivos": [
+    "css"
+  ],
+  "peso": {
+    "bytes": 600,
+    "gzip": 338
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": false,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

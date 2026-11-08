@@ -1,0 +1,6 @@
+risco{
+text-decoration-line: line-through;
+-webkit-text-decoration-line: line-through;
+text-decoration-color: #6121ff; /*mude a cor aqui*/
+-webkit-text-decoration-color: #6121ff; /*mude a cor aqui*/
+}

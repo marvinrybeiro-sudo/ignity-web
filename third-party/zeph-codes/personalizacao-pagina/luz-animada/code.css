@@ -1,0 +1,46 @@
+selector{
+    
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    mix-blend-mode: screen;
+    -webkit-mix-blend-mode: screen;
+}
+
+.video-background {
+    filter: saturate(0);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    display: none;
+}
+.video-placeholder {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    mix-blend-mode: plus-lighter;
+    -webkit-mix-blend-mode: plus-lighter;
+}
+
+@media (max-width:767px){
+    .video-background{
+        position: absolute;
+    }
+    selector{
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 0;
+        height: 100%;
+        opacity: .4;
+    }
+}

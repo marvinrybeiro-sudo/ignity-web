@@ -1,0 +1,7 @@
+.hover-rotate{
+    transition: 1s all; /*mude o tempo da animação*/
+}
+
+.hover-rotate:hover{
+    transform: translatey(-25px) rotate(-10deg) /*customize o quanto irá se mover em px - Customize o quanto ira rotacionar em deg*/
+}

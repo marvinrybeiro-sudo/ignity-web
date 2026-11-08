@@ -1,0 +1,27 @@
+selector {
+  z-index: 1;
+}
+
+selector:before {
+    content: "";
+    position: absolute;
+    z-index: 10;
+    border-radius: 20px; /* Arredondamento das bordas do pseudo-elemento */
+    margin: 0px;
+    margin-top: 0px;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 4px; /* Espaçamento interno do pseudo-elemento */
+    background: linear-gradient(-35deg, #937cff, transparent, transparent, #937cff); /* Gradiente linear com cor e transparência */
+    -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0); /* Máscaras para efeitos visuais em navegadores WebKit */
+    mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0); /* Máscaras para efeitos visuais em outros navegadores */
+    -webkit-mask-composite: xor; /* Efeito de corte na máscara para WebKit */
+    mask-composite: exclude; /* Efeito de corte na máscara para outros navegadores */
+}

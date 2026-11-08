@@ -1,0 +1,26 @@
+.meio:before, .meio:after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.meio:before{ /*efeito de luz*/
+    background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), #0ec1ff50, transparent 40%); /*mude a cor no hexadecimal*/
+    filter: blur(100px);
+    mix-blend-mode: screen;
+    z-index: 3;
+}
+
+.meio:hover:before{
+    opacity: 1;
+}
+
+#bgluz:hover .meio:after{
+    opacity: 1;
+}

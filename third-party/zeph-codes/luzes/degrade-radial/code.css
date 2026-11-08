@@ -1,0 +1,30 @@
+selector::before{
+content: "";
+position: absolute;
+top:50%;
+left: 50%;
+width: 800px;
+height: 800px;
+transform: translate(-50%, -50%);
+background: #786b2b;/*cor*/
+border-radius: 100%;
+filter: blur(180px);
+pointer-events: none !important;
+z-index: 0;
+}
+
+selector::after{
+content: "";
+position: absolute;
+top:0;
+left: inherit;
+right: 0;
+width: 600px;
+height: 600px;
+background: #786b2b; /*cor*/
+border-radius: 100%;
+filter: blur(180px);
+opacity: 0.2;
+pointer-events: none !important;
+z-index: 0;
+}

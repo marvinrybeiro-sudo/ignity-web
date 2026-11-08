@@ -1,0 +1,41 @@
+<script>
+  (function () {
+    // Título original da página
+    const originalTitle = document.title;
+
+    // Mensagens (primeiro a mãozinha, depois o foguete)
+    const msgs = ["👋 Ei, volta pra aqui!", "🚀 Seu site novo te espera…"];
+
+    // Tempo entre trocas (ms)
+    const INTERVAL = 1500;
+
+    let timer = null;
+    let i = 0;
+
+    function startCycle() {
+      // começa exatamente com a 1ª mensagem
+      clearInterval(timer);
+      i = 0;
+      document.title = msgs[i];
+      timer = setInterval(() => {
+        i = (i + 1) % msgs.length;
+        document.title = msgs[i];
+      }, INTERVAL);
+    }
+
+    function stopCycle() {
+      clearInterval(timer);
+      document.title = originalTitle;
+    }
+
+    // Troca quando a aba perde/ganha foco
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) startCycle();
+      else stopCycle();
+    });
+
+    // Garante comportamento também com blur/focus da janela
+    window.addEventListener("blur", () => { if (document.hidden) return; startCycle(); });
+    window.addEventListener("focus", stopCycle);
+  })();
+</script>

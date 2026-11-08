@@ -1,0 +1,37 @@
+selector::after {
+    content:"";
+    pointer-events: none;
+    width: 550px; /*defina otamanho do círculo*/
+    height:550px; /*defina otamanho do círculo*/
+    border-radius: 50%;
+    position: absolute;
+    top: 15em;
+    left: 0;
+    z-index:2;
+    transform: translate(-50%, -50%);
+    background: #2d374d80; /*defina a cor do círculo*/
+    animation: circulo 20s infinite alternate ease-out; /*defina o tempo do círculo*/
+    transition: 0.5s all;
+    filter: blur(100px);  /*defina o blur do círculo*/
+    z-index: 0;
+}
+
+@keyframes circulo{
+    0%, 100%{
+        transform: translatex(50em) translatey(5em);
+        scale: 1.4;
+    }
+
+    50%{
+        transform: translatex(0em) translatey(-5em);
+    }
+
+}
+
+selector{
+      overflow: hidden !important;
+}
+
+selector *{
+      z-index: 3 !important;
+}

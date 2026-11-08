@@ -1,0 +1,173 @@
+<!--
+MAPA PONTILHADO COM ROTAS SAINDO DO BRASIL (Dubai Cash)
+1. Cole todo este código em um bloco/widget HTML da sua página.
+2. As rotas saem do Brasil em loop; a cada chegada em Portugal, México ou Índia
+   o selo correspondente acende e aparece o aviso de pagamento recebido.
+3. Destinos e tempos ficam em DEST; os textos do aviso ficam em TX (no JavaScript).
+4. Para trocar o tamanho, mude --mapa-largura no CSS.
+Sem bibliotecas externas.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+
+<div class="dcm">
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="dc-mark" viewBox="0 0 48 48"><g fill="currentColor"><path d="M8.686 11.136A20 20 0 1 1 8.686 36.864 17 17 0 1 0 8.686 11.136Z"/><rect x="5" y="23" width="28" height="2" rx="1"/><path d="M17.6 14.5C20 19.7 19.8 22.6 19 24c.8 1.4 1 4.3-1.4 9.5h-2.1c1.6-5.2 1.4-8.1.7-9.5.7-1.4.9-4.3-.7-9.5Z"/><path d="M26.9 18.8c2.4 2.9 2.2 4.4 1.4 5.2.8.8 1 2.3-1.4 5.2h-1.7c1.6-2.9 1.4-4.4.7-5.2.7-.8.9-2.3-.7-5.2Z"/></g></symbol>
+  <symbol id="f-br" viewBox="0 0 22 16"><rect width="22" height="16" fill="#1f9d4d"/><path d="M11 2.2 19.6 8 11 13.8 2.4 8z" fill="#F8D21C"/><circle cx="11" cy="8" r="3.3" fill="#1c3f94"/></symbol>
+  <symbol id="f-pt" viewBox="0 0 22 16"><rect width="22" height="16" fill="#d8232a"/><rect width="8.8" height="16" fill="#0b6b35"/><circle cx="8.8" cy="8" r="2.7" fill="#F8D21C"/></symbol>
+  <symbol id="f-mx" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><rect width="7.33" height="16" fill="#0b6b47"/><rect x="14.67" width="7.33" height="16" fill="#ce1126"/><circle cx="11" cy="8" r="1.7" fill="#8a5a2b"/></symbol>
+  <symbol id="f-in" viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><rect width="22" height="5.33" fill="#FF9933"/><rect y="10.67" width="22" height="5.33" fill="#138808"/><circle cx="11" cy="8" r="1.9" fill="none" stroke="#1a2a80" stroke-width=".7"/></symbol>
+</svg>
+  <div class="mapx" aria-hidden="true">
+    <svg class="mapx__dots" viewBox="0 0 210 104" preserveAspectRatio="none"><path class="mapx__pontos"/></svg>
+    <svg class="mapx__arcs" viewBox="0 0 210 104" preserveAspectRatio="none"></svg>
+    <span class="mx-chip mx-chip--o l" style="left:33.99%;top:80.34%"><svg class="flag"><use href="#f-br"/></svg><b>Pix</b><em>Brasil</em></span>
+    <span class="mx-chip r" data-k="lis" style="left:51.84%;top:20.46%"><svg class="flag"><use href="#f-pt"/></svg>MB WAY</span>
+    <span class="mx-chip tl" data-k="mex" style="left:8.99%;top:39.01%"><svg class="flag"><use href="#f-mx"/></svg>SPEI</span>
+    <span class="mx-chip br" data-k="mum" style="left:90.9%;top:39.35%"><svg class="flag"><use href="#f-in"/></svg>UPI</span>
+    <div class="mx-toast"><i><svg><use href="#dc-mark"/></svg></i><span><small>MB WAY · Portugal</small><b>+€ 120,00 recebido</b></span></div>
+  </div>
+</div>
+
+<style>
+.dcm{--mapa-largura:980px;--muted:#5C5850;--yellow:#F3CD00;--ease:cubic-bezier(.2,.7,.1,1);position:relative;width:100%;padding:clamp(40px,7vw,90px) clamp(16px,4vw,56px) clamp(64px,9vw,110px);background:radial-gradient(52% 62% at 50% 54%,#FBF5DC 0%,rgba(251,245,220,0) 74%),#fff;color:#0E0D0A;font-family:'Archivo',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-stretch:100%;line-height:1.55;-webkit-font-smoothing:antialiased;overflow:hidden}
+.dcm,.dcm *{box-sizing:border-box}
+.dcm svg{display:block;max-width:100%}
+.dcm .flag{width:22px;height:16px;border-radius:3px;overflow:hidden;flex:none;box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+.dcm .mapx{display:block;position:relative;aspect-ratio:210/104;width:100%;max-width:var(--mapa-largura);margin:0 auto}
+@supports not (aspect-ratio:1){.dcm .mapx::before{content:"";display:block;padding-top:49.52%}}
+.dcm .mapx>svg{position:absolute;inset:0;width:100%;height:100%;max-width:none;overflow:visible}
+.dcm .mapx__dots{-webkit-mask-image:radial-gradient(78% 88% at 50% 50%,#000 58%,transparent 100%);mask-image:radial-gradient(78% 88% at 50% 50%,#000 58%,transparent 100%)}
+.dcm .mapx__pontos{fill:none;stroke:#CDC6B3;stroke-width:1.25;stroke-linecap:round}
+.dcm .mapx__arcs{will-change:transform}
+.dcm .mx-ln{fill:none;stroke:rgba(201,153,10,.26);stroke-width:.4}
+.dcm .mx-ln.is-main{stroke:rgba(201,153,10,.5);stroke-width:.55}
+.dcm .mx-cm{fill:none;stroke:#E2B400;stroke-width:.85;stroke-linecap:round;stroke-dashoffset:999px}
+.dcm .mx-cm.is-main{stroke:#C99A00;stroke-width:1.2}
+.dcm .mx-pt{fill:#C9990A}
+.dcm .mx-rg{fill:none;stroke:#C9990A;stroke-width:.4;opacity:0;transform-box:fill-box;transform-origin:center}
+.dcm .mx-o{fill:#0E0D0A;stroke:#F3CD00;stroke-width:.7}
+.dcm .mx-org{fill:none;stroke:#C9990A;stroke-width:.45;transform-box:fill-box;transform-origin:center;animation:dcm-mxp 2.4s cubic-bezier(.2,.7,.1,1) infinite}
+@keyframes dcm-mxp{0%{transform:scale(1);opacity:.9}100%{transform:scale(5);opacity:0}}
+.dcm .mapx.is-off .mx-org{animation-play-state:paused}
+.dcm .mx-chip{position:absolute;z-index:2;display:inline-flex;align-items:center;gap:.45em;padding:.42em .72em .42em .48em;border-radius:8px;background:#fff;border:1px solid rgba(14,13,10,.12);box-shadow:0 8px 18px -12px rgba(0,0,0,.4);font-size:.68rem;font-weight:650;line-height:1;white-space:nowrap;color:#0E0D0A;transition:border-color .35s,box-shadow .35s}
+.dcm .mx-chip .flag{width:16px;height:12px;border-radius:2px}
+.dcm .mx-chip em{font-style:normal;font-weight:500;color:var(--muted)}
+.dcm .mx-chip.hit{border-color:#C9990A;box-shadow:0 0 0 3px rgba(243,205,0,.35),0 8px 18px -12px rgba(0,0,0,.4)}
+.dcm .mx-chip.r{transform:translate(9px,-50%)}
+.dcm .mx-chip.l{transform:translate(calc(-100% - 9px),-50%)}
+.dcm .mx-chip.tl{transform:translate(-12px,calc(-100% - 9px))}
+.dcm .mx-chip.br{transform:translate(calc(-100% + 12px),9px)}
+.dcm .mx-chip--o{background:#0E0D0A;color:#fff;border-color:#0E0D0A}
+.dcm .mx-chip--o b{color:var(--yellow)}.dcm .mx-chip--o em{color:#bdb7a9}
+.dcm .mx-toast{position:absolute;z-index:3;right:12px;bottom:-8px;display:flex;align-items:center;gap:10px;padding:8px 13px 8px 8px;border-radius:13px;background:#fff;border:1px solid rgba(14,13,10,.1);box-shadow:0 18px 34px -20px rgba(0,0,0,.5);font-size:.72rem;line-height:1.2;opacity:0;transform:translateY(8px) scale(.97);transition:opacity .35s,transform .45s var(--ease)}
+.dcm .mx-toast.on{opacity:1;transform:none}
+.dcm .mx-toast i{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:#0E0D0A;color:var(--yellow)}
+.dcm .mx-toast i svg{width:18px;height:18px}
+.dcm .mx-toast small{display:block;color:var(--muted);font-size:.66rem;margin-bottom:3px;white-space:nowrap}
+.dcm .mx-toast b{display:block;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (min-width:901px){
+  .dcm .mx-chip{font-size:.8rem;border-radius:10px;padding:.5em .85em .5em .55em}
+  .dcm .mx-chip .flag{width:19px;height:14px}
+  .dcm .mx-toast{font-size:.84rem;right:2%;bottom:-6%;padding:10px 16px 10px 10px;border-radius:15px}
+  .dcm .mx-toast i{width:34px;height:34px;border-radius:10px}.dcm .mx-toast i svg{width:21px;height:21px}
+  .dcm .mx-toast small{font-size:.74rem}
+}
+</style>
+
+<script>
+(() => {
+  if (window.__dcMapaPronto) return; window.__dcMapaPronto = true;
+  const LANDMASK = window.DC_LANDMASK = window.DC_LANDMASK || "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPCf//8HAAAAAAAAAAAAAAAAyPzz//8A4AAAAAADAAAAAACAlAnw//8AAAAAB4AfAAAAAADAAywA/P8AAABgAP4fAAEAAQIAPvYH+H8AAABguP//7x8A4P//K9wc+B8AgH+g1///////z////z98+AMC4L/8////////AP///684+AAB8P7///////9/wP///wMGcAAAfP7//////38fgAf+/wd+AAAAfP7//////wEBAAH4/x9+AABAKP//////f8ABAADw/3//AQCw+P///////8AAAADg////AwDA/////////wAAAADA//8vBwDA/////////wAAAADA//8/AACA/6/v////fwAAAADA//8PAACA1wf3////PwIAAADA//8HAADwYW/P////DwEAAACA//8DAADwQPnP//9/BAEAAACA//8DAAAAD+D/////yAAAAAAA/v8BAADgD8D/////IAAAAAAA+n8AAADwf9f/////AQAAAAAA/IMAAADw///3////AQAAAAAA8IEAAAD8/7/P////AAAAAAAA4AEAAAD8/79/+P9/AQAAAAAAwBEAAAD+/3//8OcHAAAAAAAAwBsYAAD8/39/4MMLAAAAAAAAAB4AAAD+//8e4IEHAQAAAAAAAHAAAAD+//8HwIAPAwAAAAAAAAAUAAD8//8JwIAGAAAAAAAAAID+AAD4//8PAIAABAAAAAAAAAD+AQDw/f8PAAEBAAAAAAAAAAD+DwAA8P8HAIBhAAAAAAAAAAD/DwAA8P8DAABzAAAAAAAAAAD/PwAA8P8BAABzMQAAAAAAAAD//wEA8P8AAAACwQMAAAAAAAD//wMA4P8AAAAEgAcAAAAAAAD//wMA4P8AAACABQEAAAAAAAD+/wEA4P8AAAAAAAAAAAAAAAD+/wAA4P8IAAAAMAAAAAAAAAD4/wAA4P8MAAAAfgIAAAAAAADw/wAA4D8MAAAA/gcAAAAAAADw/wAA4D8GAADA/w8AAAAAAADwPwAAwD8GAADg/w8AAAAAAADwHwAAwB8AAADg/x8AAAAAAAD4DwAAgB8AAADA/x8AAAAAAAD4DwAAgA8AAADA/x8AAAAAAAD4BwAAgAMAAADAwx8AAAAAAAD4AQAAAAAAAAAAAA8AAAAAAAD4AAAAAAAAAAAAAARAAAAAAAA8AAAAAAAAAAAAAAQgAAAAAAA4AAAAAAAAAAAAAAAQAAAAAAAcAAAAAAAAAAAAAAAIAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAMAQAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAABAAAAAAABgAAAiAAAAAAAAAAAgAAAAACD+j////x8AAAAAAAB8AACg////5/////8PAACAgP/9AAD+//////////8HAMD///8PAMD///////////8BgPz///8BcPz///////////8HAPz///8fAP7///////////8AAPj///////////////////8P////////////////////////////////////////////////";
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (s, c) => (c || document).querySelector(s);
+  const $$ = (s, c) => Array.prototype.slice.call((c || document).querySelectorAll(s));
+  function onView(el, cb, opts) {
+    if (!el) return; opts = opts || {};
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { cb(true, e); if (!opts.repeat) io.disconnect(); }
+      else if (opts.repeat) cb(false, e);
+    }), { threshold: opts.threshold || 0, rootMargin: opts.margin || '0px' });
+    io.observe(el);
+  }
+
+  /* ==========================================================================
+     Mapa pontilhado com rotas saindo do Brasil — código original
+     ========================================================================== */
+  function initMapHero(box) {
+    const dotsPath = $('.mapx__pontos', box), svg = $('.mapx__arcs', box); if (!box || !svg) return;
+    const LON0 = -118, LAT0 = 60, NS = 'http://www.w3.org/2000/svg';
+    const P = (lat, lon) => [lon - LON0, LAT0 - lat];
+    try {
+      const s = atob(LANDMASK), u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i);
+      let d = '';
+      for (let y = 0; y < 72; y++) for (let x = 0; x < 144; x++) {
+        const i = y * 144 + x; if (!((u[i >> 3] >> (i & 7)) & 1)) continue;
+        const q = P(90 - (y + .5) * 2.5, -180 + (x + .5) * 2.5);
+        if (q[0] < 1 || q[0] > 209 || q[1] < 1 || q[1] > 103) continue;
+        d += 'M' + q[0].toFixed(2) + ' ' + q[1].toFixed(2) + 'h0';
+      }
+      dotsPath.setAttribute('d', d);
+    } catch (e) {}
+
+    const mk = (tag, at, par) => { const e = document.createElementNS(NS, tag); for (const k in at) e.setAttribute(k, at[k]); par.appendChild(e); return e; };
+    const gL = mk('g', {}, svg), gC = mk('g', {}, svg), gP = mk('g', {}, svg);
+    const O = P(-23.55, -46.63), DUR = 6000, TRAVEL = 1800;
+    const DEST = [
+      { k: 'lis', lat: 38.72, lon: -9.14, d: 0 }, { k: 'mex', lat: 19.43, lon: -99.13, d: 2000 }, { k: 'mum', lat: 19.08, lon: 72.88, d: 4000 },
+      { lat: 40.71, lon: -74.0, d: 1000 }, { lat: 51.5, lon: -.12, d: 5000 }, { lat: 6.52, lon: 3.38, d: 3000 },
+      { lat: -1.29, lon: 36.82, d: 500 }, { lat: 4.71, lon: -74.07, d: 3500 }, { lat: 25.2, lon: 55.27, d: 2500 }
+    ];
+    const anims = [], hits = [], canAnim = !reduced && typeof svg.animate === 'function';
+    DEST.forEach(c => {
+      const q = P(c.lat, c.lon), dx = q[0] - O[0], dy = q[1] - O[1], len = Math.hypot(dx, dy);
+      let nx = dy / len, ny = -dx / len; if (ny > 0) { nx = -nx; ny = -ny; }
+      const h = len * .3, cx = (O[0] + q[0]) / 2 + nx * h, cy = (O[1] + q[1]) / 2 + ny * h;
+      const path = 'M' + O[0].toFixed(2) + ' ' + O[1].toFixed(2) + 'Q' + cx.toFixed(2) + ' ' + cy.toFixed(2) + ' ' + q[0].toFixed(2) + ' ' + q[1].toFixed(2);
+      const main = !!c.k;
+      mk('path', { d: path, class: 'mx-ln' + (main ? ' is-main' : '') }, gL);
+      mk('circle', { cx: q[0], cy: q[1], r: main ? 1.25 : .9, class: 'mx-pt' }, gP);
+      if (!canAnim) return;
+      const cm = mk('path', { d: path, class: 'mx-cm' + (main ? ' is-main' : '') }, gC);
+      const rg = mk('circle', { cx: q[0], cy: q[1], r: main ? 1.5 : 1.1, class: 'mx-rg' }, gP);
+      const L = cm.getTotalLength(), seg = Math.min(14, L * .3), f = TRAVEL / DUR, a = f * L / (L + seg);
+      cm.style.strokeDasharray = seg.toFixed(2) + ' ' + (L + seg + 4).toFixed(2); cm.style.strokeDashoffset = seg.toFixed(2) + 'px';
+      anims.push(cm.animate([{ strokeDashoffset: seg + 'px', offset: 0 }, { strokeDashoffset: -L + 'px', offset: f }, { strokeDashoffset: -L + 'px', offset: 1 }], { duration: DUR, delay: c.d, iterations: Infinity }));
+      anims.push(rg.animate([{ opacity: 0, transform: 'scale(1)', offset: 0 }, { opacity: 0, transform: 'scale(1)', offset: a }, { opacity: .9, transform: 'scale(1)', offset: a + .004 }, { opacity: 0, transform: 'scale(4)', offset: a + .28 }, { opacity: 0, transform: 'scale(4)', offset: 1 }], { duration: DUR, delay: c.d, iterations: Infinity }));
+      if (main) hits.push({ k: c.k, at: c.d + a * DUR });
+    });
+    mk('circle', { cx: O[0], cy: O[1], r: 1.6, class: 'mx-org' }, gP);
+    mk('circle', { cx: O[0], cy: O[1], r: 1.9, class: 'mx-o' }, gP);
+
+    /* aviso de pagamento recebido, sincronizado com a chegada de cada rota */
+    const toast = $('.mx-toast', box), tA = $('.mx-toast small', box), tB = $('.mx-toast b', box), chips = {};
+    $$('.mx-chip[data-k]', box).forEach(ch => { chips[ch.dataset.k] = ch; });
+    const TX = { lis: ['MB WAY', 'Portugal', 'Portugal', '€ 120,00', '€120.00'], mex: ['SPEI', 'México', 'Mexico', 'MX$ 2.400,00', 'MX$2,400.00'], mum: ['UPI', 'Índia', 'India', '₹ 9.800,00', '₹9,800.00'] };
+    let cur = null, t0 = 0, tick = null, swapT = null;
+    function show(k) {
+      const en = document.documentElement.lang.indexOf('en') === 0, x = TX[k], wait = cur ? 220 : 0;
+      toast.classList.remove('on'); clearTimeout(swapT);
+      swapT = setTimeout(() => { tA.textContent = x[0] + ' · ' + (en ? x[2] : x[1]); tB.textContent = '+' + (en ? x[4] + ' received' : x[3] + ' recebido'); toast.classList.add('on'); }, wait);
+      Object.keys(chips).forEach(c => chips[c].classList.toggle('hit', c === k));
+      cur = k;
+    }
+    function clock() {
+      const t = performance.now() - t0; let best = null, bt = -1;
+      hits.forEach(hh => { if (t < hh.at) return; const last = hh.at + Math.floor((t - hh.at) / DUR) * DUR; if (last > bt) { bt = last; best = hh.k; } });
+      if (best && best !== cur) show(best);
+    }
+    document.addEventListener('langchange', () => { if (cur) { const k = cur; cur = null; show(k); } });
+    if (!canAnim) { show('lis'); return; }
+    function play() { t0 = performance.now(); anims.forEach(an => { an.cancel(); an.play(); }); clearInterval(tick); tick = setInterval(clock, 200); box.classList.remove('is-off'); }
+    function pause() { anims.forEach(an => an.pause()); clearInterval(tick); box.classList.add('is-off'); }
+    let inView = true;
+    onView(box, on => { inView = on; on ? play() : pause(); }, { repeat: true });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); else if (inView) play(); });
+  }
+
+  function preparar() { $$('.dcm .mapx').forEach(initMapHero); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', preparar, { once: true });
+  else preparar();
+})();
+</script>

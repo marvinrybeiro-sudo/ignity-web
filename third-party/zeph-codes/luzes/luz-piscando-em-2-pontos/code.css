@@ -1,0 +1,42 @@
+selector::before{
+content:"";
+position: absolute;
+top: 15%; /*defina o posicionamento da luz ao topo*/
+left: inherit;
+right: calc(50% - 800px); /*defina o posicionamento da luz*/
+width: 500px;  /*defina o tamanho da luz*/
+height: 600px; /*defina o tamanho da luz*/
+background: #d5d1ff; /*defina a cor da luz*/
+border-radius: 100%;
+filter: blur(150px); /*defina o desfoque*/
+opacity: 0.3;
+mix-blend-mode: screen;
+animation: luz 5s infinite; /*defina o tempo da animação*/
+pointer-events: none;
+}
+
+selector::after{
+content:"";
+position: absolute;
+top: 60%; /*defina o posicionamento da luz ao topo*/
+left: inherit;
+right: calc(50% - 400px); /*defina o posicionamento da luz*/
+width: 10000px; /*defina o tamanho da luz*/
+height: 300px; /*defina o tamanho da luz*/
+background: #937cff; /*defina a cor da luz*/
+border-radius: 100%;
+filter: blur(150px); /*defina o desfoque*/
+opacity: 0.3;
+mix-blend-mode: screen;
+animation: luz 5s 2s infinite;  /*defina o tempo da animação e delay*/
+pointer-events: none;
+}
+
+@keyframes luz{
+0%, 100%{
+opacity: 0;
+}
+50%{
+opacity: 0.5;
+}
+}

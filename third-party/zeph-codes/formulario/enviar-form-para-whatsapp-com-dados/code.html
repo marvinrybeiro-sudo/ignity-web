@@ -1,0 +1,35 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector(".elementor-form");
+
+    if (!form) return;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Coletar os campos do formulário
+      const nome = document.querySelector('#form-field-name')?.value || '';
+      const email = document.querySelector('#form-field-email')?.value || '';
+      const telefone = document.querySelector('#form-field-field_00fb978')?.value || '';
+      const empresa = document.querySelector('#form-field-field_2381a21')?.value || '';
+      const segmento = document.querySelector('#form-field-field_2835506')?.value || '';
+      const cargo = document.querySelector('#form-field-field_8434c66')?.value || '';
+      const faturamento = document.querySelector('#form-field-field_9b45867')?.value || '';
+
+      // Criar mensagem
+      const mensagem = `Olá! Me chamo ${nome} e gostaria de mais informações.%0A
+📧 Email: ${email}%0A
+📱 Telefone: ${telefone}%0A
+🏢 Empresa: ${empresa}%0A
+🧩 Segmento: ${segmento}%0A
+👔 Cargo: ${cargo}%0A
+💰 Faturamento mensal: ${faturamento}`;
+
+      // Redirecionar para WhatsApp
+      const numeroWhatsApp = "NUMERO DO WHATSAPP"; // Sem espaços ou caracteres
+      const url = `https://api.whatsapp.com/send/?phone=SEU_NUMERO&text=${mensagem}`;
+      window.location.href = url;
+    });
+  });
+</script>
+

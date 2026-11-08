@@ -1,0 +1,15 @@
+.elementor-heading-title::before{
+    content: "";
+    background: #EDC7E0; /*defina a cor aqui*/
+    position: absolute;
+    width: 75%; /*defina a largura aqui*/
+    height: 10px; /*defina a altura aqui*/
+    bottom: -1%;
+    right: -1%;
+    z-index: 0;
+}
+
+.destaque{
+    z-index: 2 !important;
+    position: relative;
+}

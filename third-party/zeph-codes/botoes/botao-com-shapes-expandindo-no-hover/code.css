@@ -1,0 +1,22 @@
+.btn {
+ background: #fafbff;  /*defina a cor do BG aqui*/
+ border-radius: .5rem; /*defina o arredondamento aqui*/
+ border-bottom: 2px solid #8a2be2;
+ border-right: 2px solid #8a2be2;
+ border-top: 2px solid #fafbff;
+ border-left: 2px solid #fafbff;
+ transition-duration: 1s;
+ transition-property: border-top,
+    border-left,
+    border-bottom,
+    border-right,
+    box-shadow;
+}
+
+.btn:hover {
+ border-top: 2px solid #8a2be2;
+ border-left: 2px solid #8a2be2;
+ border-bottom: 2px solid #EE67EE;
+ border-right: 2px solid #EE67EE;
+ box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px; /*aqui fica as cores do hover*/
+}

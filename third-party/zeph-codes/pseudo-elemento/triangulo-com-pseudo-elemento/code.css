@@ -1,0 +1,12 @@
+selector::after{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent; /*defina o tamanho lateral*/
+    border-right: 100px solid transparent; /*defina o tamanho lateral*/
+    border-bottom: 200px solid #6121FF; /*altere a cor e o tamanho da base*/
+    top: 50%;  /*altere à posição ao topo*/
+    left: 50%; /*altere à esquerda*/
+    transform: translate(-50%, -50%);
+}

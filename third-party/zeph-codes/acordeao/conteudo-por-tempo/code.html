@@ -1,0 +1,188 @@
+<!--
+CONTEÚDO POR TEMPO
+1. Cole todo este código em um bloco/widget HTML da sua página.
+2. Troque os títulos, as descrições e o conteúdo dos painéis abaixo.
+3. data-intervalo="6000" define o tempo de cada item: 6000 = 6 segundos.
+4. Para adicionar/remover itens, mantenha um botão e um painel para cada item,
+   na mesma ordem. Você pode substituir os painéis pretos por imagens ou HTML.
+As cores ficam nas variáveis do CSS. Não precisa de bibliotecas nem imagens.
+O mouse sobre a lista pausa a troca; clique ou use o teclado para escolher.
+O botão Pausar mantém a troca parada. A animação pausa fora da tela.
+-->
+
+<style>
+.zeph-tempo {
+  /* PERSONALIZE AQUI */
+  --destaque: #000;
+  --fundo: #fff;
+  --texto: #111;
+  --painel: #000;
+  max-width: 1200px;
+  margin: auto;
+  padding: clamp(24px, 5vw, 64px);
+  color: var(--texto);
+  background: var(--fundo);
+  font: 16px/1.5 Arial, Helvetica, sans-serif;
+}
+.zeph-tempo, .zeph-tempo * { box-sizing: border-box; }
+.zeph-tempo__topo { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 32px; }
+.zeph-tempo h2 { margin: 0; color: inherit; font: 700 clamp(26px, 4vw, 42px)/1.1 Arial, sans-serif; }
+.zeph-tempo__pausa { border: 1px solid #ccc; border-radius: 30px; padding: 10px 16px; color: var(--texto); background: var(--fundo); font: inherit; cursor: pointer; }
+.zeph-tempo__grade { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: start; }
+.zeph-tempo__lista { border-top: 1px solid #ddd; }
+.zeph-tempo__item {
+  position: relative; display: block; width: 100%; padding: 24px 30px 24px 0;
+  border: 0; border-bottom: 1px solid #ddd; border-radius: 0;
+  color: var(--texto); background: transparent; text-align: left; font: inherit; cursor: pointer;
+}
+.zeph-tempo__nome { display: block; font-size: clamp(20px, 2.2vw, 27px); line-height: 1.2; }
+.zeph-tempo__item::after { content: '+'; position: absolute; right: 4px; top: 22px; font-size: 24px; transition: transform .3s; }
+.zeph-tempo__item.is-ativo::after { transform: rotate(45deg); }
+.zeph-tempo__descricao { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .4s, opacity .4s, margin .4s; }
+.zeph-tempo__descricao > span { min-height: 0; overflow: hidden; color: #666; font-size: 15px; }
+.zeph-tempo__item.is-ativo .zeph-tempo__descricao { grid-template-rows: 1fr; opacity: 1; margin-top: 12px; }
+.zeph-tempo__barra { position: absolute; height: 2px; left: 0; right: 0; bottom: -1px; background: var(--destaque); transform: scaleX(0); transform-origin: left; }
+.zeph-tempo__visual { display: grid; overflow: hidden; border-radius: 24px; background: var(--painel); }
+.zeph-tempo__painel {
+  grid-area: 1 / 1; min-width: 0; min-height: 460px; padding: 36px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; color: #fff; opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity .45s, transform .45s, visibility .45s;
+}
+.zeph-tempo__painel.is-ativo { opacity: 1; visibility: visible; transform: none; }
+.zeph-tempo__numero { font-size: clamp(64px, 10vw, 120px); font-weight: 700; line-height: 1; }
+.zeph-tempo__painel p { margin: 20px 0 0; color: inherit; }
+.zeph-tempo button:focus-visible { outline: 3px solid #777; outline-offset: 5px; }
+@media (max-width: 760px) {
+  .zeph-tempo__grade { grid-template-columns: 1fr; gap: 24px; }
+  .zeph-tempo__visual { order: -1; }
+  .zeph-tempo__painel { min-height: 260px; padding: 24px; }
+  .zeph-tempo__item { padding-block: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .zeph-tempo *, .zeph-tempo *::after { transition: none; }
+}
+</style>
+
+<section class="zeph-tempo" data-intervalo="6000" aria-label="Conteúdo por tempo">
+  <div class="zeph-tempo__topo">
+    <h2>Conteúdo por tempo</h2>
+    <button class="zeph-tempo__pausa" type="button" aria-pressed="false">Pausar</button>
+  </div>
+  <div class="zeph-tempo__grade">
+    <!-- BOTÕES: um para cada painel, na mesma ordem. -->
+    <div class="zeph-tempo__lista">
+      <button class="zeph-tempo__item is-ativo" type="button" aria-expanded="true">
+        <span class="zeph-tempo__nome">Conteúdo 01</span>
+        <span class="zeph-tempo__descricao"><span>Escreva uma descrição breve para o primeiro conteúdo.</span></span>
+        <span class="zeph-tempo__barra" aria-hidden="true"></span>
+      </button>
+      <button class="zeph-tempo__item" type="button" aria-expanded="false">
+        <span class="zeph-tempo__nome">Conteúdo 02</span>
+        <span class="zeph-tempo__descricao"><span>Escreva uma descrição breve para o segundo conteúdo.</span></span>
+        <span class="zeph-tempo__barra" aria-hidden="true"></span>
+      </button>
+      <button class="zeph-tempo__item" type="button" aria-expanded="false">
+        <span class="zeph-tempo__nome">Conteúdo 03</span>
+        <span class="zeph-tempo__descricao"><span>Escreva uma descrição breve para o terceiro conteúdo.</span></span>
+        <span class="zeph-tempo__barra" aria-hidden="true"></span>
+      </button>
+      <button class="zeph-tempo__item" type="button" aria-expanded="false">
+        <span class="zeph-tempo__nome">Conteúdo 04</span>
+        <span class="zeph-tempo__descricao"><span>Escreva uma descrição breve para o quarto conteúdo.</span></span>
+        <span class="zeph-tempo__barra" aria-hidden="true"></span>
+      </button>
+      <button class="zeph-tempo__item" type="button" aria-expanded="false">
+        <span class="zeph-tempo__nome">Conteúdo 05</span>
+        <span class="zeph-tempo__descricao"><span>Escreva uma descrição breve para o quinto conteúdo.</span></span>
+        <span class="zeph-tempo__barra" aria-hidden="true"></span>
+      </button>
+    </div>
+    <!-- PAINÉIS: substitua os números e textos pelo seu conteúdo. -->
+    <div class="zeph-tempo__visual">
+      <div class="zeph-tempo__painel is-ativo"><span class="zeph-tempo__numero">01</span><p>Seu primeiro conteúdo aqui.</p></div>
+      <div class="zeph-tempo__painel" aria-hidden="true" inert><span class="zeph-tempo__numero">02</span><p>Seu segundo conteúdo aqui.</p></div>
+      <div class="zeph-tempo__painel" aria-hidden="true" inert><span class="zeph-tempo__numero">03</span><p>Seu terceiro conteúdo aqui.</p></div>
+      <div class="zeph-tempo__painel" aria-hidden="true" inert><span class="zeph-tempo__numero">04</span><p>Seu quarto conteúdo aqui.</p></div>
+      <div class="zeph-tempo__painel" aria-hidden="true" inert><span class="zeph-tempo__numero">05</span><p>Seu quinto conteúdo aqui.</p></div>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+  document.querySelectorAll('.zeph-tempo:not([data-pronto])').forEach((bloco) => {
+    bloco.dataset.pronto = 'true';
+    const itens = [...bloco.querySelectorAll('.zeph-tempo__item')];
+    const paineis = [...bloco.querySelectorAll('.zeph-tempo__painel')];
+    if (!itens.length || itens.length !== paineis.length) return;
+    const barras = itens.map(item => item.querySelector('.zeph-tempo__barra'));
+    const lista = bloco.querySelector('.zeph-tempo__lista');
+    const botao = bloco.querySelector('.zeph-tempo__pausa');
+    const duracao = Math.max(1000, Number(bloco.dataset.intervalo) || 6000);
+    const movimento = matchMedia('(prefers-reduced-motion: reduce)');
+    let ativo = 0, animacao, visivel = false, mouse = false, foco = false;
+    let pausado = movimento.matches;
+    const prefixo = 'zt-' + Math.random().toString(36).slice(2, 10);
+
+    function sincronizar() {
+      botao.textContent = pausado ? 'Continuar' : 'Pausar';
+      botao.setAttribute('aria-pressed', String(pausado));
+      if (!animacao) return;
+      if (pausado || mouse || foco || !visivel || document.hidden) animacao.pause();
+      else animacao.play();
+    }
+
+    function selecionar(indice) {
+      ativo = indice;
+      if (animacao) animacao.cancel();
+      itens.forEach((item, i) => {
+        const selecionado = i === ativo;
+        item.classList.toggle('is-ativo', selecionado);
+        item.setAttribute('aria-expanded', String(selecionado));
+        paineis[i].classList.toggle('is-ativo', selecionado);
+        paineis[i].setAttribute('aria-hidden', String(!selecionado));
+        paineis[i].inert = !selecionado;
+      });
+      animacao = barras[ativo].animate(
+        [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }],
+        { duration: duracao, easing: 'linear', fill: 'forwards' }
+      );
+      animacao.onfinish = () => selecionar((ativo + 1) % itens.length);
+      sincronizar();
+    }
+
+    itens.forEach((item, i) => {
+      item.id = prefixo + '-botao-' + i;
+      paineis[i].id = prefixo + '-painel-' + i;
+      item.setAttribute('aria-controls', paineis[i].id);
+      paineis[i].setAttribute('role', 'region');
+      paineis[i].setAttribute('aria-labelledby', item.id);
+      item.addEventListener('click', () => selecionar(i));
+      item.addEventListener('pointerenter', (evento) => {
+        if (evento.pointerType !== 'mouse') return;
+        mouse = true;
+        if (i !== ativo) selecionar(i);
+        sincronizar();
+      });
+    });
+    lista.addEventListener('pointerleave', () => { mouse = false; sincronizar(); });
+    // O teclado pausa a troca para permitir a leitura e seleção sem pressa.
+    bloco.addEventListener('focusin', (evento) => {
+      foco = evento.target !== botao && evento.target.matches(':focus-visible');
+      sincronizar();
+    });
+    bloco.addEventListener('focusout', (evento) => {
+      if (!bloco.contains(evento.relatedTarget)) { foco = false; sincronizar(); }
+    });
+    botao.addEventListener('click', () => { pausado = !pausado; sincronizar(); });
+    document.addEventListener('visibilitychange', sincronizar);
+    movimento.addEventListener('change', () => { pausado = movimento.matches; sincronizar(); });
+    new IntersectionObserver(([entrada]) => {
+      visivel = entrada.isIntersecting;
+      sincronizar();
+    }, { threshold: 0 }).observe(bloco);
+    selecionar(0);
+  });
+})();
+</script>

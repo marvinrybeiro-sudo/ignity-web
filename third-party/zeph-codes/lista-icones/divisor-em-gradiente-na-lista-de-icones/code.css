@@ -1,0 +1,4 @@
+.elementor-icon-list-item:not(:last-child):after {
+    border-top: 1px solid; /* Borda superior sólida com 1 pixel de espessura */
+    border-image: linear-gradient(90deg, #440dca, transparent) 1; /* Gradiente linear na borda, de vermelho para azul */
+}

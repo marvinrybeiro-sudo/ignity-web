@@ -1,0 +1,41 @@
+{
+  "id": "glow-nos-cards-1791434693728-1791434694384",
+  "titulo": "Glow nos cards",
+  "modulo": "Módulo: Cards",
+  "categoria": "cards",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2026-10-08T04:44:54.000Z",
+  "atualizado": "2026-10-08T04:44:54.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/bc7b85d8-0cc4-4b92-bb40-be5f89b628ac.gif",
+  "video": null,
+  "arquivos": [
+    "html"
+  ],
+  "peso": {
+    "bytes": 3428,
+    "gzip": 1634
+  },
+  "deps": {
+    "scriptsExternos": [],
+    "imports": [],
+    "gsap": false,
+    "scrollTrigger": false,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": true
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

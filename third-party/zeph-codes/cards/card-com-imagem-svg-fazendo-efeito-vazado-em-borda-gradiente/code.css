@@ -1,0 +1,49 @@
+selector::after { /*bg do card*/
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000917; /* Cor de fundo */
+    z-index: 0;
+    border-radius: 8px; /* Arredondamento das bordas */
+}
+
+selector::before{ /*borda*/
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 2px); /* Largura ajustada */
+    height: calc(100% + 2px); /* Altura ajustada */
+    background: linear-gradient(to right, #dddcdb 15%, #131418 80%, transparent); /* Gradiente linear */
+    z-index: 0;
+    border-radius: 8px;
+}
+
+.elementor-image-box-title,
+.elementor-image-box-description,
+.elementor-image-box-img{
+    z-index: 9;
+    position: relative;
+}
+
+.elementor-image-box-img{
+    position: absolute;
+    margin-top: -60px !important; /* posicione a imagem */
+}
+
+.elementor-image-box-img::before{ /*borda no ícone*/
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px; /* Largura fixa */
+    height: 100%; /* Altura total */
+    background: #0f1013; /* Cor de fundo */
+    z-index: -1; /* Nível de empilhamento atrás do elemento imagem */
+    border-radius: 8px; /* Arredondamento das bordas */
+}

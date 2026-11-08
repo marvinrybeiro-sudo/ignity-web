@@ -1,0 +1,87 @@
+selector{
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+selector .elementor-button{
+    transition: 0.5s;
+    background: transparent !important;
+}
+
+selector .elementor-button-text,
+selector .elementor-button-icon{
+    position: relative;
+    z-index: 55;
+}
+
+/*cor de fundo*/
+selector .elementor-button::before {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(90deg, #D212B8, #482399); /*altere a cor aqui*/
+  z-index: 3;
+  transition: opacity 0.2s linear;
+  opacity: 1;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+    border-radius: 8px;
+    transition: 0.5s;
+}
+
+
+/*cor do hover*/
+selector .elementor-button::after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(90deg, #482399, #D212B8); /*altere a cor aqui*/
+  z-index: 12;
+  transition: opacity 0.2s linear;
+  opacity: 1;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+    border-radius: 8px;
+    transition: 0.5s;
+    opacity: 0;
+}
+
+selector .elementor-button:hover::after {
+    transition: 0.5s;
+    opacity: 1;
+    box-shadow: 0px 0px 20px 0px white;
+}
+
+/*cor do brilho*/
+selector::before {
+  position: absolute;
+  content: "";
+  top: -40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff; /*altere a cor aqui*/
+  z-index: 2;
+  transition: opacity 0.2s linear;
+  opacity: 1;
+  width: 40px;
+  height: 100px;
+  filter: blur(15px);
+    border-radius: 8px;
+  animation: rodar 5s infinite linear;
+  transform-origin: center bottom;
+}
+
+/*animação do brilho*/
+@keyframes rodar{
+    0%{
+        transform: translate(-50%, -50%) rotate(0);
+    }
+    100%{
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}

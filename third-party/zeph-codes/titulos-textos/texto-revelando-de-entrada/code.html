@@ -1,0 +1,106 @@
+<!--
+TEXTO REVELANDO DE ENTRADA
+1. Cole todo este código em um bloco/widget HTML da sua página.
+2. Troque os textos abaixo. Cada .zeph-entrada__linha anima separadamente.
+3. Duplique uma linha para adicionar outra. Use <strong> para destacar palavras.
+4. Ajuste a cor da faixa, o tamanho da fonte e os tempos nas variáveis do CSS.
+O efeito aparece uma vez, quando o título entra na tela durante o scroll.
+Você pode repetir o bloco <div class="zeph-entrada"> com outros títulos.
+Sem bibliotecas, fontes externas ou imagens. Sem JS, o texto continua visível.
+-->
+
+<style>
+.zeph-entrada {
+  /* PERSONALIZE AQUI */
+  --cor-faixa: #5a2ff6;
+  --cor-texto: #111;
+  --cor-destaque: #5a2ff6;
+  --tamanho: clamp(32px, 5.5vw, 76px);
+  --duracao: 600ms;
+  --atraso-faixa: 500ms;
+  --intervalo-linhas: 200ms;
+  --curva: cubic-bezier(.165, .84, .44, 1);
+  color: var(--cor-texto);
+  font-family: Arial, Helvetica, sans-serif;
+}
+.zeph-entrada, .zeph-entrada * { box-sizing: border-box; }
+.zeph-entrada__titulo {
+  margin: 0;
+  color: inherit;
+  font: 700 var(--tamanho)/1.15 Arial, Helvetica, sans-serif;
+  letter-spacing: -.05em;
+}
+.zeph-entrada__linha {
+  display: block;
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  padding: .14em .08em .26em 0;
+  margin: -.14em -.08em -.26em 0;
+  overflow-wrap: anywhere;
+}
+.zeph-entrada__linha strong { color: var(--cor-destaque); font-weight: inherit; }
+.zeph-entrada.is-pronto .zeph-entrada__linha { clip-path: inset(0 100% 0 0); }
+.zeph-entrada.is-pronto .zeph-entrada__linha::after {
+  content: '';
+  position: absolute;
+  inset: .06em 0 .14em;
+  border-radius: 2px;
+  background: var(--cor-faixa);
+  transform-origin: right center;
+  pointer-events: none;
+}
+.zeph-entrada.is-visivel .zeph-entrada__linha {
+  animation: zeph-entrada-revelar var(--duracao) var(--curva) both;
+  animation-delay: calc(var(--linha, 0) * var(--intervalo-linhas));
+}
+.zeph-entrada.is-visivel .zeph-entrada__linha::after {
+  animation: zeph-entrada-faixa var(--duracao) var(--curva) both;
+  animation-delay: calc(var(--atraso-faixa) + var(--linha, 0) * var(--intervalo-linhas));
+}
+@keyframes zeph-entrada-revelar {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes zeph-entrada-faixa {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .zeph-entrada.is-pronto .zeph-entrada__linha { clip-path: none; animation: none; }
+  .zeph-entrada.is-pronto .zeph-entrada__linha::after { display: none; }
+}
+</style>
+
+<!-- SEU TÍTULO: substitua os textos e mantenha uma tag span por linha. -->
+<div class="zeph-entrada">
+  <h2 class="zeph-entrada__titulo">
+    <span class="zeph-entrada__linha">Seu título aqui.</span>
+    <span class="zeph-entrada__linha">Com um <strong>novo destaque.</strong></span>
+  </h2>
+</div>
+
+<script>
+(() => {
+  const blocos = document.querySelectorAll('.zeph-entrada:not([data-iniciado])');
+  const movimento = matchMedia('(prefers-reduced-motion: reduce)');
+  if (!('IntersectionObserver' in window) || movimento.matches) return;
+  // Dispara quando o título cruza 84% da altura da tela, como na referência.
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach((entrada) => {
+      if (!entrada.isIntersecting) return;
+      entrada.target.classList.add('is-visivel');
+      observador.unobserve(entrada.target);
+    });
+  }, { rootMargin: `0px 0px -${innerHeight * .16}px 0px`, threshold: 0 });
+
+  blocos.forEach((bloco) => {
+    bloco.dataset.iniciado = 'true';
+    bloco.querySelectorAll('.zeph-entrada__linha').forEach((linha, i) => {
+      linha.style.setProperty('--linha', i);
+    });
+    bloco.classList.add('is-pronto');
+    observador.observe(bloco);
+  });
+})();
+</script>

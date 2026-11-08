@@ -1,0 +1,83 @@
+<!-- Importação obrigatória do GSAP e ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<style>
+  /* Centraliza o texto */
+  .elementor-heading-title,
+  .texto {
+    text-align: center;
+  }
+
+  /* Estilização para telas menores */
+  @media only screen and (max-width: 600px) {
+    .elementor-heading-title span,
+    .texto span {
+      display: inline-block;
+      opacity: 0;
+      color: white;/* ✅ Altere a cor do texto aqui */
+      
+      font-size: 28px;/* ✅ Altere o tamanho da fonte no mobile */
+      
+      font-weight: 700;
+    }
+  }
+
+  /* Estilização para telas maiores */
+  @media only screen and (min-width: 600px) {
+    .elementor-heading-title span,
+    .texto span {
+      display: inline-block;
+      opacity: 0;
+      
+      color: white;/* ✅ Altere a cor do texto aqui */
+      
+      font-size: 48px;/* ✅ Altere o tamanho da fonte no desktop */
+      
+      font-weight: 700;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const elements = document.querySelectorAll('.elementor-heading-title, .texto');
+
+    elements.forEach(el => {
+      const text = el.textContent.trim();
+      el.innerHTML = '';
+
+      [...text].forEach((char, i) => {
+        const span = document.createElement('span');
+
+        if (char === ' ') {
+          span.innerHTML = '&nbsp;';
+          span.style.width = '0.2em';
+          span.style.display = 'inline-block';
+        } else {
+          span.textContent = char;
+        }
+
+        el.appendChild(span);
+      });
+
+      const spans = el.querySelectorAll('span');
+
+      gsap.fromTo(spans,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          ease: "none",
+          stagger: 0.03,                      // ✅ Altere o tempo entre as letras aqui
+          scrollTrigger: {
+            trigger: el,
+            start: "top 65%",                 // ✅ Altere o ponto de início da animação no scroll
+            end: "bottom 45%",                // ✅ Altere o ponto final da animação no scroll
+            scrub: true,                      // ✅ true = anima junto com o scroll
+            once: false,
+          }
+        }
+      );
+    });
+  });
+</script>

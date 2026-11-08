@@ -1,0 +1,167 @@
+<!--
+TEXTO REVELANDO
+1. Cole todo este código em um bloco/widget HTML da sua página.
+2. Troque as frases logo abaixo pelo seu texto.
+3. Para personalizar, ajuste a fonte, o tamanho e as cores no CSS.
+   Remova zeph-reveal__phrase--gold para tirar o dourado.
+   data-reveal-delay define o atraso em milissegundos (0 = sem atraso).
+-->
+
+<style>
+/* Ajuste a fonte, o tamanho e as cores aqui. */
+.zeph-reveal {
+  --reveal-edge: rgba(35, 30, 20, .75);
+  margin: 0;
+  color: #151510;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(36px, 6vw, 76px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -.055em;
+}
+.zeph-reveal__phrase { display: block; }
+.zeph-reveal__phrase--gold { color: #a68450; }
+.zeph-reveal__row {
+  display: block;
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  overflow: hidden;
+  padding: .14em .08em .12em 0;
+  margin: -.14em 0 -.12em;
+}
+.zeph-reveal__word { display: inline-block; }
+.zeph-reveal__phrase--gold .zeph-reveal__word {
+  background: linear-gradient(180deg, #c9a468 0%, #a68450 55%, #7e6238 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.zeph-reveal__edge {
+  position: absolute;
+  top: 8%; bottom: 8%; left: 0;
+  width: 2px;
+  margin-left: -2px;
+  opacity: 0;
+  background: linear-gradient(180deg, transparent, var(--reveal-edge) 30%, var(--reveal-edge) 70%, transparent);
+  box-shadow: 0 0 14px 2px rgba(35, 30, 20, .12);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .zeph-reveal__row { clip-path: none !important; }
+  .zeph-reveal__word { transform: none !important; }
+  .zeph-reveal__edge { display: none; }
+}
+</style>
+
+<!-- EDITE SEU TEXTO AQUI -->
+<h2 class="zeph-reveal" data-reveal-delay="0">
+  <span class="zeph-reveal__phrase">Mude de país.</span>
+  <span class="zeph-reveal__phrase zeph-reveal__phrase--gold">Não de conexão.</span>
+</h2>
+
+<!-- ANIMAÇÃO: pode manter como está -->
+<script>
+/* JavaScript puro. Carregue uma única vez, com defer ou antes de </body>. */
+(() => {
+  'use strict';
+  const start = async () => {
+    if (document.fonts) await document.fonts.ready;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    document.querySelectorAll('.zeph-reveal').forEach(title => {
+      if (title.dataset.revealReady) return;
+      const phrases = [...title.querySelectorAll('.zeph-reveal__phrase')];
+      if (!phrases.length || !Element.prototype.animate) return;
+      title.dataset.revealReady = 'true';
+      const source = phrases.map(el => el.textContent.trim().replace(/\s+/g, ' '));
+      if (!title.hasAttribute('aria-label')) title.setAttribute('aria-label', source.join(' '));
+      phrases.forEach(el => el.setAttribute('aria-hidden', 'true'));
+      let rows = [], animations = [], played = false, observer, timer;
+      let lastWidth = title.getBoundingClientRect().width;
+      const delay = Math.max(0, Number(title.dataset.revealDelay) || 0);
+
+      function clearAnimations() {
+        animations.forEach(animation => animation.cancel());
+        animations = [];
+      }
+      function layout() {
+        clearAnimations();
+        rows = [];
+        phrases.forEach((phrase, p) => {
+          const words = source[p].split(' ').filter(Boolean).map(text => {
+            const word = document.createElement('span');
+            word.className = 'zeph-reveal__word';
+            word.textContent = text;
+            return word;
+          });
+          phrase.replaceChildren();
+          words.forEach((word, i) => { if (i) phrase.append(' '); phrase.append(word); });
+          // Mede as quebras naturais antes de criar a máscara de cada linha.
+          const lines = [];
+          let previousTop;
+          words.forEach(word => {
+            const top = word.offsetTop;
+            if (previousTop === undefined || Math.abs(top - previousTop) > 2) lines.push([]);
+            lines[lines.length - 1].push(word);
+            previousTop = top;
+          });
+          phrase.replaceChildren();
+          lines.forEach(line => {
+            const row = document.createElement('span');
+            row.className = 'zeph-reveal__row';
+            line.forEach((word, i) => { if (i) row.append(' '); row.append(word); });
+            const edge = document.createElement('i');
+            edge.className = 'zeph-reveal__edge';
+            row.append(edge);
+            phrase.append(row);
+            rows.push({ row, words: line, edge });
+          });
+        });
+        if (!played && !reduced.matches) rows.forEach(({row}) => { row.style.clipPath = 'inset(0 100% 0 0)'; });
+      }
+      function animate(element, frames, duration, wait, easing) {
+        animations.push(element.animate(frames, { duration, delay: wait, easing, fill: 'both' }));
+      }
+      function reveal() {
+        if (played) return;
+        played = true;
+        observer?.disconnect();
+        if (reduced.matches) { rows.forEach(({row}) => { row.style.clipPath = 'none'; }); return; }
+        rows.forEach(({row, words, edge}, index) => {
+          row.style.clipPath = 'none';
+          const wait = delay + index * 220;
+          animate(row, [{clipPath:'inset(0 100% 0 0)'}, {clipPath:'inset(0 0% 0 0)'}], 1150, wait, 'cubic-bezier(.65,0,.35,1)');
+          animate(edge, [{left:'0%'}, {left:'100%'}], 1150, wait, 'cubic-bezier(.65,0,.35,1)');
+          animate(edge, [{opacity:1}, {opacity:0}], 350, wait + 900, 'linear');
+          words.forEach((word, i) => animate(word,
+            [{transform:'translateY(60%)'}, {transform:'translateY(0%)'}],
+            1050, wait + 50 + i * 40, 'cubic-bezier(.16,1,.3,1)'));
+        });
+      }
+      layout();
+      if ('IntersectionObserver' in window && !reduced.matches) {
+        observer = new IntersectionObserver(entries => {
+          if (entries.some(entry => entry.isIntersecting)) reveal();
+        }, { rootMargin: '0px 0px -12% 0px', threshold: 0 });
+        observer.observe(title);
+      } else reveal();
+      if ('ResizeObserver' in window) new ResizeObserver(entries => {
+        const width = entries[0].contentRect.width;
+        if (Math.abs(width - lastWidth) < 1) return;
+        lastWidth = width;
+        clearTimeout(timer);
+        timer = setTimeout(layout, 120);
+      }).observe(title);
+      reduced.addEventListener('change', event => {
+        if (!event.matches) return;
+        played = true;
+        observer?.disconnect();
+        clearAnimations();
+        rows.forEach(({row}) => { row.style.clipPath = 'none'; });
+      });
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true});
+  else start();
+})();
+</script>

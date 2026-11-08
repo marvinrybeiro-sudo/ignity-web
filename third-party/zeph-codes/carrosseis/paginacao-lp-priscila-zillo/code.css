@@ -1,0 +1,8 @@
+selector .swiper-pagination-bullet-active{
+    width: 30px; /*mude a largura por aqui*/
+    border-radius: 2px;
+}
+
+selector .swiper-pagination-bullet{
+    transition: 0.5s;
+}

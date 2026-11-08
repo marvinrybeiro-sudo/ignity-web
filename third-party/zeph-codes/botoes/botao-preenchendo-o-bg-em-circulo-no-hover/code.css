@@ -1,0 +1,30 @@
+.elementor-button {
+  border: 2px solid #4c0de2; /*cor da borda*/
+  border-radius: 34px; /*arredondamento*/
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+  overflow: hidden;
+}
+
+.elementor-button::before { /*efeito hover*/
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 80px; /*aumente o tamanho se necessário*/
+  height: 80px; /*aumente o tamanho se necessário*/
+  border-radius: inherit;
+  scale: 0;
+  z-index: -1;
+  background-color: #4c0de2; /*mude a cor*/
+  transition: all 1s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.elementor-button:hover::before {
+  scale: 3;
+}
+
+.elementor-button:hover {
+  color: #212121; /*Mude a cor do texto no hover aqui*/
+  scale: 1.1;
+  box-shadow: 0 0px 20px rgba(193, 163, 98,0.4);
+}

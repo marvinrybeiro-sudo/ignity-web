@@ -1,0 +1,26 @@
+<script>
+  const pai = document.querySelector('.pai');
+  const imagemMascara = document.querySelector('.imagem-mascara');
+
+  // 🎯 Tamanho do círculo da máscara
+  const circleSize = 250;
+
+  // ✏️ Ajustes finos de posição
+  // Se o círculo estiver fora de alinhamento, mexa aqui:
+  const ajusteX = -580; // Aumente ou diminua para mover no eixo horizontal
+  const ajusteY = -120; // Aumente ou diminua para mover no eixo vertical
+
+  pai.addEventListener('mousemove', (e) => {
+    const rect = pai.getBoundingClientRect();
+    const x = e.clientX - rect.left - (circleSize / 2) + ajusteX;
+    const y = e.clientY - rect.top - (circleSize / 2) + ajusteY;
+
+    imagemMascara.style.maskPosition = `${x}px ${y}px`;
+    imagemMascara.style.webkitMaskPosition = `${x}px ${y}px`;
+  });
+
+  pai.addEventListener('mouseleave', () => {
+    imagemMascara.style.maskPosition = `-9999px -9999px`;
+    imagemMascara.style.webkitMaskPosition = `-9999px -9999px`;
+  });
+</script>

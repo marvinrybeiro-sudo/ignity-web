@@ -1,0 +1,45 @@
+{
+  "id": "perspectiva-3d-com-scroll-1763599752322",
+  "titulo": "Perspectiva 3d com scroll",
+  "modulo": "Módulo: Scroll",
+  "categoria": "scroll",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-20T00:49:13.000Z",
+  "atualizado": "2025-11-20T00:49:13.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1763599753195.gif",
+  "video": null,
+  "arquivos": [
+    "html",
+    "css"
+  ],
+  "peso": {
+    "bytes": 969,
+    "gzip": 449
+  },
+  "deps": {
+    "scriptsExternos": [
+      "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+    ],
+    "imports": [],
+    "gsap": true,
+    "scrollTrigger": true,
+    "lenis": false,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": false,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

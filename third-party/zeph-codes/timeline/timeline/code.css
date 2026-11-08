@@ -1,0 +1,31 @@
+@media only screen and (max-width: 600px) {
+.linee::before{
+    content: "";
+    background: #00000050;
+    width: 3px;
+    transform: scaley(0.9);
+    height: 100%;
+    left: -7px;
+}}
+
+@media only screen and (min-width: 600px) {
+.linee::before{
+    content: "";
+    background: #00000050;
+    width: 3px;
+    transform: scaley(0.9);
+    height: 100%;
+    left: -19px;
+}}
+
+.text::before{
+    content: "";
+    background: black;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translatey(-50%);
+    left: -06%;
+    border-radius: 1000px
+}

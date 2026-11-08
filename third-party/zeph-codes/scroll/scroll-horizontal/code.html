@@ -1,0 +1,255 @@
+<!--
+SCROLL HORIZONTAL (versão com fixação reforçada)
+1. Cole todo este código em um bloco/widget HTML da sua página.
+2. Coloque seu conteúdo dentro dos cards pretos. Duplique ou remova os <article>.
+3. Ajuste a largura, a altura e o espaço entre os cards nas variáveis do CSS.
+4. Se o site tem menu fixo no topo, ajuste DISTANCIA_DO_TOPO no JavaScript
+   (ou coloque data-topo="80" na <section>) para o bloco fixar logo abaixo do menu.
+No computador, role a página para percorrer os cards. No celular, arraste para o lado.
+Se algum bloco acima tiver overflow:hidden (comum em temas e construtores), o script
+corrige sozinho; se ainda assim o sticky falhar, ele passa a fixar via JavaScript.
+-->
+
+<style>
+.zeph-horizontal {
+  /* PERSONALIZE AQUI */
+  --card-largura: clamp(260px, 32vw, 440px);
+  --card-altura: clamp(220px, 45svh, 460px);
+  --card-espaco: 24px;
+  --margem-lateral: clamp(24px, 6vw, 96px);
+  --altura: 100svh;
+  --topo: 0px;
+  display: block;
+  width: 100%;
+  max-width: none;
+  position: relative;
+  overflow: visible !important;
+  background: #fff;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.zeph-horizontal, .zeph-horizontal * { box-sizing: border-box; }
+.zeph-horizontal__fixo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  padding: 48px 0;
+  width: 100%;
+  background: #fff;
+}
+.zeph-horizontal.is-pinned .zeph-horizontal__fixo {
+  position: -webkit-sticky;
+  position: sticky;
+  top: var(--topo);
+  height: var(--altura);
+  padding-block: 24px;
+  z-index: 1;
+}
+/* Plano B: quando o sticky não funciona no site, o JS move o bloco junto com o scroll */
+.zeph-horizontal.is-pinned.modo-js .zeph-horizontal__fixo {
+  position: relative;
+  top: 0;
+  will-change: transform;
+}
+.zeph-horizontal__titulo {
+  margin: 0;
+  padding-inline: var(--margem-lateral);
+  color: #000;
+  font: 700 clamp(24px, 3vw, 40px)/1.1 Arial, Helvetica, sans-serif;
+}
+.zeph-horizontal__janela {
+  width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: var(--margem-lateral);
+}
+.zeph-horizontal.is-pinned .zeph-horizontal__janela { overflow: hidden; }
+.zeph-horizontal__trilho {
+  display: flex;
+  gap: var(--card-espaco);
+  width: max-content;
+  padding-inline: var(--margem-lateral);
+}
+.zeph-horizontal.is-pinned .zeph-horizontal__trilho { will-change: transform; }
+.zeph-horizontal__card {
+  flex: 0 0 var(--card-largura);
+  width: var(--card-largura);
+  height: var(--card-altura);
+  border-radius: 20px;
+  background: #000;
+  color: #fff;
+  scroll-snap-align: start;
+}
+.zeph-horizontal__progresso {
+  display: none;
+  height: 2px;
+  margin-inline: var(--margem-lateral);
+  background: #e5e5e5;
+  overflow: hidden;
+}
+.zeph-horizontal.is-pinned .zeph-horizontal__progresso { display: block; }
+.zeph-horizontal__progresso span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+@media (max-width: 900px) {
+  .zeph-horizontal { --card-largura: 82vw; --card-altura: 340px; --card-espaco: 16px; }
+}
+</style>
+
+<section class="zeph-horizontal" aria-label="Scroll horizontal">
+  <div class="zeph-horizontal__fixo">
+    <h2 class="zeph-horizontal__titulo">Scroll horizontal</h2>
+    <div class="zeph-horizontal__janela" tabindex="0" role="region" aria-label="Cards: use as setas para percorrer">
+      <div class="zeph-horizontal__trilho">
+        <!-- COLOQUE SEU CONTEÚDO DENTRO DOS CARDS ABAIXO -->
+        <article class="zeph-horizontal__card" aria-label="Card 1"></article>
+        <article class="zeph-horizontal__card" aria-label="Card 2"></article>
+        <article class="zeph-horizontal__card" aria-label="Card 3"></article>
+        <article class="zeph-horizontal__card" aria-label="Card 4"></article>
+        <article class="zeph-horizontal__card" aria-label="Card 5"></article>
+        <article class="zeph-horizontal__card" aria-label="Card 6"></article>
+      </div>
+    </div>
+    <div class="zeph-horizontal__progresso" aria-hidden="true"><span></span></div>
+  </div>
+</section>
+
+<script>
+/* Efeito de rolagem. Pode manter como está; não usa bibliotecas externas. */
+(() => {
+  const DISTANCIA_DO_TOPO = 0;    // Altura do menu fixo do site, se houver (ex.: 80).
+  const CORRIGIR_OVERFLOW = true; // Troca overflow:hidden dos blocos acima por overflow:clip (corta igual, mas não quebra o sticky).
+
+  // Um ancestral que realmente rola (ex.: um wrapper com altura fixa e overflow:auto).
+  function rolaDeVerdade(el, cs) {
+    return /(auto|scroll|overlay)/.test(cs.overflowY) && el.scrollHeight > el.clientHeight + 1;
+  }
+
+  // overflow hidden/auto em blocos acima é a causa nº 1 do sticky "não grudar".
+  function liberarAncestrais(el) {
+    for (let p = el.parentElement; p && p !== document.documentElement; p = p.parentElement) {
+      const cs = getComputedStyle(p);
+      if (cs.overflowX === 'visible' && cs.overflowY === 'visible') continue;
+      if (rolaDeVerdade(p, cs)) break; // é este que rola: o sticky funciona dentro dele
+      const x = cs.overflowX === 'visible' ? 'visible' : 'clip';
+      const y = (cs.overflowY === 'hidden' || cs.overflowY === 'clip') ? 'clip' : 'visible';
+      p.style.setProperty('overflow-x', x, 'important');
+      p.style.setProperty('overflow-y', y, 'important');
+    }
+  }
+
+  function quemRola(el) {
+    for (let p = el.parentElement; p && p !== document.documentElement; p = p.parentElement) {
+      if (rolaDeVerdade(p, getComputedStyle(p))) return p;
+    }
+    return window;
+  }
+
+  function ouvir(mq, fn) {
+    if (mq.addEventListener) mq.addEventListener('change', fn); else mq.addListener(fn);
+  }
+
+  function iniciar() {
+    document.querySelectorAll('.zeph-horizontal').forEach(section => {
+      if (section.dataset.horizontalPronto) return;
+      section.dataset.horizontalPronto = 'true';
+      const fixo = section.querySelector('.zeph-horizontal__fixo');
+      const janela = section.querySelector('.zeph-horizontal__janela');
+      const trilho = section.querySelector('.zeph-horizontal__trilho');
+      const progresso = section.querySelector('.zeph-horizontal__progresso span');
+      const desktop = matchMedia('(min-width: 901px)');
+      const reduzido = matchMedia('(prefers-reduced-motion: reduce)');
+      const toque = matchMedia('(pointer: coarse)');
+      const topo = Number(section.dataset.topo ?? DISTANCIA_DO_TOPO) || 0;
+      let ativo = false, distancia = 0, atual = 0, frame = 0, anterior = 0;
+      let modoJs = false, liberado = false, largura = 0, altura = 0;
+
+      const limitar = v => Math.min(distancia, Math.max(0, v));
+      const rolado = () => topo - section.getBoundingClientRect().top; // quanto já rolou dentro da seção
+
+      function posicionarFixo(y) {
+        fixo.style.transform = (ativo && modoJs) ? 'translate3d(0,' + y + 'px,0)' : '';
+      }
+
+      function desenhar(tempo) {
+        frame = 0;
+        if (!ativo) return;
+        const r = rolado();
+        const alvo = limitar(r);
+        if (!modoJs && r > 20 && r < distancia - 20 &&
+            Math.abs(fixo.getBoundingClientRect().top - topo) > 4) {
+          // Deveria estar grudado no topo e não está: o site bloqueia o sticky. Usa o plano B.
+          modoJs = true;
+          section.classList.add('modo-js');
+        }
+        posicionarFixo(alvo); // no plano B acompanha o scroll sem atraso
+        const dt = anterior ? Math.min(tempo - anterior, 64) : 16;
+        anterior = tempo;
+        atual += (alvo - atual) * (1 - Math.exp(-dt / 100));
+        if (Math.abs(alvo - atual) < .25) atual = alvo;
+        trilho.style.transform = 'translate3d(' + (-atual) + 'px, 0, 0)';
+        progresso.style.transform = 'scaleX(' + (distancia ? atual / distancia : 0) + ')';
+        if (atual !== alvo) frame = requestAnimationFrame(desenhar);
+        else anterior = 0;
+      }
+
+      function atualizar() {
+        if (ativo && !frame) frame = requestAnimationFrame(desenhar);
+      }
+
+      function medir() {
+        cancelAnimationFrame(frame);
+        frame = 0;
+        anterior = 0;
+        largura = window.innerWidth;
+        altura = window.innerHeight;
+        const visivel = altura - topo;
+        section.style.setProperty('--topo', topo + 'px');
+        section.style.setProperty('--altura', visivel + 'px');
+        distancia = Math.max(0, trilho.scrollWidth - janela.clientWidth);
+        ativo = desktop.matches && !reduzido.matches && distancia > 1;
+        if (ativo && CORRIGIR_OVERFLOW && !liberado) { liberado = true; liberarAncestrais(section); }
+        section.classList.toggle('is-pinned', ativo);
+        section.style.height = ativo ? (visivel + distancia) + 'px' : '';
+        janela.scrollLeft = 0;
+        atual = ativo ? limitar(rolado()) : 0;
+        posicionarFixo(atual);
+        trilho.style.transform = ativo ? 'translate3d(' + (-atual) + 'px, 0, 0)' : '';
+        progresso.style.transform = 'scaleX(' + (ativo ? atual / distancia : 0) + ')';
+        atualizar();
+      }
+
+      // capture:true pega o scroll da página e também de wrappers que rolam no lugar dela.
+      document.addEventListener('scroll', atualizar, { passive: true, capture: true });
+      window.addEventListener('resize', () => {
+        // Em telas de toque a barra do navegador some/aparece: ignora essas variações pequenas.
+        if (toque.matches && window.innerWidth === largura && Math.abs(window.innerHeight - altura) < 120) return;
+        medir();
+      }, { passive: true });
+      ouvir(desktop, medir);
+      ouvir(reduzido, medir);
+      janela.addEventListener('keydown', event => {
+        if (!ativo || event.target !== janela || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+        event.preventDefault();
+        quemRola(section).scrollBy({ top: event.key === 'ArrowRight' ? 320 : -320, behavior: 'auto' });
+      });
+      if ('ResizeObserver' in window) {
+        const observer = new ResizeObserver(medir);
+        observer.observe(janela);
+        observer.observe(trilho);
+      }
+      medir();
+      if (document.fonts) document.fonts.ready.then(medir);
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar, { once: true });
+  else iniciar();
+})();
+</script>

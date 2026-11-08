@@ -1,0 +1,26 @@
+selector::before{
+content:"";
+position: absolute;
+top: 10%; /*defina o posicionamento da luz ao topo*/
+left: inherit;
+right: 50%; /*defina o posicionamento da luz*/
+width: 500px;  /*defina o tamanho da luz*/
+height: 600px; /*defina o tamanho da luz*/
+background: #7247ff; /*defina a cor da luz*/
+border-radius: 100%;
+filter: blur(150px); /*defina o desfoque*/
+opacity: 0.3;
+mix-blend-mode: screen;
+animation: luz 5s infinite; /*defina o tempo da animação*/
+pointer-events: none;
+}
+
+
+@keyframes luz{
+0%, 100%{
+opacity: 0;
+}
+50%{
+opacity: 0.5;
+}
+}

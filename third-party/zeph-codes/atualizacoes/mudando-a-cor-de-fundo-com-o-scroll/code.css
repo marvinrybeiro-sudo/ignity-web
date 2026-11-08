@@ -1,0 +1,9 @@
+.cor{
+    background: #ffffff !important;
+    transition: 1.2s !important;
+}
+
+.cor .elementor-heading-title{
+    color: #000000 !important;
+    transition: 1.2s !important;
+}

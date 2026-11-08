@@ -1,0 +1,12 @@
+selector .swiper-slide {
+    transition: all 1.4s ease !important;
+    scale:0.9;
+    filter: blur(3px);
+}
+
+selector .swiper-slide-prev,
+selector .swiper-slide-next {
+  scale: 1.1;
+  transition: all 1.4s ease !important;
+  filter: blur(0px);
+}

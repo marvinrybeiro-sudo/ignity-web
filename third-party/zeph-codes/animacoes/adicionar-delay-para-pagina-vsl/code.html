@@ -1,0 +1,26 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+const checagem = localStorage.getItem('visitours6');
+const botao = document.getElementById('botao');
+
+if(checagem){
+    botao.classList.remove('delay');
+}else{
+    $('.delay').hide();
+    $('.botao').hide();
+    setTimeout(function() {
+        $('.botao').show();
+    }, 275 * 1000);  // Delay de 4 minutos e 35 segundos para .botao
+
+    setTimeout(function() {
+        $('.delay').show();
+    }, 317 * 1000);  // Delay de 5 minutos e 17 segundos para .delay
+}
+</script>
+
+<script>
+  setTimeout(function(){
+    localStorage.setItem('visitours6', 'true');
+  }, 275 * 1000);  // Configura localStorage após 4 minutos e 35 segundos
+</script>

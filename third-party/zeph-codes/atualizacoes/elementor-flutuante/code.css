@@ -1,0 +1,25 @@
+selector {
+  animation: floatIcon3D 3s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+@keyframes floatIcon3D {
+  0% {
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  25% {
+    transform: translate3d(-4px, -8px, 4px) rotateX(2deg) rotateY(-3deg) rotateZ(1deg);
+  }
+
+  50% {
+    transform: translate3d(5px, -3px, -4px) rotateX(-2deg) rotateY(3deg) rotateZ(-1deg);
+  }
+
+  75% {
+    transform: translate3d(-3px, 6px, 3px) rotateX(2deg) rotateY(-2deg) rotateZ(1deg);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}}

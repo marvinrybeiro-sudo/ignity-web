@@ -1,0 +1,123 @@
+<span id="alertWapp">1</span>
+<div id="msgTooltip">Precisa de ajuda?</div>
+
+<!-- Ícone WhatsApp -->
+<div id="whatsappWidget">
+    <img src="https://zeph.com.br/wp-content/uploads/2025/12/zap.svg" alt="WhatsApp" id="zapIcon" />
+</div>
+
+<style>
+    /* Posicionamento do botão ÍCONE do Elementor (necessário) */
+    #whatsappWidget {
+        position: fixed;
+        right: 16px;
+        bottom: 20px;
+        z-index: 10;
+        cursor: pointer;
+    }
+
+    #whatsappWidget img {
+        width: 60px; 
+        height: 60px;
+        display: block;
+    }
+
+    /* Estilo do Alerta (bolinha vermelha) */
+    #alertWapp {
+        position: fixed;
+        right: 20px;
+        bottom: 70px;
+        width: 17px;
+        height: 17px;
+        z-index: 12;
+        background: red;
+        color: #fff;
+        font-size: 11px;
+        text-align: center;
+        border-radius: 50%;
+        font-weight: bold;
+        line-height: 17px;
+        visibility: hidden;
+    }
+
+    /* Estilo do Tooltip */
+    #msgTooltip {
+        position: fixed;
+        right: 95px;
+        width: 72px;
+        bottom: 35px;
+        background: #fff;
+        padding: 4px 6px;
+        font-size: 12px;
+        line-height: 1.1em;
+        border-radius: 10px;
+        border: 1px solid #e2e2e2;
+        box-shadow: 2px 2px 3px #99999990;
+        font-family: 'Space Grotesk', sans-serif;
+        transform: translateX(100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.5s, opacity 0.5s;
+        z-index: 12;
+        text-wrap: balance;
+        cursor: pointer;
+    }
+
+    #msgTooltip::after {
+        content: '';
+        position: absolute;
+        right: -7px; 
+        bottom: 12px;
+        width: 0;
+        height: 0;
+        border-top: 7px solid transparent;
+        border-bottom: 7px solid transparent;
+        border-left: 7px solid #fff;
+        z-index: 12;
+    }
+</style>
+
+<script>
+    function showTooltip() {
+        const tooltip = document.getElementById("msgTooltip");
+        tooltip.style.visibility = "visible";
+        tooltip.style.transform = "translateX(0)";
+        tooltip.style.opacity = "1";
+    }
+
+    function hideTooltip() {
+        const tooltip = document.getElementById("msgTooltip");
+        tooltip.style.transform = "translateX(100%)";
+        tooltip.style.opacity = "0";
+        setTimeout(() => tooltip.style.visibility = "hidden", 500);
+    }
+
+    function showAlert() {
+        document.getElementById("alertWapp").style.visibility = "visible";
+    }
+
+    setTimeout(showTooltip, 5000);
+    setTimeout(hideTooltip, 15000);
+
+    setInterval(() => {
+        showTooltip();
+        setTimeout(hideTooltip, 10000);
+    }, 25000);
+
+    setTimeout(showAlert, 15000);
+
+    document.getElementById("msgTooltip").onclick = hideTooltip;
+</script>
+
+
+<script>
+    const wappLink = "https://wa.me/message/JZ7CF6ITCFMFP1";
+
+    document.getElementById("whatsappWidget").onclick = () => {
+        window.open(wappLink, "_blank");
+    };
+
+    document.getElementById("msgTooltip").onclick = () => {
+        window.open(wappLink, "_blank");
+    };
+</script>

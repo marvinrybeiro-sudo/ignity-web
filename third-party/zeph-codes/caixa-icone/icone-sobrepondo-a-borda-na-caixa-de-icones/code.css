@@ -1,0 +1,9 @@
+.box{
+border: 1px solid #fff; /*configure a borda*/
+border-radius: 6px; /*configure o arredondamento da borda*/
+}
+
+.elementor-icon-box-icon, .elementor-icon-box-content{
+    left: -32px !important; /*puxe os elementos para a esquerda para sobrepor a borda*/
+    position: relative
+    }

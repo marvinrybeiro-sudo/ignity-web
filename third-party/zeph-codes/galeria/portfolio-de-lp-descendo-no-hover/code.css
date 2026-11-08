@@ -1,0 +1,8 @@
+selector .e-gallery-item .e-gallery-image.e-gallery-image{
+    background-position: top center; /* Posicionamento inicial do plano de fundo */
+    transition: background-position 5s ease-in-out; /* Transição suave do plano de fundo ao passar o mouse */
+}
+
+selector .e-gallery-item:hover .e-gallery-image{
+    background-position: bottom center; /* Posicionamento do plano de fundo ao passar o mouse */
+}

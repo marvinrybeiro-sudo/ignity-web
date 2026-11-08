@@ -1,0 +1,62 @@
+selector .elementor-button::before {
+    content: "";
+    border-radius: inherit;
+    transition: all .3s;
+    background: linear-gradient(45deg, #7247ff, transparent, #7247ff, #7247ff, transparent, #7247ff);
+    background-size: 1800%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    width: calc(100% + 5px);
+    height: calc(100% + 5px);
+    animation: btn 5s linear infinite;
+}
+
+selector .elementor-button::after {
+    box-shadow: 0 0px 70px -2px #b6abff50 /*cor do brilho*/;
+    content: "";
+    border-radius: inherit;
+    transition: 0.5s all;
+    background: linear-gradient(to left, #210471, #4c0de2); /*cor do BG*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    transition: 5s all;
+}
+
+selector .elementor-button:hover{
+    scale: 1.05; /*crescimento no hover*/
+}
+
+selector .elementor-button{
+    transition: 0.5s all;
+}
+
+selector .elementor-button *{
+    z-index: 3!important;
+}
+
+@keyframes btn{ /*animação*/
+0% {
+    background-position: 0%;
+}
+50% {
+    background-position: 50%;
+}
+100% {
+    background-position: 100%;
+}
+}
+
+selector .elementor-button:hover::after {
+     background: linear-gradient(20deg, #0095fe, transparent, #01bfec, #a5eeff, transparent, #0095fe);
+  background-size: 1200%;
+  transition: 0.5s all;
+     box-shadow: 0 0px 100px -2px #61a2ff70 /*cor do brilho no hover*/;
+}

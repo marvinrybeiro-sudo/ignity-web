@@ -1,0 +1,45 @@
+/*CSS DO CONTAINER*/
+selector {
+  position: relative;
+  width: 100%;
+}
+
+/*CSS DA LISTA DE ÍCONES*/
+selector .elementor-widget-container {
+  overflow: visible !important;
+  white-space: nowrap !important;
+}
+
+selector .elementor-icon-list-items {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 15px;
+  width: max-content;
+  animation: carrossel 40s linear infinite;
+}
+
+selector .elementor-inline-item {
+  border-radius: 11.318px;
+  border: 1.509px solid rgba(0, 32, 67, 0.25);
+  background: #0B1E33;
+  padding: 10px 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  transition: 0.7s ease all;
+}
+
+selector .elementor-inline-item:hover {
+  background: #24405E;
+  transition: 0.7s ease all;
+}
+
+@keyframes carrossel {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

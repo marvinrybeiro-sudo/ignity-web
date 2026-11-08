@@ -1,0 +1,141 @@
+/*CSS 01*/
+selector{
+    background: radial-gradient(68.5% 119.738% at 49.1% 100%, rgba(0, 85, 255, 0.5) 0%, rgba(82, 139, 255, 0.5) 100%);
+    border-radius: 1000px;
+    box-shadow: #0055FF66 0px 0px 40px 0px;
+}
+
+selector:hover{
+    box-shadow: #0055FF66 0px 0px 80px 10px;
+}
+
+/*CSS 02*/
+selector{
+    overflow: hidden;
+    border-radius: 908px;
+    cursor: pointer;
+    transition: transform 0.4s ease all;
+}
+
+selector:hover{
+    transform: scale(0.98);
+}
+
+selector .elementor-button{
+    transition: 0.5s;
+    border-radius: 2000px !important;
+    background: transparent !important;
+    padding: 20px 0px !important;
+}
+
+selector .elementor-button-text,
+selector .elementor-button-icon{
+    position: relative;
+    z-index: 3;
+}
+
+/*cor de fundo*/
+selector .elementor-button::before {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(53.6% 100% at 50% 100%, rgb(14, 150, 254) 0%, rgb(0, 85, 255) 100%);
+  z-index: 3;
+  transition: opacity 0.2s linear;
+  opacity: 1;
+  width: calc(100% - 3px);
+  height: calc(100% - 3px);
+    border-radius: 800px;
+    transition: 0.5s;
+}
+
+/*cor da borda*/
+selector .elementor-button::after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff30; /*altere a cor aqui*/
+  z-index: 1;
+  transition: opacity 0.3s linear;
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+    border-radius: 8px;
+}
+
+/*cor do brilho*/
+selector::before {
+  position: absolute;
+  content: "";
+  top: -40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white; /*altere a cor aqui*/
+  z-index: 2;
+  transition: opacity 0.2s linear;
+  opacity: 1;
+  width: 20px;
+  height: 180px;
+  filter: blur(10px);
+    border-radius: 8px;
+  animation: rodar 5s infinite linear;
+  transform-origin: center bottom;
+}
+
+/*animação do brilho*/
+@keyframes rodar{
+    0%{
+        transform: translate(-50%, -50%) rotate(0);
+    }
+    100%{
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+
+.elementor-button-content-wrapper::after {
+  content: "ㅤ";
+  position: absolute;
+  top: 68px;
+  right: 78px;
+  z-index: 999;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%23fff'%3E%3Cpath d='M7.146 7.146a.75.75 0 0 1 1.061 0l8.5 8.5a.75.75 0 1 1-1.06 1.061l-8.5-8.5a.75.75 0 0 1 0-1.06z'/%3E%3Cpath d='M16.177 6.427a.75.75 0 0 1 .75.75v9a.75.75 0 0 1-.75.75h-9a.75.75 0 0 1 0-1.5h8.25v-8.25a.75.75 0 0 1 .75-.75z'/%3E%3C/g%3E%3C/svg%3E") no-repeat center/contain;
+  padding: 11px;
+  opacity: 1;
+  rotate: -90deg;                /* ⬅️ mantém a mesma rotação da seta */
+  opacity: 0;
+  transition: 0.5s ease all;
+}
+
+.bt:hover .elementor-button-content-wrapper::after {
+    content: "ㅤ";
+  position: absolute;
+  top: 18px;
+  right: 38px;
+  z-index: 999;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%23fff'%3E%3Cpath d='M7.146 7.146a.75.75 0 0 1 1.061 0l8.5 8.5a.75.75 0 1 1-1.06 1.061l-8.5-8.5a.75.75 0 0 1 0-1.06z'/%3E%3Cpath d='M16.177 6.427a.75.75 0 0 1 .75.75v9a.75.75 0 0 1-.75.75h-9a.75.75 0 0 1 0-1.5h8.25v-8.25a.75.75 0 0 1 .75-.75z'/%3E%3C/g%3E%3C/svg%3E") no-repeat center/contain;
+  opacity: 1;
+  rotate: -90deg;                /* ⬅️ mantém a mesma rotação da seta */
+  transition: 0.5s ease all;
+}
+
+
+.elementor-button-icon, .elementor-button-text{
+        align-self: center;
+}
+
+.elementor-button-icon{
+    font-size: 35px;
+    rotate: -90deg;
+    align-self: center;
+    transition: 0.3s ease all
+}
+
+.bt:hover .elementor-button-icon{
+    transform: translate(120%, 120%);
+    opacity: 0;
+}

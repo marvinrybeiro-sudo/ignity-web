@@ -1,0 +1,50 @@
+.elementor-image-box-img,
+.elementor-image-box-description,
+.elementor-image-box-title{
+    z-index: 2;
+    position: relative;
+}
+
+.elementor-image-box-wrapper{ /*card estático*/
+    background: linear-gradient(286deg, #440dca, #7247ff); 
+    border-radius: 12px;
+    padding: 80px 30px;
+    transition: 0.5s ease-out;
+    z-index: 1;
+}
+
+.elementor-image-box-wrapper::before{ /*card no hover*/
+    content: "";
+    background-color: #fff;
+    border-radius: 5px;
+    bottom: 1px;
+    content: "";
+    left: 1px;
+    opacity: 0;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    transition: opacity .25s ease-in-out;
+    z-index: 1
+}
+
+.elementor-image-box-wrapper:hover::before {
+    opacity: 1
+}
+
+.elementor-image-box-wrapper:hover /*descrição no hover*/
+.elementor-image-box-description{
+    color: #210471 !important;
+}
+
+.elementor-image-box-wrapper:hover /*titulo no hover*/
+.elementor-image-box-title{
+    color: #210471 !important;
+}
+
+selector .elementor-image-box-img,
+selector .elementor-image-box-description,
+selector .elementor-image-box-title{
+    z-index: 2;
+    position: relative;
+}

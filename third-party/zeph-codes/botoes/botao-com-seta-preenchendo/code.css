@@ -1,0 +1,31 @@
+selector .elementor-button{
+    position: relative;
+    border-radius: 400px;
+    padding: 25px 66px 25px 35px !important;
+    transition: all 500ms ease;
+    background: linear-gradient(90deg, #4C0DE2 0%, #3709AA 100%);
+}
+
+selector .elementor-button-icon{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    background: #fff;
+    border-radius: 400px;
+    padding: 8px;
+    width: 32px;
+    height: 32px;
+    transition: all 500ms ease;
+    color: #4C0DE2 !important;
+}
+
+selector .elementor-button-icon svg path{
+    fill: #4C0DE2 !important;
+    transition: all 500ms ease;
+}
+
+selector .elementor-button:hover .elementor-button-icon{
+    width: calc(100% - 40px);
+}

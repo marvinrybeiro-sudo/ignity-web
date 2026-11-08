@@ -1,0 +1,143 @@
+@media only screen and (max-width: 600px) {
+.bt1{
+    margin-left: -50px;
+}
+ .elementor-button, .elementor-button-link, .elementor-size-sm{
+    overflow: hidden !important;
+    }
+    
+    
+}
+
+
+.bt1 .elementor-button{
+    background: linear-gradient(0deg, #6BE09A, #75FBBF);
+    filter: saturate(150%);
+    border-radius: 1000px;
+    overflow: hidden !important;
+    margin-bottom: -06px !Important;
+    }
+
+.bt1 .elementor-button-text{
+    z-index: 9;
+}
+
+
+ /*luz que fica envolta do bot*/
+
+.bt1 .elementor-button::after{
+    content: "";
+    background: linear-gradient(-90deg, white, #ffffff40);
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 42%;
+    height: 3px;
+    animation: luzz 2s infinite ease
+}
+
+@keyframes luzz{
+    0%{
+    transform: translatex(-100px);
+    }
+    100%{
+    transform: translatex(200px);
+    }
+}
+
+.bt1 .elementor-button::before{
+    content: "";
+    background: linear-gradient(90deg, white, #ffffff40);
+    position: absolute;
+    top: 97%;
+    left: 0%;
+    width: 42%;
+    height: 3px;
+    animation: luzz2 3.5s infinite ease
+}
+
+@keyframes luzz2{
+    0%{
+    transform: translatex(200px);
+    }
+    100%{
+    transform: translatex(-100px);
+    }
+}
+
+
+
+ /*seta bot*/
+ 
+ .bt1:hover .elementor-button-wrapper::after{
+    content: "";
+    background: url("https://propseguro.com/wp-content/uploads/2024/07/Vector.svg");
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: calc(50% + 15px);
+    rotate: 45deg;
+    background-repeat: no-repeat;
+    background-position: center right;
+    transition: 0.5s ease all;
+}
+
+.bt1 .elementor-button-wrapper::after{
+    content: "";
+    background: url("https://propseguro.com/wp-content/uploads/2024/07/Vector.svg");
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: calc(50% + 30px);
+    transform: translate(-50%, -50%);
+    background-repeat: no-repeat;
+    background-position: center right;
+    transition: 0.7s ease all;
+}
+
+
+ /*background white atras do bot*/
+
+.bt1 .elementor-button-wrapper::before{
+    content: "";
+    background: #ffffff15;
+    width: 135%;
+    height: 130%;
+    position: absolute;
+    top: 50%;
+    left: -04%;
+    transform: translatey(-50%);
+    border-radius: 1000px;
+    border: solid 1px #ffffff15;
+    transition: 0.7s ease all;
+
+}
+
+.bt1:hover .elementor-button-wrapper::before{
+    content: "";
+    background: #ffffff25;
+    width: 135%;
+    height: 130%;
+    position: absolute;
+    top: 50%;
+    left: -04%;
+    transform: translatey(-50%);
+    border-radius: 1000px;
+    border: solid 1px #ffffff15;
+    transition: 0.7s ease all;
+}
+
+
+.bt1 .elementor-button-icon{
+    position: absolute;
+    top: 50%;
+    left: 110%;
+    transform: translatey(-50%);
+    transition: 1s ease all;
+}
+
+.bt1:hover .elementor-button-icon{
+    transform: translatey(-50%) rotate(45deg);
+}

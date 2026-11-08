@@ -1,0 +1,66 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  let tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".pai",
+      start: "top 80%", 
+      end: "bottom 50%",
+      scrub: true,
+      //markers: true
+    }
+  });
+
+  gsap.utils.toArray(".text").forEach((el, i) => {
+    gsap.set(el, { opacity: 0, filter: "blur(10px)", y: 15 }); // Estado inicial
+    
+    tl.to(el, {
+      opacity: 1,
+      filter: "blur(0px)",
+      y: 0,
+      duration: 0.6,
+      ease: "power2.out"
+    }, "+=" + (i * 0.5)); // Ajustando o tempo para garantir animação sequencial
+  });
+</script>
+
+
+<script>
+  // Registrar o plugin ScrollTrigger
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Selecionar o elemento com a classe .linee
+  const lineeElement = document.querySelector('.linee');
+
+  // Criar um elemento dinâmico para simular o ::after no DOM
+  const afterElement = document.createElement('div');
+  afterElement.style.position = 'absolute';
+  afterElement.style.top = '20px';
+  afterElement.style.left = window.innerWidth <= 768 ? '-20px' : '-20px'; // Definir o left com base no tamanho da janela
+  afterElement.style.width = '4px';
+  afterElement.style.height = '0%';
+  afterElement.style.background = 'linear-gradient(0deg, black, black)';
+   afterElement.style.transform = 'scaleY(0.9)'; // Aplicando a transformação scaleY
+  lineeElement.style.position = 'relative';
+  lineeElement.appendChild(afterElement);
+
+  // Atualizar o left dinamicamente no resize
+  window.addEventListener('resize', () => {
+    afterElement.style.left = window.innerWidth <= 768 ? '-8px' : '-20px';
+  });
+
+  // Animar a altura do elemento ::after com GSAP e ScrollTrigger
+  gsap.to(afterElement, {
+    height: '100%',
+    scrollTrigger: {
+      trigger: lineeElement,
+      start: "top 80%", 
+      end: "bottom 30%",
+      scrub: true,
+      //markers: false // Exibir os markers para depuração
+    }
+  });
+</script>

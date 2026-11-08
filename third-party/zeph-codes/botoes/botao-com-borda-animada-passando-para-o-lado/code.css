@@ -1,0 +1,42 @@
+.btn9 {
+  width: 250px; /*largura do botão*/
+  height: 64px; /*altura do botão*/
+  border-radius: 10px;
+  background: linear-gradient(to right,#210471,#937cff,#210471,#210471,#937cff,#210471);/* cor da borda*/
+  background-size: 250%;
+  background-position: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition-duration: 1s;
+  overflow: hidden;
+}
+
+.btn9::before {
+  position: absolute;
+  content: "QUERO ME INSCREVER"; /*texto do botão*/
+  color: #937cff;  /*cor do texto do botão*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 97%;
+  height: 90%;
+  border-radius: 8px;
+  transition-duration: 1s;
+  background-color: rgba(0, 0, 0, 0.842); /*bg do botão*/
+  background-size: 200%;
+}
+
+.btn9:hover {
+  background-position: right;
+  transition-duration: 1s;
+}
+
+.btn9:hover::before {
+  background-position: right;
+  transition-duration: 1s;
+}
+
+.btn9:active {
+  transform: scale(0.95);
+}

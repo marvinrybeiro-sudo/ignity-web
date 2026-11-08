@@ -1,0 +1,46 @@
+{
+  "id": "carrossel-vinculado-ao-scroll---elementor-+-gsap-1763602830445",
+  "titulo": "Carrossel vinculado ao scroll - Elementor + GSAP",
+  "modulo": "Módulo: Carrossel",
+  "categoria": "carrosseis",
+  "origem": "Zeph Code$ (codigosuteis.zeph.com.br)",
+  "licenca": "privada-zeph-codes — uso próprio, NÃO redistribuir",
+  "criado": "2025-11-20T01:40:31.000Z",
+  "atualizado": "2025-11-20T01:40:31.000Z",
+  "gif": "https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1763602831220.png",
+  "video": null,
+  "arquivos": [
+    "html",
+    "css"
+  ],
+  "peso": {
+    "bytes": 3748,
+    "gzip": 1456
+  },
+  "deps": {
+    "scriptsExternos": [
+      "https://unpkg.com/lenis@1.1.18/dist/lenis.min.js",
+      "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js",
+      "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"
+    ],
+    "imports": [],
+    "gsap": true,
+    "scrollTrigger": true,
+    "lenis": true,
+    "jquery": false,
+    "swiper": false,
+    "three": false
+  },
+  "tecnica": {
+    "temJS": true,
+    "intersectionObserver": false,
+    "scrollTimelineCSS": false,
+    "requestAnimationFrame": true,
+    "canvasWebGL": false
+  },
+  "a11y": {
+    "prefersReducedMotion": false
+  },
+  "referenciaTerceiros": null,
+  "elementorJson": false
+}

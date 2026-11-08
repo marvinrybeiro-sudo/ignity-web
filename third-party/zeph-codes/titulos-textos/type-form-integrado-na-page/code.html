@@ -1,0 +1,68 @@
+<!-- Popup -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var formElements = document.querySelectorAll('.form');
+    var formularioElement = document.querySelector('.formulario');
+    var fecharElement = document.querySelector('.fechar');
+
+    formElements.forEach(function(formElement) {
+        formElement.addEventListener('click', function() {
+            formularioElement.classList.add('formulario-ativo');
+        });
+    });
+
+    fecharElement.addEventListener('click', function() {
+        formularioElement.classList.remove('formulario-ativo');
+    });
+});
+
+</script>
+
+
+<!-- Formulário -->
+<style>
+  /* Esconde ambos por padrão */
+  .typeform-desktop, .typeform-mobile {
+    display: none;
+  }
+
+  /* Mostra o desktop em telas maiores que 768px */
+  @media (min-width: 769px) {
+    .typeform-desktop {
+      display: block;
+    }
+  }
+
+  /* Mostra o mobile em telas menores que 768px */
+  @media (max-width: 768px) {
+    .typeform-mobile {
+      display: block;
+    }
+  }
+</style>
+
+<!-- Versão Desktop -->
+<div class="typeform-desktop">
+  <iframe
+    src="COLOQUE O LINK"
+    width="100%"
+    height="800px"
+    frameborder="0"
+    style="border: none;"
+    allow="camera; microphone; autoplay; encrypted-media;"
+    loading="lazy">
+  </iframe>
+</div>
+
+<!-- Versão Mobile -->
+<div class="typeform-mobile">
+  <iframe
+    src="COLOQUE O LINK"
+    width="100%"
+    height="500px"
+    frameborder="0"
+    style="border: none;"
+    allow="camera; microphone; autoplay; encrypted-media;"
+    loading="lazy">
+  </iframe>
+</div>

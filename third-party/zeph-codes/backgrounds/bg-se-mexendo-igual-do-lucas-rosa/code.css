@@ -1,0 +1,27 @@
+selector{
+    overflow: hidden;
+}
+
+selector::before{
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: url("LINK-AQUI") !important; /*Adicione o link da imagem*/
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    filter: blur(200px);
+    animation: 12s linear infinite mov;
+    pointer-events: none;
+}
+
+@keyframes mov{
+    0%, 100% {
+        transform: scale(1);
+        filter: blur(200px) saturate(1);
+    }
+    50% {
+        transform: scale(2);
+        filter: blur(200px) saturate(1.82);
+    }
+}

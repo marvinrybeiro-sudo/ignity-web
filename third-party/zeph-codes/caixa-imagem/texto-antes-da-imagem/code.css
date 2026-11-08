@@ -1,0 +1,12 @@
+selector .elementor-image-box-wrapper{
+    display: flex;
+    align-content: center !important;
+    align-items: center;
+}
+
+.elementor-image-box-img{
+    order: 1;
+    padding-left: 1em;
+    align-items: center !important;
+    margin-bottom: 0 !important;
+}

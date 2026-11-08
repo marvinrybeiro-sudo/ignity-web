@@ -1,0 +1,33 @@
+@media (min-width:768px){
+selector{
+    transition: all 0.5;
+}
+
+selector:hover .blur{
+    filter: blur(3px);
+    transform: scale(0.99);
+}
+
+.blur{
+    transform: scale(1);
+    transition: all .5s;
+}
+
+.blur:hover{
+    transform: scale(1.03) !important;
+    filter: blur(0px) !important;
+    box-shadow: 0 0 60px 0 #7247ff30 !important; /*mude o brilho aqui*/ 
+}
+
+.conteiner{
+    pointer-events: none;
+}
+
+.blur{
+    pointer-events: visible !important
+}
+
+selector .hover-brilho:hover{
+   box-shadow: 0 0 500px 0 #7247ff !important; 
+}
+}

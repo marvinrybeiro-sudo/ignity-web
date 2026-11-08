@@ -1,0 +1,194 @@
+<!-- BOTÃO 2 ETAPAS UPSELL -->
+<div class="upsell-decline-wrapper">
+  <button id="upsellDeclineBtn" class="upsell-decline-btn" type="button">
+    <!-- Texto inicial -->
+    <span class="btn-label label-step-1">Não obrigado</span>
+
+    <!-- Texto da segunda etapa -->
+    <span class="btn-label label-step-2">Tem certeza?</span>
+
+    <!-- Loader que só aparece no final -->
+    <span class="btn-loader"></span>
+  </button>
+</div>
+
+<style>
+  /* Apenas para posicionar melhor se precisar */
+  .upsell-decline-wrapper {
+    display: inline-block;
+  }
+
+  /* Estilo base do botão */
+  .upsell-decline-btn {
+    position: relative;
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #ffffff; /* fundo branco na etapa 1 */
+    color: #222;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px;
+
+    /* Transições suaves */
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease,
+      transform 0.1s ease;
+  }
+
+  /* Hover que você deixou no código */
+  .upsell-decline-btn:hover {
+    position: relative;
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+    color: #22222280; /* leve alteração de cor no hover */
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px;
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease,
+      transform 0.1s ease;
+  }
+
+  /* Clique dá uma leve reduzida pra parecer real */
+  .upsell-decline-btn:active {
+    transform: scale(0.97);
+  }
+
+  /* Evita clique enquanto está carregando */
+  .upsell-decline-btn:disabled {
+    cursor: default;
+  }
+
+  /* Configuração dos textos empilhados */
+  .btn-label {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  /* Texto 1 visível */
+  .label-step-1 {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  /* Texto 2 escondido até chegar a etapa certa */
+  .label-step-2 {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+
+  /* Estado quando entra no "Tem certeza?" */
+  .upsell-decline-btn.state-confirm {
+    background-color: #e53935; /* vermelho */
+    border-color: #e53935;
+    color: #ffffff; /* texto branco */
+  }
+
+  /* Esconde o texto da etapa 1 */
+  .upsell-decline-btn.state-confirm .label-step-1 {
+    opacity: 0;
+    transform: translate(-50%, -8px);
+  }
+
+  /* Mostra o texto da etapa 2 */
+  .upsell-decline-btn.state-confirm .label-step-2 {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  /* Loader visual */
+  .btn-loader {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #ffffff;
+    animation: upsell-spin 0.7s linear infinite;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+  }
+
+  /* Estado final antes de redirecionar */
+  .upsell-decline-btn.state-loading {
+    background-color: #e53935;
+    border-color: #e53935;
+    color: #ffffff;
+  }
+
+  /* Esconde os textos */
+  .upsell-decline-btn.state-loading .btn-label {
+    opacity: 0;
+  }
+
+  /* Mostra só o loader */
+  .upsell-decline-btn.state-loading .btn-loader {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Animação do loader */
+  @keyframes upsell-spin {
+    to { transform: rotate(360deg); }
+  }
+</style>
+
+<script>
+  (function () {
+    // Pega o botão
+    const btn = document.getElementById("upsellDeclineBtn");
+    if (!btn) return;
+
+    // Troque aqui para o link real da sua página de upsell
+    const targetUrl = "https://seu-link-de-upsell.com";
+
+    // Controle interno de qual etapa está
+    let step = 1;
+
+    btn.addEventListener("click", function () {
+
+      // PRIMEIRO CLIQUE → muda para "Tem certeza?"
+      if (step === 1) {
+        step = 2;
+        btn.classList.add("state-confirm");
+        return;
+      }
+
+      // SEGUNDO CLIQUE → ativa loader e redireciona
+      if (step === 2) {
+        step = 3;
+        btn.classList.add("state-loading");
+        btn.disabled = true; // bloqueia mais cliques
+
+        // Pequeno delay só para o loader aparecer bonito
+        setTimeout(function () {
+          window.location.href = targetUrl;
+        }, 800);
+      }
+    });
+  })();
+</script>

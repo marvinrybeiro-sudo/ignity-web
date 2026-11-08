@@ -1,0 +1,11 @@
+# Linhas caindo na diagonal
+
+> Módulo: Backgrounds · categoria `backgrounds` · **licença privada (Zeph Code$) — não redistribuir**
+
+1. Adicione o código abaixo no conteúdo de um widget HTML
+2. Adicione o código abaixo no CSS personalizado
+3. Aumente o z-index dos elementos da seção para 1 ou mais
+
+![preview](https://images.zeph.com.br/rota_upload_video/gif/imagem/snippet-file-1764181737865.gif)
+
+Arquivos: `code.html`, `code.css` · peso 10.9 KB gzip

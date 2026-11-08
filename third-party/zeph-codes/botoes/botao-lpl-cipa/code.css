@@ -1,0 +1,16 @@
+.elementor-button{
+    animation: 3.4s cubic-bezier(.2,.5,.9,.6) 2s infinite textura;
+    background-image: linear-gradient(45deg,#f22982,#71143e,#f22982,#71143e);  /*defina a cor do BG aqui*/
+    background-size: 400% 200%;
+    transition: all .8s;
+    }
+
+@keyframes textura {
+            0% {
+                background-position: 0 0
+            }
+
+            100% {
+                background-position: 100% 0
+            }
+        }

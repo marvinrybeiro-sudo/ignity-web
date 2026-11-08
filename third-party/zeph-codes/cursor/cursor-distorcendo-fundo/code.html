@@ -1,0 +1,184 @@
+<!--
+CURSOR DISTORCENDO FUNDO
+1. Cole este bloco inteiro em um widget HTML. Não precisa instalar bibliotecas.
+2. Troque o texto do <h2> e a frase do <p> abaixo.
+3. Personalize as cores HEX e a altura nas variáveis CSS de .cif-hero.
+4. No JS: RAIO controla a largura do rastro, FORCA a distorção e DURACAO
+   quanto tempo a tinta leva para desaparecer. O efeito segue o ponteiro de verdade.
+5. O exemplo gera o fundo e as cores por código: não inclui imagens/3D do vídeo.
+   Para usar em outra seção, mantenha o canvas e a estrutura deste bloco.
+6. No celular, passe o dedo. A rolagem vertical continua livre. Movimento reduzido
+   ou WebGL indisponível: o título permanece visível, sem animação.
+Pode repetir o bloco na página: cada cópia funciona de forma independente.
+-->
+<style>
+.cif-hero{
+  --cif-papel:#f2f2ed; --cif-tinta:#111111;
+  --cif-cor-1:#c6ff32; --cif-cor-2:#a88aff; --cif-cor-3:#ffacd1;
+  --cif-altura:540px;
+  position:relative;isolation:isolate;overflow:hidden;box-sizing:border-box;
+  width:100%;height:var(--cif-altura);min-height:300px;
+  background:var(--cif-papel);color:var(--cif-tinta);touch-action:pan-y;
+  font-family:Arial,Helvetica,sans-serif;
+}
+.cif-hero *, .cif-hero *::before, .cif-hero *::after{box-sizing:border-box}
+.cif-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;pointer-events:none}
+.cif-title{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  margin:0!important;padding:20px;font:900 clamp(42px,13vw,180px)/1 Arial,Helvetica,sans-serif;
+  letter-spacing:-.07em;color:var(--cif-tinta);text-align:center;pointer-events:none;z-index:1}
+.cif-hero.cif-ready .cif-title{opacity:0}
+.cif-caption{position:absolute;left:clamp(20px,4%,56px);top:30px;z-index:2;
+  margin:0!important;max-width:250px;font:500 14px/1.4 Arial,Helvetica,sans-serif;pointer-events:none}
+.cif-note{position:absolute;left:clamp(20px,4%,56px);bottom:26px;z-index:2;
+  font:12px/1.4 Arial,Helvetica,sans-serif;pointer-events:none}
+@media(max-width:600px){.cif-hero{height:380px}.cif-caption{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.cif-hero.cif-ready .cif-title{opacity:1}.cif-canvas{display:none}}
+</style>
+<section class="cif-hero" aria-label="Exemplo de fundo interativo">
+  <canvas class="cif-canvas" aria-hidden="true"></canvas>
+  <p class="cif-caption">Uma ideia ganha forma.<br>Um movimento muda tudo.</p>
+  <h2 class="cif-title">IMAGINE</h2>
+  <span class="cif-note">Mova o cursor e explore.</span>
+</section>
+<script>
+(function(){
+  'use strict';
+  const root=document.currentScript.previousElementSibling;
+  if(!root || !root.classList.contains('cif-hero'))return;
+  const RAIO=0.17;     // Fração da altura: 0.10 = fino; 0.22 = largo.
+  const FORCA=0.024;   // Deslocamento do fundo: 0.015 = suave; 0.06 = forte.
+  const DURACAO=1.65;  // Segundos até o rastro desaparecer.
+  const TOTAL=32;      // Quantidade máxima de pontos do rastro.
+  const canvas=root.querySelector('.cif-canvas');
+  const heading=root.querySelector('.cif-title');
+  const motion=matchMedia('(prefers-reduced-motion: reduce)');
+  const gl=canvas.getContext('webgl',{alpha:false,antialias:false,powerPreference:'low-power'});
+  if(!gl)return;
+  let program,buffer,texture,observer,resizeObserver;
+  let raf=0,visible=true,lost=false,disposed=false,w=1,h=1,last=null,index=0,lastInput=0;
+  let points=Array.from({length:TOTAL},()=>({x:0,y:0,t:-100,r:0}));
+  const values=new Float32Array(TOTAL*4),locations={};
+  const vertex=`attribute vec2 a_position;varying vec2 uv;
+    void main(){uv=a_position*.5+.5;gl_Position=vec4(a_position,0.,1.);}`;
+  const fragment=`precision highp float;
+    varying vec2 uv;
+    uniform sampler2D u_text;
+    uniform vec2 u_size;
+    uniform vec4 u_points[32];
+    uniform float u_time,u_force;
+    uniform vec3 u_paper,u_ink,u_c1,u_c2,u_c3;
+    float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+    float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+      return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+1.),f.x),f.y);}
+    float fbm(vec2 p){return .57*noise(p)+.28*noise(p*2.03)+.15*noise(p*4.01);}
+    float glyph(vec2 p){return texture2D(u_text,clamp(p,vec2(.001),vec2(.999))).r;}
+    void main(){
+      vec2 aspect=vec2(u_size.x/u_size.y,1.);
+      vec2 p=uv*aspect;
+      float field=0.;vec2 drag=vec2(0.);
+      for(int i=0;i<32;i++){
+        vec4 point=u_points[i];vec2 delta=p-point.xy*aspect;
+        float radius=max(point.w,.001);
+        float f=exp(-dot(delta,delta)/(radius*radius))*point.z;
+        field=max(field,f);
+        drag+=delta*f*.035;
+      }
+      float n=fbm(p*19.+vec2(u_time*.16,-u_time*.11));
+      float mask=smoothstep(.28,.305,field+(n-.5)*.34*min(field*4.,1.));
+      vec2 ripple=vec2(fbm(p*13.+u_time*.22),fbm(p.yx*17.-u_time*.19))-.5;
+      vec2 displaced=uv+(ripple*u_force*4.+drag)*min(field*2.2,1.)/aspect;
+      float plain=glyph(displaced);
+      vec3 base=mix(u_paper,u_ink,plain);
+      float colored=glyph(displaced+vec2(sin(p.y*9.+u_time)*.008,0.));
+      float broad=max(colored,max(glyph(displaced+vec2(.006,.005)),glyph(displaced-vec2(.006,.005))));
+      float stripes=.5+.5*sin(p.x*7.+p.y*2.+n*2.+u_time*.55);
+      vec3 iridescent=mix(u_c1,u_c2,smoothstep(.05,.65,stripes));
+      iridescent=mix(iridescent,u_c3,smoothstep(.55,1.,stripes));
+      float shine=pow(max(0.,sin(p.x*22.+p.y*2.+n*3.)),10.);
+      iridescent=mix(iridescent*.68,vec3(1.),shine*.72);
+      float bevel=clamp(glyph(displaced+vec2(.003,-.005))-glyph(displaced-vec2(.003,-.005)),-1.,1.);
+      iridescent+=bevel*.24;
+      vec3 reveal=mix(vec3(.025),iridescent,broad);
+      // Camada revelada e distorção desaparecem juntas, voltando ao título original.
+      gl_FragColor=vec4(mix(base,reveal,mask),1.);
+    }`;
+  function shader(type,source){const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){gl.deleteShader(s);throw new Error('Shader indisponível');}return s;}
+  function color(css,fallback){let s=css.trim().replace('#','');if(s.length===3)s=s.split('').map(x=>x+x).join('');
+    if(!/^[0-9a-f]{6}$/i.test(s))s=fallback;return[0,2,4].map(i=>parseInt(s.slice(i,i+2),16)/255);}
+  try{
+    const vs=shader(gl.VERTEX_SHADER,vertex),fs=shader(gl.FRAGMENT_SHADER,fragment);
+    program=gl.createProgram();gl.attachShader(program,vs);gl.attachShader(program,fs);gl.linkProgram(program);
+    gl.deleteShader(vs);gl.deleteShader(fs);
+    if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error('WebGL indisponível');
+    gl.useProgram(program);buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
+    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
+    const a=gl.getAttribLocation(program,'a_position');gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,2,gl.FLOAT,false,0,0);
+    ['text','size','points[0]','time','force','paper','ink','c1','c2','c3'].forEach(name=>locations[name]=gl.getUniformLocation(program,'u_'+name));
+    texture=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,texture);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+    gl.uniform1i(locations.text,0);gl.uniform1f(locations.force,FORCA);
+  }catch(e){root.classList.remove('cif-ready');return;}
+  function clear(){last=null;points.forEach(p=>p.t=-100);}
+  function resize(){
+    if(disposed||lost)return;
+    if(raf)cancelAnimationFrame(raf);raf=0;
+    const rect=root.getBoundingClientRect();w=Math.max(1,rect.width);h=Math.max(1,rect.height);
+    // Limita resolução para manter o efeito leve em telas Retina.
+    const ratio=Math.min(devicePixelRatio||1,1.5,1600/w);
+    canvas.width=Math.max(1,Math.round(w*ratio));canvas.height=Math.max(1,Math.round(h*ratio));
+    gl.viewport(0,0,canvas.width,canvas.height);
+    const layer=document.createElement('canvas');layer.width=canvas.width;layer.height=canvas.height;
+    const ctx=layer.getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,layer.width,layer.height);
+    const text=heading.textContent.trim()||'IMAGINE';
+    let size=layer.height*.49;ctx.font='900 '+size+'px Arial, Helvetica, sans-serif';
+    size*=Math.min(1,layer.width*.93/Math.max(1,ctx.measureText(text).width));
+    ctx.font='900 '+size+'px Arial, Helvetica, sans-serif';ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(text,layer.width/2,layer.height*.52);
+    gl.bindTexture(gl.TEXTURE_2D,texture);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);
+    gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,layer);
+    const css=getComputedStyle(root);
+    [['paper','--cif-papel','f2f2ed'],['ink','--cif-tinta','111111'],['c1','--cif-cor-1','c6ff32'],['c2','--cif-cor-2','a88aff'],['c3','--cif-cor-3','ffacd1']]
+      .forEach(([key,name,fallback])=>gl.uniform3fv(locations[key],color(css.getPropertyValue(name),fallback)));
+    clear();draw(performance.now());root.classList.toggle('cif-ready',!motion.matches);
+  }
+  function draw(now){
+    raf=0;if(disposed||lost)return;if(!root.isConnected){dispose();return;}
+    const t=now/1000;let active=false;
+    points.forEach((p,i)=>{const life=Math.max(0,1-(t-p.t)/DURACAO);active=active||life>0;
+      values.set([p.x,p.y,life,p.r*(.5+life*.5)],i*4);});
+    gl.uniform2f(locations.size,w,h);gl.uniform4fv(locations['points[0]'],values);gl.uniform1f(locations.time,t);
+    gl.drawArrays(gl.TRIANGLES,0,6);
+    if(active&&visible&&!document.hidden&&!motion.matches)raf=requestAnimationFrame(draw);
+  }
+  function wake(){if(!raf&&visible&&!document.hidden&&!motion.matches&&!lost)raf=requestAnimationFrame(draw);}
+  function add(x,y,time){points[index]={x,y,t:time,r:RAIO};index=(index+1)%TOTAL;}
+  function move(e){
+    if(motion.matches||lost)return;
+    const rect=root.getBoundingClientRect();const x=(e.clientX-rect.left)/rect.width,y=1-(e.clientY-rect.top)/rect.height;
+    const time=performance.now()/1000;
+    if(time-lastInput<.012)return;lastInput=time;
+    // Interpola deslocamentos rápidos para não deixar círculos separados no rastro.
+    if(last){const distance=Math.hypot((x-last.x)*w/h,y-last.y);
+      const steps=Math.min(10,Math.max(1,Math.ceil(distance/(RAIO*.28))));
+      for(let i=1;i<=steps;i++)add(last.x+(x-last.x)*i/steps,last.y+(y-last.y)*i/steps,time);
+    }else add(x,y,time);
+    last={x,y};wake();
+  }
+  function leave(){last=null;}
+  function preference(){clear();root.classList.toggle('cif-ready',!motion.matches&&!lost);if(raf)cancelAnimationFrame(raf);raf=0;draw(performance.now());}
+  function visibility(){if(document.hidden){cancelAnimationFrame(raf);raf=0;last=null;}else wake();}
+  function dispose(){disposed=true;cancelAnimationFrame(raf);observer.disconnect();resizeObserver.disconnect();
+    root.removeEventListener('pointermove',move);root.removeEventListener('pointerleave',leave);root.removeEventListener('pointercancel',leave);
+    motion.removeEventListener('change',preference);document.removeEventListener('visibilitychange',visibility);
+    gl.deleteTexture(texture);gl.deleteBuffer(buffer);gl.deleteProgram(program);}
+  root.addEventListener('pointermove',move,{passive:true});root.addEventListener('pointerleave',leave);root.addEventListener('pointercancel',leave);
+  motion.addEventListener('change',preference);document.addEventListener('visibilitychange',visibility);
+  canvas.addEventListener('webglcontextlost',()=>{lost=true;cancelAnimationFrame(raf);root.classList.remove('cif-ready');});
+  observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible)wake();else{cancelAnimationFrame(raf);raf=0;last=null;}});
+  resizeObserver=new ResizeObserver(resize);observer.observe(root);resizeObserver.observe(root);
+  if(document.fonts)document.fonts.ready.then(()=>{if(root.isConnected)resize();});
+  resize();
+})();
+</script>
